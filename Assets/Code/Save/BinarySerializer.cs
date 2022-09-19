@@ -19,7 +19,7 @@ public class BinarySerializer
     {
         if (data == null)
         {
-            Debug.Log("Data is null, saving default data");
+            Debug.Log("Data is null");
             return;
         }
 
