@@ -8,12 +8,15 @@ public class Player : MonoBehaviour
     private PlayerMover mover;
     private CircleCollider2D circleCollider;
 
-    //Характеристики игрока
+    //Характеристики игрока_________________________________
     private float playerSpeed = 1;
     private float playerInertia = 0.04f;
     private int playerHealth = 1;
     private int scoreMultiplier = 1;
+    //______________________________________________________
 
+
+    //Ивенты поднимаемые игроком_________________________________________________
     //Ивент смерти
     public delegate void PlayerDeadHandler();
     public event PlayerDeadHandler playerDie;
@@ -21,6 +24,8 @@ public class Player : MonoBehaviour
     //Ивент столкновения игрока с снарядом
     public delegate void PlayerFacedProjectile();
     public event PlayerFacedProjectile playerFacedProjectile;
+    //___________________________________________________________________________
+
 
     private void Awake()
     {
