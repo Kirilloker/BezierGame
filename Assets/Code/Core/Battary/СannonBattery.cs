@@ -9,6 +9,7 @@ public class СannonBattery : MonoBehaviour
     private ProjectilesPrefabs projectilesPrefabs;
     [SerializeField]
     private Player player;
+
     //Список пушек
     private List<Cannon> cannons;
 
