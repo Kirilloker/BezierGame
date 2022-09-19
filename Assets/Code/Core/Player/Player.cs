@@ -44,8 +44,11 @@ public class Player : MonoBehaviour
             switch (effect)
             {
                 case ProjectileEffect.DealDamage:
-                    PlayerHealth = -1 * (int)effectValue;
+                    int newHealth = PlayerHealth;
+                    newHealth -= (int)effectValue;
+                    PlayerHealth = newHealth;
                     break;
+
                 default:
                     break;
             }
@@ -100,7 +103,7 @@ public class Player : MonoBehaviour
         //Если здоровье игрока 0 или меньше - запускаем ивент смерти
         set
         {
-            playerHealth += value;
+            playerHealth = value;
             if (playerHealth <= 0)
                 playerDie.Invoke();
         }
