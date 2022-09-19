@@ -61,6 +61,7 @@ public class BinarySerializer
         }
         else
         {
+            Debug.Log("Not found file. Create New.");
             SetDefaultData();
         }
 

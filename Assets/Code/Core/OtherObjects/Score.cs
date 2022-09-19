@@ -15,6 +15,9 @@ public class Score
     {
         score += points;
 
+        // Ќова€ строчка - выгл€дит она просто супер, согласись
+        GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>().Record = (int)score;
+
         //«апускаем ивент дл€ смены пути при достижении счета, кратного некоторому числу
         if ((score % ScoreWayChangeValue) == 0 && ScoreReachWayChangeValue != null)
             ScoreReachWayChangeValue.Invoke();

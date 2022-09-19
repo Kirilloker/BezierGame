@@ -9,11 +9,11 @@ public class GameDataManager : MonoBehaviour
 
     private Hashtable gameData;
 
-    private BinarySerializer serializer;
+    private BinarySerializer serializer = new BinarySerializer();
 
     private void ChangeHashTable(string key, string value) 
     {
-        if (gameData == null) Debug.Log("SaveData не существует");
+        if (gameData == null) Debug.Log("gameData не существует");
 
         try
         {
@@ -27,6 +27,8 @@ public class GameDataManager : MonoBehaviour
                 if (PrintDebug) Debug.Log("ДОБАВЛЕН ключ: " + key + "  Со значением: " + value);
                 gameData.Add(key, value);
             }
+
+            serializer.SaveData();
         }
         catch 
         {
@@ -78,7 +80,7 @@ public class GameDataManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         serializer.LoadData();
-        gameData = serializer.GetData();
+        GameData = serializer.GetData();
     }
 
 
@@ -93,11 +95,20 @@ public class GameDataManager : MonoBehaviour
             if (value < 0)
             {
                 if (PrintDebug) Debug.Log("Record не может быть отрицательным");
+
                 ChangeHashTable("Record", "0");
             }
             else
             {
-                ChangeHashTable("Record", value.ToString());
+                if (Record >= value)
+                {
+                    if (PrintDebug) Debug.Log("Перехвачена попытка уменьшить Record");
+                }
+                else
+                {
+                    ChangeHashTable("Record", value.ToString());
+                }
+                
             }
         }
     }

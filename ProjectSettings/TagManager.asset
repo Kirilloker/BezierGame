@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Projectile
+  - GameData
   layers:
   - Default
   - TransparentFX
