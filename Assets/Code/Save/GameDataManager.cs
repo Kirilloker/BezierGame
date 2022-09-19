@@ -7,66 +7,117 @@ public class GameDataManager : MonoBehaviour
     // Если True - в консоль будут выводиться логи по поводу сохранения
     private bool PrintDebug = true;
 
-    private Hashtable saveData;
+    private Hashtable gameData;
+
+    private BinarySerializer serializer;
 
     private void ChangeHashTable(string key, string value) 
     {
-        if (saveData == null && PrintDebug) Debug.Log("SaveData не существует");
+        if (gameData == null) Debug.Log("SaveData не существует");
 
         try
         {
-            if (saveData.ContainsKey(key) == true)
+            if (gameData.ContainsKey(key) == true)
             {
                 if (PrintDebug) Debug.Log("ОБНОВЛЕН ключ: " + key + "  Со значением: " + value);
-                saveData[key] = value;
+                gameData[key] = value;
             }
             else
             {
                 if (PrintDebug) Debug.Log("ДОБАВЛЕН ключ: " + key + "  Со значением: " + value);
-                saveData.Add(key, value);
+                gameData.Add(key, value);
             }
         }
         catch 
         {
-            if (PrintDebug) Debug.Log("НЕ УДАЛОСЬ сохранить ключ: " + key + "  Со значением: " + value);
+            Debug.Log("НЕ УДАЛОСЬ сохранить ключ: " + key + "  Со значением: " + value);
         }
     }
 
-    public Hashtable SaveData
+    private string TryGetValueInHashTable(string key)
+    {
+        try
+        {
+            if (GameData.ContainsKey(key) == true)
+            {
+                return (string)gameData[key];
+            }
+            else
+            {
+                if (PrintDebug) Debug.Log("Не удалось достать значение по ключу:" + key);
+            }
+        }
+        catch
+        {
+            if (PrintDebug) Debug.Log("ОШИБКА не удалось достать значение по ключу:" + key);
+            
+        }
+
+        return "Error";
+    }
+
+    public Hashtable GameData
     {
         get 
         {
-            return saveData; 
+            return gameData; 
         }
         set 
-        { 
-            saveData = value;
+        {
+            gameData = value;
             if (PrintDebug) Debug.Log("Были установлны новые данные (нужно сохранить в память)");
         }
     }
 
     private void OnApplicationQuit()
     {
-        // Тут надо вызвать сохранение пук пука
+        serializer.SaveData();
     }
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        serializer.LoadData();
+        gameData = serializer.GetData();
     }
 
 
     // Какие поля будут сохраняться ==============================================================================
+    
+
     public int Record
     {
-        get { return (int)saveData["Record"]; }
-        set { ChangeHashTable("Record", value.ToString()); }
+        get { return int.Parse(TryGetValueInHashTable("Record")); }
+        set 
+        { 
+            if (value < 0)
+            {
+                if (PrintDebug) Debug.Log("Record не может быть отрицательным");
+                ChangeHashTable("Record", "0");
+            }
+            else
+            {
+                ChangeHashTable("Record", value.ToString());
+            }
+        }
     }
 
     public int Coins
     {
-        get { return (int)saveData["Coins"]; }
-        set { ChangeHashTable("Coins", value.ToString()); }
+        get { return int.Parse(TryGetValueInHashTable("Coins")); }
+        set
+        {
+            if (value < 0)
+            {
+                if (PrintDebug) Debug.Log("Coins не может быть отрицательным");
+                ChangeHashTable("Coins", "0");
+            }
+            else
+            {
+                ChangeHashTable("Coins", value.ToString());
+            }
+
+        }
     }
 
     // ===========================================================================================================
