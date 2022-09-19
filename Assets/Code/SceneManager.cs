@@ -14,13 +14,4 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-            GoToMainMenuScene();
-
-        if(Input.GetKeyDown(KeyCode.Space))
-            GoToGameScene();
-    }
 }
