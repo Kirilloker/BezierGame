@@ -1,54 +1,109 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    private Rigidbody2D playerRb;
     private Player player;
-
     //Все точки пути
     private Dictionary<int, Vector2> wayPoints;
-
     //параметр, отвечающий за перемещение по кривой, использовать только через свойство!
     private int sigma = 1;
+    //Длинна пути
     private int wayLenght = 0;
-    private float currentSpeed = 0;
 
-    //Параметр отвечающий за инерцию движения, чем он больше, тем меньше инерция
-    private float slowingSpeed = 0.04f;
+    //Параметры перемещения
+    private float maxSpeedAbs;
+    private float currentSpeed;
+    private float acceleration;
+    private float slowdown;
 
     private void Awake()
     {
-        playerRb = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
-        playerRb.inertia = 1;
+        SetSpeed(player.PlayerSpeed);
     }
 
-    //Передвижение игрока
+    //Управление игроком
     private void FixedUpdate()
     {
-
         Sigma += (int)currentSpeed;
         player.transform.position = wayPoints[Sigma];
-        if (currentSpeed > 0)
-            currentSpeed -= slowingSpeed;
-        if (currentSpeed < 0)
-            currentSpeed += slowingSpeed;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            AcceleratePlayer(1);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            AcceleratePlayer(-1);
+        }
+
+        SlowdownPlayer();
+        
+        //    if (Input.GetMouseButton(0))
+        //{
+        //    //CreatePointBezier(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //    Vector3 vectorTouch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //    if (vectorTouch.x < 0)
+        //        
+        //    else
+        //        
+        //}
     }
 
+    private void SlowdownPlayer()
+    {
+        //Если игрок движется в положительном направлении
+        if (currentSpeed > 0f)
+        {
+            //Замедляем его
+            currentSpeed -= slowdown;
+
+            //Но не изменяем направление
+            if (currentSpeed < 0f)
+                currentSpeed = 0f;
+        }
+
+        //Если игрок движется в отрицательном направлении
+        if (currentSpeed < 0f)
+        {
+            //Замедляем его
+            currentSpeed += slowdown;
+
+            //Но не изменяем направление
+            if (currentSpeed > 0f)
+                currentSpeed = 0f;
+        }
+    }
+    private void AcceleratePlayer(int direction)
+    {
+        direction = direction / Math.Abs(direction);
+
+        //Если скорость не достигла максимальной
+        if (Math.Abs(currentSpeed) < maxSpeedAbs)
+        {
+            //Увеличиваем скорость
+            currentSpeed += acceleration * direction;
+
+            //Скорость не может быть выше максимальной
+            if (Math.Abs(currentSpeed) > maxSpeedAbs)
+                currentSpeed = maxSpeedAbs * direction;
+        }
+    }
+    public void SetSpeed(float value)
+    {
+        maxSpeedAbs = value;
+        acceleration = maxSpeedAbs * 0.2f;
+        slowdown = maxSpeedAbs * 0.1f;
+    }
     public void SetWayPoints(Dictionary<int, Vector2> wayPoints)
     {
         this.wayPoints = wayPoints;
         wayLenght = wayPoints.Count;
     }
-
-    public void MovePlayer(float speed, float inertia)
-    {
-        slowingSpeed = inertia;
-        currentSpeed = speed;
-    }
-
     private int Sigma
     {
         get 

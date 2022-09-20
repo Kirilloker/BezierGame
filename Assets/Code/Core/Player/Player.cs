@@ -9,8 +9,7 @@ public class Player : MonoBehaviour
     private CircleCollider2D circleCollider;
 
     //Характеристики игрока_________________________________
-    private float playerSpeed = 1;
-    private float playerInertia = 0.01f;
+    private float playerSpeed = 10;
     private int playerHealth = 1;
     private int scoreMultiplier = 1;
     private float playerSize = 1;
@@ -30,10 +29,11 @@ public class Player : MonoBehaviour
     public event PlayerPickUpCoin playerPickUpCoin;
     //___________________________________________________________________________
 
-
     private void Awake()
     {
         mover = GetComponent<PlayerMover>();
+        mover.SetSpeed(playerSpeed);
+
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = true;
     }
@@ -47,8 +47,6 @@ public class Player : MonoBehaviour
 
             ProjectileEffect effect = projectile.GetEffect();
             float effectValue = projectile.GetEffectValue();
-
-            Debug.Log(effectValue);
 
             switch (effect)
             {
@@ -83,33 +81,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //Управление персонажем
-    private void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.S))
-        {
-            mover.MovePlayer(-1 * playerSpeed, playerInertia);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-
-            mover.MovePlayer(playerSpeed, playerInertia);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            //CreatePointBezier(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            Vector3 vectorTouch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            if (vectorTouch.x < 0)
-                mover.MovePlayer(playerSpeed, playerInertia);
-            else
-                mover.MovePlayer(-1 * playerSpeed, playerInertia);
-
-        }
-    }
-
     //Обработчики ивентов____________________________________________
     public void OnWayCreated(Dictionary<int, Vector2> wayPoints)
     {
@@ -121,7 +92,6 @@ public class Player : MonoBehaviour
         mover.SetWayPoints(wayPoints);
     }
     //_______________________________________________________________
-
 
 
     //Свойства_______________________________________________________
@@ -159,14 +129,19 @@ public class Player : MonoBehaviour
             this.transform.localScale = new Vector3(playerSize, playerSize, 0);
         }
     }
-
     public float PlayerSpeed
     {
         get { return playerSpeed; }
         set
         {
             playerSpeed = value;
-            playerInertia = playerSpeed / 100f;
+
+            if (playerSpeed < 5)
+                playerSpeed = 5f;
+            if (playerSpeed > 50)
+                playerSpeed = 50f;
+
+            mover.SetSpeed(value);
         }
     }
     //_______________________________________________________________
