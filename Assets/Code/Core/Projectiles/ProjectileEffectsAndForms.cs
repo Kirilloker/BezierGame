@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 public enum ProjectileEffect
 {
     DealDamage,
+    AddCoin,
+
 }
 
 public enum ProjectileForm
 {
     Cube,
+    Coin,
+    scoreMultiplyer
 }

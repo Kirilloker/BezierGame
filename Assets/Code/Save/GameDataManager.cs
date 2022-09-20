@@ -83,9 +83,14 @@ public class GameDataManager : MonoBehaviour
         GameData = serializer.GetData();
     }
 
+    //Обработчики ивентов__________________________________
+    public void OnPlayerPickUpCoin(int numOfCoins)
+    {
+        Coins += numOfCoins;
+    }
 
     // Какие поля будут сохраняться ==============================================================================
-    
+
 
     public int Record
     {

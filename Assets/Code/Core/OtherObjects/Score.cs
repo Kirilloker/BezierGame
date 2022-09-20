@@ -6,17 +6,22 @@ public class Score
 {
     private uint score = 0;
     private uint ScoreWayChangeValue = 1;
+    private GameDataManager dataManager;
     
     //Ивент смены пути
     public delegate void ScoreReachWayChangeValueHandler();
     public event ScoreReachWayChangeValueHandler ScoreReachWayChangeValue;
 
+    public Score(GameDataManager dataManager)
+    {
+        this.dataManager = dataManager;
+    }
+
     private void IncreaseScore(uint points)
     {
         score += points;
 
-        // Новая строчка - выглядит она просто супер, согласись
-        GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>().Record = (int)score;
+        dataManager.Record = (int)score;
 
         //Запускаем ивент для смены пути при достижении счета, кратного некоторому числу
         if ((score % ScoreWayChangeValue) == 0 && ScoreReachWayChangeValue != null)

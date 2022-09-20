@@ -32,6 +32,9 @@ public class Cannon : MonoBehaviour
             case ProjectileEffect.DealDamage:
                 launchedProjectile.AddComponent<DamageDealer>();
                 break;
+            case ProjectileEffect.AddCoin:
+                launchedProjectile.AddComponent<AddCoin>();
+                break;
         }
 
         //Задаем значение добавленному эффекта

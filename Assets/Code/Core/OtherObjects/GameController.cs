@@ -17,11 +17,17 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Way way;
 
-    private Score score = new Score();
+    private Score score;
+    private GameDataManager dataManager;
 
-    //Регистрируем обработчики различных событий
+
     private void Awake()
     {
+        dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
+        score = new Score(dataManager);
+
+
+        //Регистрируем обработчики различных событий
         platform1.playerHitPlatform += score.OnPlayerHitPlatform;
         platform2.playerHitPlatform += score.OnPlayerHitPlatform;
         platform1.playerHitPlatform += this.OnPlayerHitPlatform;
@@ -33,6 +39,8 @@ public class GameController : MonoBehaviour
         score.ScoreReachWayChangeValue += way.OnScoreReachWayChangeValue;
 
         player.playerDie += this.OnPlayerDie;
+
+        player.playerPickUpCoin += dataManager.OnPlayerPickUpCoin;
     }
 
     //Начало игры

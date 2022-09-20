@@ -1639,6 +1639,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cubeProjectile: {fileID: 3084450190497505680, guid: 6e228de202f54944192c66fbadde733f, type: 3}
+  coinProjectile: {fileID: 5634532218228455928, guid: d421407d6b35c1547b70fcf5ed13a303, type: 3}
+  scoreMultiplyerProjectile: {fileID: 0}
+  speedUpProjectile: {fileID: 0}
+  sizeIncreaseProjectile: {fileID: 0}
+  sizeDecreaseProjectile: {fileID: 0}
 --- !u!4 &1573015786
 Transform:
   m_ObjectHideFlags: 0
