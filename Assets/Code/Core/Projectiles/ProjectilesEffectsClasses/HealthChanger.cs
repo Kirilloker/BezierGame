@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour, IProjectile
+public class HealthChanger : MonoBehaviour, IProjectile
 {
-    private float damage = 1;
+    private float healhtChange = 1;
 
     public void Destroy()
     {
@@ -13,16 +13,16 @@ public class DamageDealer : MonoBehaviour, IProjectile
 
     public ProjectileEffect GetEffect()
     {
-        return ProjectileEffect.DealDamage;
+        return ProjectileEffect.HealthChange;
     }
 
     public float GetEffectValue()
     {
-        return damage;
+        return healhtChange;
     }
 
     public void SetEffectValue(float value)
     {
-        damage = value;
+        healhtChange = value;
     }
 }

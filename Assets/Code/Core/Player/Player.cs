@@ -52,9 +52,9 @@ public class Player : MonoBehaviour
 
             switch (effect)
             {
-                case ProjectileEffect.DealDamage:
+                case ProjectileEffect.HealthChange:
                     int newHealth = PlayerHealth;
-                    newHealth -= (int)effectValue;
+                    newHealth += (int)effectValue;
                     PlayerHealth = newHealth;
                     break;
                 case ProjectileEffect.AddCoin:

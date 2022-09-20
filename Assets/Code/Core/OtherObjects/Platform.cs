@@ -8,6 +8,9 @@ public class Platform : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool active;
 
+    private UnityEngine.Color activeColor = new Color(0.5490196f, 0.9019608f, 0.3176471f, 1f);
+    private UnityEngine.Color disactiveColor = new Color(0.303048f, 0.4077995f, 0.488f, 1f);
+
     //Ивент касания игроком платформы
     public delegate void PlayerHitPlatformHandler(Player player, Platform platform);
     public event PlayerHitPlatformHandler playerHitPlatform;
@@ -46,9 +49,9 @@ public class Platform : MonoBehaviour
         {
             active = value;
             if (value)
-                spriteRenderer.color = Color.green;
+                spriteRenderer.color = activeColor;
             else
-                spriteRenderer.color = Color.grey;
+                spriteRenderer.color = disactiveColor;
         }
     }
 }

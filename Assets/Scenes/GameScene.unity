@@ -223,7 +223,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1d44245223d4ed64ab946f37b1a64c55, type: 3}
-  m_Color: {r: 0.23825411, g: 0.99215686, b: 0.023529433, a: 1}
+  m_Color: {r: 0.30304798, g: 0.40779954, b: 0.488, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -703,7 +703,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.42352942, g: 0.64705884, b: 0.8156863, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1638,10 +1638,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d974d77ea2c1e4e98259c7f1ef13b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeProjectile: {fileID: 3084450190497505680, guid: 6e228de202f54944192c66fbadde733f, type: 3}
+  damageCubeProjectile: {fileID: 3084450190497505680, guid: 6e228de202f54944192c66fbadde733f, type: 3}
   coinProjectile: {fileID: 5634532218228455928, guid: d421407d6b35c1547b70fcf5ed13a303, type: 3}
   scoreMultiplyerProjectile: {fileID: 0}
   speedUpProjectile: {fileID: 0}
+  speedDownProjectile: {fileID: 0}
   sizeIncreaseProjectile: {fileID: 0}
   sizeDecreaseProjectile: {fileID: 0}
 --- !u!4 &1573015786
@@ -1940,7 +1941,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1d44245223d4ed64ab946f37b1a64c55, type: 3}
-  m_Color: {r: 0.2392157, g: 0.9921569, b: 0.023529414, a: 1}
+  m_Color: {r: 0.54901963, g: 0.9019608, b: 0.31764707, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -37,7 +37,7 @@ public class СannonBattery : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.DealDamage, 1);
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.HealthChange, -1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))

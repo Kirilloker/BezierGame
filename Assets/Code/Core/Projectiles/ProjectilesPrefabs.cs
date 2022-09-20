@@ -9,13 +9,15 @@ public class ProjectilesPrefabs : MonoBehaviour
 
     //Тут добавляем различные префабы снарядов
     [SerializeField]
-    private GameObject cubeProjectile;
+    private GameObject damageCubeProjectile;
     [SerializeField]
     private GameObject coinProjectile;
     [SerializeField]
     private GameObject scoreMultiplyerProjectile;
     [SerializeField]
     private GameObject speedUpProjectile;
+    [SerializeField]
+    private GameObject speedDownProjectile;
     [SerializeField]
     private GameObject sizeIncreaseProjectile;
     [SerializeField]
@@ -28,7 +30,7 @@ public class ProjectilesPrefabs : MonoBehaviour
         switch (prefab)
         {
             case ProjectileForm.Cube:
-                projectile = cubeProjectile;
+                projectile = damageCubeProjectile;
                 break;
             case ProjectileForm.Coin:
                 projectile = coinProjectile;

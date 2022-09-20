@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public enum ProjectileEffect
 {
-    DealDamage,
+    HealthChange,
     AddCoin,
 
 }
