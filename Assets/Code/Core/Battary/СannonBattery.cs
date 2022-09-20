@@ -24,9 +24,6 @@ public class СannonBattery : MonoBehaviour
         cannons.Add(new Cannon());
 
         cannons[0].SetCannonPos(new Vector2(3, 5));
-
-        cannons[0].Load(
-            projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.DealDamage, 1);
     }
 
     //Test 
@@ -35,6 +32,18 @@ public class СannonBattery : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F))
         {
             cannons[0].Fire(new Vector2(0,0), 4);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.DealDamage, 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Coin), ProjectileEffect.AddCoin, 1);
         }
     }
 }

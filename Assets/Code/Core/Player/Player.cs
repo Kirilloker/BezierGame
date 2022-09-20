@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private float playerInertia = 0.04f;
     private int playerHealth = 1;
     private int scoreMultiplier = 1;
+    private float playerSize = 0.5f;
     //______________________________________________________
 
 
@@ -21,9 +22,12 @@ public class Player : MonoBehaviour
     public delegate void PlayerDeadHandler();
     public event PlayerDeadHandler playerDie;
 
-    //Ивент столкновения игрока с снарядом
+    //Ивентs столкновения игрока с снарядами
     public delegate void PlayerFacedProjectile();
     public event PlayerFacedProjectile playerFacedProjectile;
+
+    public delegate void PlayerPickUpCoin(int coins);
+    public event PlayerPickUpCoin playerPickUpCoin;
     //___________________________________________________________________________
 
 
@@ -53,7 +57,9 @@ public class Player : MonoBehaviour
                     newHealth -= (int)effectValue;
                     PlayerHealth = newHealth;
                     break;
-
+                case ProjectileEffect.AddCoin:
+                    playerPickUpCoin.Invoke((int)effectValue);
+                    break;
                 default:
                     break;
             }
@@ -121,6 +127,16 @@ public class Player : MonoBehaviour
     {
         get { return (uint)scoreMultiplier; }
         set { scoreMultiplier = (int)value; }
+    }
+
+    public float PlayerSize
+    {
+        get { return playerSize; }
+        set 
+        { 
+            playerSize = (float)value;
+            this.transform.localScale = new Vector3(playerSize, playerSize, 0);
+        }
     }
     //_______________________________________________________________
 }
