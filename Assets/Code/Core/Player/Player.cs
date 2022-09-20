@@ -10,10 +10,10 @@ public class Player : MonoBehaviour
 
     //Характеристики игрока_________________________________
     private float playerSpeed = 1;
-    private float playerInertia = 0.04f;
+    private float playerInertia = 0.01f;
     private int playerHealth = 1;
     private int scoreMultiplier = 1;
-    private float playerSize = 0.5f;
+    private float playerSize = 1;
     //______________________________________________________
 
 
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     //Обработка столкновений с снарядами
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.tag == "Projectile")
         {
             IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
 
@@ -52,14 +52,29 @@ public class Player : MonoBehaviour
 
             switch (effect)
             {
+                //__________________________________________________________________
                 case ProjectileEffect.HealthChange:
                     int newHealth = PlayerHealth;
                     newHealth += (int)effectValue;
                     PlayerHealth = newHealth;
                     break;
+                //__________________________________________________________________
                 case ProjectileEffect.AddCoin:
                     playerPickUpCoin.Invoke((int)effectValue);
                     break;
+                //__________________________________________________________________
+                case ProjectileEffect.SizeChange:
+                    float newSize = PlayerSize;
+                    newSize += effectValue;
+                    PlayerSize = newSize;
+                    break;
+                //__________________________________________________________________
+                case ProjectileEffect.SpeedChange:
+                    float newSpeed = PlayerSpeed;
+                    newSpeed += effectValue;
+                    PlayerSpeed = newSpeed;
+                    break;
+                //__________________________________________________________________
                 default:
                     break;
             }
@@ -108,6 +123,7 @@ public class Player : MonoBehaviour
     //_______________________________________________________________
 
 
+
     //Свойства_______________________________________________________
     public int PlayerHealth
     {
@@ -128,14 +144,29 @@ public class Player : MonoBehaviour
         get { return (uint)scoreMultiplier; }
         set { scoreMultiplier = (int)value; }
     }
-
     public float PlayerSize
     {
         get { return playerSize; }
-        set 
-        { 
+        set
+        {
             playerSize = (float)value;
+
+            if (playerSize < 0.35f)
+                playerSize = 0.35f;
+            if (playerSize > 1.6f)
+                playerSize = 1.6f;
+
             this.transform.localScale = new Vector3(playerSize, playerSize, 0);
+        }
+    }
+
+    public float PlayerSpeed
+    {
+        get { return playerSpeed; }
+        set
+        {
+            playerSpeed = value;
+            playerInertia = playerSpeed / 100f;
         }
     }
     //_______________________________________________________________

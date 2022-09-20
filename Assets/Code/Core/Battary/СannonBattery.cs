@@ -45,5 +45,25 @@ public class СannonBattery : MonoBehaviour
             cannons[0].Load(
           projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Coin), ProjectileEffect.AddCoin, 1);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeInc), ProjectileEffect.SizeChange, 0.25f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeDec), ProjectileEffect.SizeChange, -0.25f);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedUp), ProjectileEffect.SpeedChange, 1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedDown), ProjectileEffect.SpeedChange, -1);
+        }
     }
 }

@@ -13,15 +13,19 @@ public class ProjectilesPrefabs : MonoBehaviour
     [SerializeField]
     private GameObject coinProjectile;
     [SerializeField]
-    private GameObject scoreMultiplyerProjectile;
-    [SerializeField]
     private GameObject speedUpProjectile;
     [SerializeField]
     private GameObject speedDownProjectile;
     [SerializeField]
-    private GameObject sizeIncreaseProjectile;
+    private GameObject sizeIncProjectile;
     [SerializeField]
-    private GameObject sizeDecreaseProjectile;
+    private GameObject sizeDecProjectile;
+    [SerializeField]
+    private GameObject scoreMultiplyerProjectile;
+    [SerializeField]
+    private GameObject SlowmoutionProjectile;
+    [SerializeField]
+    private GameObject ShieldProjectile;
 
 
     public GameObject GetProjectilePrefab(ProjectileForm prefab)
@@ -34,6 +38,18 @@ public class ProjectilesPrefabs : MonoBehaviour
                 break;
             case ProjectileForm.Coin:
                 projectile = coinProjectile;
+                break;
+            case ProjectileForm.SpeedUp:
+                projectile = speedUpProjectile;
+                break;
+            case ProjectileForm.SpeedDown:
+                projectile = speedDownProjectile;
+                break;
+            case ProjectileForm.SizeDec:
+                projectile = sizeDecProjectile;
+                break;
+            case ProjectileForm.SizeInc:
+                projectile = sizeIncProjectile;
                 break;
         }
 

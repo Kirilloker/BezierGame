@@ -8,12 +8,22 @@ public enum ProjectileEffect
 {
     HealthChange,
     AddCoin,
-
+    SpeedChange,
+    SizeChange,
+    Shield,
+    ScoreMultiplier,
+    HidePath,
+    Slowmoution
 }
 
 public enum ProjectileForm
 {
     Cube,
     Coin,
-    scoreMultiplyer
+    ScoreMultiplyer,
+    SpeedUp,
+    SpeedDown,
+    SizeInc,
+    SizeDec,
+    HealthUp
 }
