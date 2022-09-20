@@ -53,7 +53,6 @@ public class PlayerMover : MonoBehaviour
         //        
         //}
     }
-
     private void SlowdownPlayer()
     {
         //≈сли игрок движетс€ в положительном направлении
