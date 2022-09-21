@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 39610645}
   - component: {fileID: 39610644}
   - component: {fileID: 39610648}
+  - component: {fileID: 39610649}
   m_Layer: 0
   m_Name: UpPlatform
   m_TagString: Platform
@@ -181,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634c52aeb2b3ed8409728e22a5b7f6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animation: {fileID: 39610649}
 --- !u!212 &39610646
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -269,6 +271,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!111 &39610649
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39610643}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 2820f8bfff205f946bcfa8df75bc03ba, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 2820f8bfff205f946bcfa8df75bc03ba, type: 2}
+  - {fileID: 7400000, guid: 728bb48f889c83040a6a00be55e1f1ae, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &293261152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1491,7 @@ GameObject:
   - component: {fileID: 2127873479}
   - component: {fileID: 2127873478}
   - component: {fileID: 2127873482}
+  - component: {fileID: 2127873483}
   m_Layer: 0
   m_Name: DownPlatform
   m_TagString: Platform
@@ -1517,6 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634c52aeb2b3ed8409728e22a5b7f6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animation: {fileID: 2127873483}
 --- !u!212 &2127873480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1605,3 +1626,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!111 &2127873483
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127873477}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 2820f8bfff205f946bcfa8df75bc03ba, type: 2}
+  - {fileID: 7400000, guid: 728bb48f889c83040a6a00be55e1f1ae, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
