@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    [SerializeField]
+    Animation Animation;
+
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private bool active;
@@ -49,9 +52,11 @@ public class Platform : MonoBehaviour
         {
             active = value;
             if (value)
-                spriteRenderer.color = activeColor;
+                Animation.Play("ActivePlatform");
+            //spriteRenderer.color = activeColor;
             else
-                spriteRenderer.color = disactiveColor;
+                Animation.Play("NoActivePlatform");
+            //spriteRenderer.color = disactiveColor;
         }
     }
 }

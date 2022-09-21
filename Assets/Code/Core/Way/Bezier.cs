@@ -72,12 +72,14 @@ public class Bezier
         List<Vector2> points = new List<Vector2>();
 
         points.Add(downPoint);
+        points.Add(new Vector2(downPoint.x, downPoint.y + 1f));
  
         for (int i = 0; i < pointsBezier.Count; i++)
         {
             points.Add(pointsBezier[i]);
         }
 
+        points.Add(new Vector2(upPoint.x, upPoint.y - 1f));
         points.Add(upPoint);
 
 
