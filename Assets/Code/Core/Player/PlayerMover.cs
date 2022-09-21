@@ -41,7 +41,7 @@ public class PlayerMover : MonoBehaviour
         }
 
         SlowdownPlayer();
-        
+
         //    if (Input.GetMouseButton(0))
         //{
         //    //CreatePointBezier(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -53,6 +53,7 @@ public class PlayerMover : MonoBehaviour
         //        
         //}
     }
+
     private void SlowdownPlayer()
     {
         //≈сли игрок движетс€ в положительном направлении

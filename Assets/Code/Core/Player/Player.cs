@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private int playerHealth = 1;
     private int scoreMultiplier = 1;
     private float playerSize = 1;
+    private float maxSpeed = 50f;
+    private float minSpeed = 5f;
     //______________________________________________________
 
 
@@ -136,10 +138,10 @@ public class Player : MonoBehaviour
         {
             playerSpeed = value;
 
-            if (playerSpeed < 5)
-                playerSpeed = 5f;
-            if (playerSpeed > 50)
-                playerSpeed = 50f;
+            if (playerSpeed < minSpeed)
+                playerSpeed = minSpeed;
+            if (playerSpeed > maxSpeed)
+                playerSpeed = maxSpeed;
 
             mover.SetSpeed(value);
         }
