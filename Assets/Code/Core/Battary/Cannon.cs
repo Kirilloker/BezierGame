@@ -29,11 +29,17 @@ public class Cannon : MonoBehaviour
         //Добавляем ему эффект
         switch (effect)
         {
-            case ProjectileEffect.DealDamage:
-                launchedProjectile.AddComponent<DamageDealer>();
+            case ProjectileEffect.HealthChange:
+                launchedProjectile.AddComponent<HealthChanger>();
                 break;
             case ProjectileEffect.AddCoin:
                 launchedProjectile.AddComponent<AddCoin>();
+                break;
+            case ProjectileEffect.SizeChange:
+                launchedProjectile.AddComponent<SizeChange>();
+                break;
+            case ProjectileEffect.SpeedChange:
+                launchedProjectile.AddComponent<SpeedChange>();
                 break;
         }
 

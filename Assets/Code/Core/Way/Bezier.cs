@@ -13,8 +13,8 @@ public class Bezier
     // Объект для отрисовки кривой
     private LineRenderer lineRenderer;
 
-    private int fragment = 700;
-    private int fragmentNormalize = 700;
+    private int fragment = 1000;
+    private int fragmentNormalize = 1000;
 
     // Список точек по которым строится кривая Безье 
     private List<Vector2> pointsBezier = new List<Vector2>();

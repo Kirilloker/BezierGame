@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3084450190497505682}
   - component: {fileID: 3084450190497505683}
   m_Layer: 0
-  m_Name: CubeProjectile
+  m_Name: SpeedDownProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1d44245223d4ed64ab946f37b1a64c55, type: 3}
-  m_Color: {r: 0.9150943, g: 0.038848326, b: 0.038848326, a: 1}
+  m_Color: {r: 0.7411155, g: 0.039215676, b: 0.9137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

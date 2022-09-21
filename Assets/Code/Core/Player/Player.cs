@@ -9,11 +9,10 @@ public class Player : MonoBehaviour
     private CircleCollider2D circleCollider;
 
     //Характеристики игрока_________________________________
-    private float playerSpeed = 1;
-    private float playerInertia = 0.04f;
+    private float playerSpeed = 10;
     private int playerHealth = 1;
     private int scoreMultiplier = 1;
-    private float playerSize = 0.5f;
+    private float playerSize = 1;
     //______________________________________________________
 
 
@@ -30,10 +29,11 @@ public class Player : MonoBehaviour
     public event PlayerPickUpCoin playerPickUpCoin;
     //___________________________________________________________________________
 
-
     private void Awake()
     {
         mover = GetComponent<PlayerMover>();
+        mover.SetSpeed(playerSpeed);
+
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = true;
     }
@@ -41,57 +41,43 @@ public class Player : MonoBehaviour
     //Обработка столкновений с снарядами
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.tag == "Projectile")
         {
             IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
 
             ProjectileEffect effect = projectile.GetEffect();
             float effectValue = projectile.GetEffectValue();
 
-            Debug.Log(effectValue);
-
             switch (effect)
             {
-                case ProjectileEffect.DealDamage:
+                //__________________________________________________________________
+                case ProjectileEffect.HealthChange:
                     int newHealth = PlayerHealth;
-                    newHealth -= (int)effectValue;
+                    newHealth += (int)effectValue;
                     PlayerHealth = newHealth;
                     break;
+                //__________________________________________________________________
                 case ProjectileEffect.AddCoin:
                     playerPickUpCoin.Invoke((int)effectValue);
                     break;
+                //__________________________________________________________________
+                case ProjectileEffect.SizeChange:
+                    float newSize = PlayerSize;
+                    newSize += effectValue;
+                    PlayerSize = newSize;
+                    break;
+                //__________________________________________________________________
+                case ProjectileEffect.SpeedChange:
+                    float newSpeed = PlayerSpeed;
+                    newSpeed += effectValue;
+                    PlayerSpeed = newSpeed;
+                    break;
+                //__________________________________________________________________
                 default:
                     break;
             }
 
             projectile.Destroy();
-        }
-    }
-
-    //Управление персонажем
-    private void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.S))
-        {
-            mover.MovePlayer(-1 * playerSpeed, playerInertia);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-
-            mover.MovePlayer(playerSpeed, playerInertia);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            //CreatePointBezier(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            Vector3 vectorTouch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            if (vectorTouch.x < 0)
-                mover.MovePlayer(playerSpeed, playerInertia);
-            else
-                mover.MovePlayer(-1 * playerSpeed, playerInertia);
-
         }
     }
 
@@ -128,14 +114,34 @@ public class Player : MonoBehaviour
         get { return (uint)scoreMultiplier; }
         set { scoreMultiplier = (int)value; }
     }
-
     public float PlayerSize
     {
         get { return playerSize; }
-        set 
-        { 
+        set
+        {
             playerSize = (float)value;
+
+            if (playerSize < 0.35f)
+                playerSize = 0.35f;
+            if (playerSize > 1.6f)
+                playerSize = 1.6f;
+
             this.transform.localScale = new Vector3(playerSize, playerSize, 0);
+        }
+    }
+    public float PlayerSpeed
+    {
+        get { return playerSpeed; }
+        set
+        {
+            playerSpeed = value;
+
+            if (playerSpeed < 5)
+                playerSpeed = 5f;
+            if (playerSpeed > 50)
+                playerSpeed = 50f;
+
+            mover.SetSpeed(value);
         }
     }
     //_______________________________________________________________
