@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthChanger : MonoBehaviour, IProjectile
 {
-    private float healhtChange = 1;
+    private int healhtChange = 1;
 
     public void Destroy()
     {
@@ -23,6 +23,6 @@ public class HealthChanger : MonoBehaviour, IProjectile
 
     public void SetEffectValue(float value)
     {
-        healhtChange = value;
+        healhtChange = (int)value;
     }
 }

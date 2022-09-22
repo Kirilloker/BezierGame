@@ -11,7 +11,7 @@ public enum ProjectileEffect
     SpeedChange,
     SizeChange,
     Shield,
-    ScoreMultiplier,
+    ScoreMultiplyer,
     HidePath,
     Slowmoution
 }
@@ -25,5 +25,7 @@ public enum ProjectileForm
     SpeedDown,
     SizeInc,
     SizeDec,
-    HealthUp
+    HealthUp,
+    Slowmoution,
+    Shield
 }

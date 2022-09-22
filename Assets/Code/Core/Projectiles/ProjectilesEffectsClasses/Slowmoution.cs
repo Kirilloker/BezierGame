@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedChange : MonoBehaviour, IProjectile
+public class Slowmoution : MonoBehaviour, IProjectile
 {
-    private float speedChange = 1f;
+
+    //Таймер в секундах
+    private float slowmoutionTimer = 8;
 
     public void Destroy()
     {
@@ -13,16 +15,16 @@ public class SpeedChange : MonoBehaviour, IProjectile
 
     public ProjectileEffect GetEffect()
     {
-        return ProjectileEffect.SpeedChange;
+        return ProjectileEffect.Slowmoution;
     }
 
     public float GetEffectValue()
     {
-        return speedChange;
+        return slowmoutionTimer;
     }
 
     public void SetEffectValue(float value)
     {
-        speedChange = value;
+        slowmoutionTimer = value;
     }
 }

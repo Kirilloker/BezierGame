@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private float playerSize = 1;
     private float maxSpeed = 50f;
     private float minSpeed = 5f;
+    private bool shield = false;
     //______________________________________________________
 
 
@@ -23,10 +24,11 @@ public class Player : MonoBehaviour
     public delegate void PlayerDeadHandler();
     public event PlayerDeadHandler playerDie;
 
-    //Ивентs столкновения игрока с снарядами
-    public delegate void PlayerFacedProjectile();
+    //Ивент столкновения игрока с снарядами - для эффектов, действующих на окружение
+    public delegate void PlayerFacedProjectile(ProjectileEffect effect, float projectileValue);
     public event PlayerFacedProjectile playerFacedProjectile;
 
+    //Ивент поднятия монетки
     public delegate void PlayerPickUpCoin(int coins);
     public event PlayerPickUpCoin playerPickUpCoin;
     //___________________________________________________________________________
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
             {
                 //__________________________________________________________________
                 case ProjectileEffect.HealthChange:
+                    if (shield && (effectValue < 0)) break;
                     int newHealth = PlayerHealth;
                     newHealth += (int)effectValue;
                     PlayerHealth = newHealth;
@@ -75,13 +78,52 @@ public class Player : MonoBehaviour
                     PlayerSpeed = newSpeed;
                     break;
                 //__________________________________________________________________
-                default:
+                case ProjectileEffect.Slowmoution:
+                    StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
                     break;
+                //__________________________________________________________________
+                case ProjectileEffect.Shield:
+                    StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
+                    break;
+                //__________________________________________________________________
+                case ProjectileEffect.ScoreMultiplyer:
+                    StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
+                    break;
+                //__________________________________________________________________
             }
-
             projectile.Destroy();
         }
     }
+
+
+    //Куротина для временных эффектов________________________________
+    IEnumerator EnableTempPlayerEffect(ProjectileEffect effect, float time)
+    {
+        switch (effect)
+        {
+            case ProjectileEffect.Shield:
+                shield = true;
+                yield return new WaitForSeconds(time);
+                shield = false;
+                break;
+
+            case ProjectileEffect.ScoreMultiplyer:
+                ScoreMultiplier *= 2;
+                yield return new WaitForSeconds(time);
+                scoreMultiplier /= 2;
+                break;
+
+            case ProjectileEffect.Slowmoution:
+                Time.timeScale = 0.4f;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                yield return new WaitForSeconds(time);
+                Time.timeScale = 1f;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                break;
+        }
+    }
+    //_______________________________________________________________
+
 
     //Обработчики ивентов____________________________________________
     public void OnWayCreated(Dictionary<int, Vector2> wayPoints)

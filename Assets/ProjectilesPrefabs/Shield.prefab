@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3084450190497505682}
   - component: {fileID: 3084450190497505683}
   m_Layer: 0
-  m_Name: ScoreMultiplyer
+  m_Name: Shield
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 44aca6158a89c0a47b35ebc19e236941, type: 3}
-  m_Color: {r: 0.9137255, g: 0.838271, b: 0.039215676, a: 1}
+  m_Color: {r: 0.14678238, g: 0.9137255, b: 0.039215676, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

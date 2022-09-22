@@ -51,6 +51,15 @@ public class ProjectilesPrefabs : MonoBehaviour
             case ProjectileForm.SizeInc:
                 projectile = sizeIncProjectile;
                 break;
+            case ProjectileForm.ScoreMultiplyer:
+                projectile = scoreMultiplyerProjectile;
+                break;
+            case ProjectileForm.Shield:
+                projectile = ShieldProjectile;
+                break;
+            case ProjectileForm.Slowmoution:
+                projectile = SlowmoutionProjectile;
+                break;
         }
 
         return projectile;

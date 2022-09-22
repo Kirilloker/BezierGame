@@ -225,7 +225,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1d44245223d4ed64ab946f37b1a64c55, type: 3}
-  m_Color: {r: 0.30304798, g: 0.40779954, b: 0.488, a: 1}
+  m_Color: {r: 0.54901963, g: 0.9019608, b: 0.31764707, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1280,8 +1280,8 @@ MonoBehaviour:
   sizeIncProjectile: {fileID: 3084450190497505680, guid: 24b2d708826d78540b70709fcfcd8ed7, type: 3}
   sizeDecProjectile: {fileID: 3084450190497505680, guid: 3f7f5ab7b69368a49aa827b4f40f6b23, type: 3}
   scoreMultiplyerProjectile: {fileID: 3084450190497505680, guid: 4ad890c9cc71fda418431cd07688decb, type: 3}
-  SlowmoutionProjectile: {fileID: 0}
-  ShieldProjectile: {fileID: 0}
+  SlowmoutionProjectile: {fileID: 3084450190497505680, guid: 80cfe5d5bb243d246b18d9651b244538, type: 3}
+  ShieldProjectile: {fileID: 3084450190497505680, guid: 18b0679af8a11b54bbc5455a55da1e82, type: 3}
 --- !u!4 &1573015786
 Transform:
   m_ObjectHideFlags: 0
@@ -1580,7 +1580,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 1d44245223d4ed64ab946f37b1a64c55, type: 3}
-  m_Color: {r: 0.54901963, g: 0.9019608, b: 0.31764707, a: 1}
+  m_Color: {r: 0.30304798, g: 0.40779954, b: 0.488, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
