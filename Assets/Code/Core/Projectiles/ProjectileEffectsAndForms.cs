@@ -13,7 +13,8 @@ public enum ProjectileEffect
     Shield,
     ScoreMultiplyer,
     HidePath,
-    Slowmoution
+    Slowmoution,
+    CoinMagnet
 }
 
 public enum ProjectileForm
@@ -27,5 +28,7 @@ public enum ProjectileForm
     SizeDec,
     HealthUp,
     Slowmoution,
-    Shield
+    Shield,
+    CoinMagnet,
+    HidePath
 }

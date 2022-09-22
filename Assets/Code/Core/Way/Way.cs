@@ -67,4 +67,17 @@ public class Way : MonoBehaviour
         }
         wayChanged.Invoke(curve.UpdateCurve());
     }
+
+    public void OnPlayerFacedProjectile(ProjectileEffect effect, float effectValue)
+    {
+        if(effect == ProjectileEffect.HidePath)
+            StartCoroutine(HidePath(effectValue));
+    }
+
+    IEnumerator HidePath(float timer)
+    {
+        lineRenderer.enabled = false;
+        yield return new WaitForSeconds(timer);
+        lineRenderer.enabled = true;
+    }
 }

@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         score.ScoreReachWayChangeValue += way.OnScoreReachWayChangeValue;
 
         player.playerDie += this.OnPlayerDie;
-
+        player.playerFacedProjectile += way.OnPlayerFacedProjectile;
         player.playerPickUpCoin += dataManager.OnPlayerPickUpCoin;
     }
 

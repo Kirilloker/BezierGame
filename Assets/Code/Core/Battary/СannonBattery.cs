@@ -80,5 +80,10 @@ public class СannonBattery : MonoBehaviour
             cannons[0].Load(
           projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Slowmoution), ProjectileEffect.Slowmoution, 5);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HidePath), ProjectileEffect.HidePath, 5);
+        }
     }
 }

@@ -26,6 +26,10 @@ public class ProjectilesPrefabs : MonoBehaviour
     private GameObject SlowmoutionProjectile;
     [SerializeField]
     private GameObject ShieldProjectile;
+    [SerializeField]
+    private GameObject HidePathProjectile;
+    [SerializeField]
+    private GameObject CoinMagnetProjectile;
 
 
     public GameObject GetProjectilePrefab(ProjectileForm prefab)
@@ -59,6 +63,12 @@ public class ProjectilesPrefabs : MonoBehaviour
                 break;
             case ProjectileForm.Slowmoution:
                 projectile = SlowmoutionProjectile;
+                break;
+            case ProjectileForm.CoinMagnet:
+                projectile = CoinMagnetProjectile;
+                break;
+            case ProjectileForm.HidePath:
+                projectile = HidePathProjectile;
                 break;
         }
 

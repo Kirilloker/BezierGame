@@ -50,6 +50,12 @@ public class Cannon : MonoBehaviour
             case ProjectileEffect.ScoreMultiplyer:
                 launchedProjectile.AddComponent<ScoreMultiplyer>();
                 break;
+            case ProjectileEffect.HidePath:
+                launchedProjectile.AddComponent<HidePath>();
+                break;
+            case ProjectileEffect.CoinMagnet:
+                launchedProjectile.AddComponent<CoinMagnet>();
+                break;
         }
 
         //Задаем значение добавленному эффекта

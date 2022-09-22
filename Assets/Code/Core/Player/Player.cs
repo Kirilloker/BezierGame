@@ -90,6 +90,15 @@ public class Player : MonoBehaviour
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
                     break;
                 //__________________________________________________________________
+                case ProjectileEffect.HidePath:
+                    playerFacedProjectile.Invoke(effect, effectValue);
+                    break;
+                //__________________________________________________________________
+                case ProjectileEffect.CoinMagnet:
+                    playerFacedProjectile.Invoke(effect, effectValue);
+                    break;
+                //__________________________________________________________________
+
             }
             projectile.Destroy();
         }

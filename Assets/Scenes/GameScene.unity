@@ -1282,6 +1282,8 @@ MonoBehaviour:
   scoreMultiplyerProjectile: {fileID: 3084450190497505680, guid: 4ad890c9cc71fda418431cd07688decb, type: 3}
   SlowmoutionProjectile: {fileID: 3084450190497505680, guid: 80cfe5d5bb243d246b18d9651b244538, type: 3}
   ShieldProjectile: {fileID: 3084450190497505680, guid: 18b0679af8a11b54bbc5455a55da1e82, type: 3}
+  HidePathProjectile: {fileID: 3084450190497505680, guid: 5eef58e232a7a254db45a3910ec1b5f6, type: 3}
+  CoinMagnetProjectile: {fileID: 3084450190497505680, guid: 000df1216d060ad4692985ea1a6543c1, type: 3}
 --- !u!4 &1573015786
 Transform:
   m_ObjectHideFlags: 0
