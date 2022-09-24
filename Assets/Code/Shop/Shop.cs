@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    Language language = Language.ru;
     private bool PrintDebug = true;
     GameDataManager data;
 
@@ -14,36 +15,53 @@ public class Shop : MonoBehaviour
     [SerializeField]
     Transform transformItem;
 
-    private List<GameObject> itemsShop = new List<GameObject>();
+    private List<ItemShop> itemsShop = new List<ItemShop>();
 
     private void Start()
     {
         data = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        Stard();
-    }
-
-    private void Stard()
-    {
-        Language language = Language.en;
+        
 
         for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
         {
             Effect nowEffect = (Effect)i;
 
-            GameObject itemShop = Instantiate(prefabItemShop, new Vector2(0f, i * -6f), Quaternion.identity ,transformItem);
+            GameObject itemShop = Instantiate(prefabItemShop, new Vector2(0f, i * -6f), Quaternion.identity, transformItem);
             itemShop.GetComponent<ItemShop>().CreateItem(
                 GetInfoEffect(nowEffect, language),
                 data.GetInfoEffect(nowEffect),
                 GetPriceEffect(nowEffect),
                 GetNameIcon(nowEffect),
                 language,
-                nowEffect
+                nowEffect,
+                this,
+                data
                 );
 
-            itemsShop.Add(itemShop);
+            itemsShop.Add(itemShop.GetComponent<ItemShop>());
         }
 
+    }
 
+    public bool BuyEffect(Effect effect, int price)
+    {
+        if (data.Coins >= price)
+        {
+            Debug.Log("Был куплен эффект под номером:" + effect + " По цене:" + price);
+
+            data.Coins -= price;
+            data.IncEffect(effect);
+
+            // Говорим всем остальным ячейкам, что им надо обновиться
+            for (int i = 0; i < itemsShop.Count; i++)
+            {
+                itemsShop[i].UpdateElementsUI();
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     private List<int> GetPriceEffect(Effect effect)

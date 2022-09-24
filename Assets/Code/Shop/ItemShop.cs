@@ -22,11 +22,14 @@ public class ItemShop : MonoBehaviour
     private string nameIcon;
     private Language language;
 
+    private Shop shop;
+    private GameDataManager data;
+
 
     private string colorHaveItem = "00FB00";
     private string colorNoItem = "13FBBB";
 
-    public void CreateItem(List<string> infoEffect, int levelEffect, List<int> priceEffect, string nameIcon, Language language, Effect effect)
+    public void CreateItem(List<string> infoEffect, int levelEffect, List<int> priceEffect, string nameIcon, Language language, Effect effect, Shop shop, GameDataManager data)
     {
         this.infoEffect = infoEffect;
         this.levelEffect = levelEffect;
@@ -34,12 +37,14 @@ public class ItemShop : MonoBehaviour
         this.nameIcon = nameIcon;
         this.language = language;
         this.effect = effect;
+        this.shop = shop;
+        this.data = data;
 
         SetIcon();
         UpdateElementsUI();
     }
 
-    private void UpdateElementsUI()
+    public void UpdateElementsUI()
     {
         SetText();
         SetTextButton();
@@ -69,19 +74,18 @@ public class ItemShop : MonoBehaviour
 
     private void SetIcon()
     {
-        var sprite = Resources.Load<Sprite>("coin");
+        var sprite = Resources.Load<Sprite>(nameIcon);
         iconEffect.sprite = sprite;
     }
 
     private void SetTextButton()
     {
-        Debug.Log("Level"  + levelEffect);
-        Debug.Log("infoEffect" + infoEffect.Count);
         // Если уже купили все эффекты, то удаляем кнопку Купить
         if (levelEffect == infoEffect.Count - 1)
         {
+            if (buttonBuy.gameObject == null) return;
+
             Destroy(buttonBuy.gameObject);
-            Debug.Log("Test"); 
             return;
         }
 
@@ -89,7 +93,7 @@ public class ItemShop : MonoBehaviour
         int price = priceEffect[levelEffect + 1];
 
         // Надо получить количество монет игрока
-        int pricePlayer = 40;
+        int pricePlayer = data.Coins;
 
         // Если у Игрока нет денег то выключаем кнопку
         if (price > pricePlayer)
@@ -118,9 +122,10 @@ public class ItemShop : MonoBehaviour
 
     public void SendRequest()
     {
-        Debug.Log("Вы нажали купить эффект");
-
-        levelEffect++;
-        UpdateElementsUI();
+        if (shop.BuyEffect(effect, priceEffect[levelEffect + 1]))
+        {
+            levelEffect++;
+            UpdateElementsUI();
+        }
     }
 }
