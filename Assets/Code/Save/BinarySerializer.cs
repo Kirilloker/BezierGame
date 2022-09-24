@@ -84,7 +84,13 @@ public class BinarySerializer
             {
                 Debug.Log("C удалением файла что то пошло не так");
             }
+
             SetDefaultData();
+            SaveData();
+        }
+        else
+        {
+            Debug.Log("Файл не существует");
         }
     }
 

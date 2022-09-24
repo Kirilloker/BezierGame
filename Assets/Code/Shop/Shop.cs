@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -15,18 +16,31 @@ public class Shop : MonoBehaviour
     [SerializeField]
     Transform transformItem;
 
+    [SerializeField]
+    Text textCoins;
+
+    [SerializeField]
+    Text textButton;
+
     private List<ItemShop> itemsShop = new List<ItemShop>();
 
     private void Start()
     {
         data = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        
 
+        UpdateTextCoins();
+        SetTextButtonBack();
+
+        CreateItems();
+    }
+
+    public void CreateItems()
+    {
         for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
         {
             Effect nowEffect = (Effect)i;
 
-            GameObject itemShop = Instantiate(prefabItemShop, new Vector2(0f, i * -6f), Quaternion.identity, transformItem);
+            GameObject itemShop = Instantiate(prefabItemShop, transformItem);
             itemShop.GetComponent<ItemShop>().CreateItem(
                 GetInfoEffect(nowEffect, language),
                 data.GetInfoEffect(nowEffect),
@@ -38,9 +52,11 @@ public class Shop : MonoBehaviour
                 data
                 );
 
+            // Задаем размер Item
+            itemShop.GetComponent<RectTransform>().sizeDelta = new Vector2(1200, 1200);
+
             itemsShop.Add(itemShop.GetComponent<ItemShop>());
         }
-
     }
 
     public bool BuyEffect(Effect effect, int price)
@@ -58,10 +74,37 @@ public class Shop : MonoBehaviour
                 itemsShop[i].UpdateElementsUI();
             }
 
+            UpdateTextCoins();
+
             return true;
         }
 
         return false;
+    }
+
+    private void UpdateTextCoins()
+    {
+        textCoins.text = data.Coins.ToString();
+    }
+
+    private void SetTextButtonBack()
+    {
+        string t_Button;
+
+        switch (language)
+        {
+            case Language.en:
+                t_Button = "Back Menu";
+                break;
+            case Language.ru:
+                t_Button = "Назад в меню";
+                break;
+            default:
+                t_Button = "Back Menu";
+                break;
+        }
+
+        textButton.text = t_Button;
     }
 
     private List<int> GetPriceEffect(Effect effect)
