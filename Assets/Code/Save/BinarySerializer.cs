@@ -72,6 +72,23 @@ public class BinarySerializer
         }
     }
 
+    public void ResetData()
+    {
+        if (File.Exists(Application.persistentDataPath + path))
+        {
+            try
+            {
+                File.Delete(Application.persistentDataPath + path);
+            }
+            catch 
+            {
+                Debug.Log("C удалением файла что то пошло не так");
+            }
+            SetDefaultData();
+        }
+    }
+
+
     public ref Hashtable GetData()
     {
         return ref data;
