@@ -23,6 +23,7 @@ public class Shield : MonoBehaviour, IProjectile
         return shieldTimer;
     }
 
+
     public void SetEffectValue(float value)
     {
         shieldTimer = value;

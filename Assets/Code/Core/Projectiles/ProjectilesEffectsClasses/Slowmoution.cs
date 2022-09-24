@@ -23,6 +23,7 @@ public class Slowmoution : MonoBehaviour, IProjectile
         return slowmoutionTimer;
     }
 
+
     public void SetEffectValue(float value)
     {
         slowmoutionTimer = value;

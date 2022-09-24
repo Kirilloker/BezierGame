@@ -21,6 +21,7 @@ public class SizeChange : MonoBehaviour, IProjectile
         return sizeChange;
     }
 
+
     public void SetEffectValue(float value)
     {
         sizeChange = value;

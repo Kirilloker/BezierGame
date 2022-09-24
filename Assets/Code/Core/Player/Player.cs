@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public event PlayerDeadHandler playerDie;
 
     //Ивент столкновения игрока с снарядами - для эффектов, действующих на окружение
-    public delegate void PlayerFacedProjectile(ProjectileEffect effect, float projectileValue);
+    public delegate void PlayerFacedProjectile(ProjectileEffect effect, float effectValue);
     public event PlayerFacedProjectile playerFacedProjectile;
 
     //Ивент поднятия монетки
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.CoinMagnet:
-                    playerFacedProjectile.Invoke(effect, effectValue);
+                    StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
                     break;
                 //__________________________________________________________________
 
@@ -128,6 +128,13 @@ public class Player : MonoBehaviour
                 yield return new WaitForSeconds(time);
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                break;
+
+            case ProjectileEffect.CoinMagnet:
+                Magnet magnet = this.gameObject.AddComponent<Magnet>();
+                magnet.SetMagnetableProjectiles(new List<ProjectileEffect> { ProjectileEffect.AddCoin});
+                yield return new WaitForSeconds(time);
+                Destroy(magnet);
                 break;
         }
     }

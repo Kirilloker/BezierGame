@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CoinMagnet : MonoBehaviour, IProjectile
 {
-
     //Таймер в секундах
     private float magnetTimer = 8;
+
+    static private List<ProjectileEffect> whoMagnet;
 
     public void Destroy()
     {

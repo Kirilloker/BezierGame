@@ -12,7 +12,6 @@ public class Cannon : MonoBehaviour
     private ProjectileEffect effect;
     private float effectValue;
 
-
     public void Load(GameObject prefab, ProjectileEffect effect, float effectValue)
     {
         this.projectilePrefab = prefab;

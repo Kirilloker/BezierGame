@@ -70,7 +70,7 @@ public class Way : MonoBehaviour
 
     public void OnPlayerFacedProjectile(ProjectileEffect effect, float effectValue)
     {
-        if(effect == ProjectileEffect.HidePath)
+        if (effect == ProjectileEffect.HidePath)
             StartCoroutine(HidePath(effectValue));
     }
 
