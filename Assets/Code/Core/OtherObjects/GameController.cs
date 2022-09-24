@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         score.ScoreReachWayChangeValue += way.OnScoreReachWayChangeValue;
 
         player.playerDie += this.OnPlayerDie;
-
+        player.playerFacedProjectile += way.OnPlayerFacedProjectile;
         player.playerPickUpCoin += dataManager.OnPlayerPickUpCoin;
     }
 
@@ -51,12 +51,9 @@ public class GameController : MonoBehaviour
         Vector2 downPoint = new Vector2(platform2.transform.position.x,
             platform2.transform.position.y + (platform2.transform.localScale.y / 2));
 
-        platform1.Active = true;
-        platform2.Active = false;
+        platform1.Active = true;;
 
         way.CreateWay(upPoint, downPoint);
-
-
     }
 
     //Обработчики событий_________________________________________________

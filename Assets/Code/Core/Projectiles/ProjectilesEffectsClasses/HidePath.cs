@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedChange : MonoBehaviour, IProjectile
+public class HidePath : MonoBehaviour, IProjectile
 {
-    private float speedChange = 1f;
+
+    //Таймер в секундах
+    private float hideTimer = 8;
 
     public void Destroy()
     {
@@ -13,16 +15,16 @@ public class SpeedChange : MonoBehaviour, IProjectile
 
     public ProjectileEffect GetEffect()
     {
-        return ProjectileEffect.SpeedChange;
+        return ProjectileEffect.HidePath;
     }
 
     public float GetEffectValue()
     {
-        return speedChange;
+        return hideTimer;
     }
 
     public void SetEffectValue(float value)
     {
-        speedChange = value;
+        hideTimer = value;
     }
 }

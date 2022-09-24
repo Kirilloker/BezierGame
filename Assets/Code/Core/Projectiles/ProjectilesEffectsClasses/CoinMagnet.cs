@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedChange : MonoBehaviour, IProjectile
+public class CoinMagnet : MonoBehaviour, IProjectile
 {
-    private float speedChange = 1f;
+
+    //Таймер в секундах
+    private float magnetTimer = 8;
 
     public void Destroy()
     {
@@ -13,16 +15,16 @@ public class SpeedChange : MonoBehaviour, IProjectile
 
     public ProjectileEffect GetEffect()
     {
-        return ProjectileEffect.SpeedChange;
+        return ProjectileEffect.CoinMagnet;
     }
 
     public float GetEffectValue()
     {
-        return speedChange;
+        return magnetTimer;
     }
 
     public void SetEffectValue(float value)
     {
-        speedChange = value;
+        magnetTimer = value;
     }
 }

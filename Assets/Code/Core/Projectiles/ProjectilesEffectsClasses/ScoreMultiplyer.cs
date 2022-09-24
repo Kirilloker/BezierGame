@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedChange : MonoBehaviour, IProjectile
+public class ScoreMultiplyer : MonoBehaviour, IProjectile
 {
-    private float speedChange = 1f;
+
+    //Таймер в секундах
+    private float multiplyerTimer = 8;
 
     public void Destroy()
     {
@@ -13,16 +15,16 @@ public class SpeedChange : MonoBehaviour, IProjectile
 
     public ProjectileEffect GetEffect()
     {
-        return ProjectileEffect.SpeedChange;
+        return ProjectileEffect.ScoreMultiplyer;
     }
 
     public float GetEffectValue()
     {
-        return speedChange;
+        return multiplyerTimer;
     }
 
     public void SetEffectValue(float value)
     {
-        speedChange = value;
+        multiplyerTimer = value;
     }
 }

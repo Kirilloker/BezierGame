@@ -41,6 +41,21 @@ public class Cannon : MonoBehaviour
             case ProjectileEffect.SpeedChange:
                 launchedProjectile.AddComponent<SpeedChange>();
                 break;
+            case ProjectileEffect.Shield:
+                launchedProjectile.AddComponent<Shield>();
+                break;
+            case ProjectileEffect.Slowmoution:
+                launchedProjectile.AddComponent<Slowmoution>();
+                break;
+            case ProjectileEffect.ScoreMultiplyer:
+                launchedProjectile.AddComponent<ScoreMultiplyer>();
+                break;
+            case ProjectileEffect.HidePath:
+                launchedProjectile.AddComponent<HidePath>();
+                break;
+            case ProjectileEffect.CoinMagnet:
+                launchedProjectile.AddComponent<CoinMagnet>();
+                break;
         }
 
         //Задаем значение добавленному эффекта

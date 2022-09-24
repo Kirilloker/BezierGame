@@ -18,7 +18,7 @@ public class Way : MonoBehaviour
     //ћаксимальное количесто добавленных точек
     private int maxBezierPoints = 12;
     //≈сли сложность кратна этому числу - добавл€ем новую точку
-    private int addNewPointDiffValue = 5;
+    private int addNewPointDiffValue = 3;
 
     //»вент создани€ пути
     public delegate void WayCreated(Dictionary<int, Vector2> wayPoints);
@@ -66,5 +66,18 @@ public class Way : MonoBehaviour
             curve.ReplaceRandomBezierPoint(pointSpawner.GetRandomVector());
         }
         wayChanged.Invoke(curve.UpdateCurve());
+    }
+
+    public void OnPlayerFacedProjectile(ProjectileEffect effect, float effectValue)
+    {
+        if(effect == ProjectileEffect.HidePath)
+            StartCoroutine(HidePath(effectValue));
+    }
+
+    IEnumerator HidePath(float timer)
+    {
+        lineRenderer.enabled = false;
+        yield return new WaitForSeconds(timer);
+        lineRenderer.enabled = true;
     }
 }

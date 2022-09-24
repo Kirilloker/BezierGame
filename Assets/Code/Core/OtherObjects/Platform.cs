@@ -9,7 +9,7 @@ public class Platform : MonoBehaviour
 
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
-    private bool active;
+    private bool active = false;
 
     private UnityEngine.Color activeColor = new Color(0.5490196f, 0.9019608f, 0.3176471f, 1f);
     private UnityEngine.Color disactiveColor = new Color(0.303048f, 0.4077995f, 0.488f, 1f);

@@ -65,5 +65,25 @@ public class СannonBattery : MonoBehaviour
             cannons[0].Load(
           projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedDown), ProjectileEffect.SpeedChange, -1);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Shield), ProjectileEffect.Shield, 10);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.ScoreMultiplyer), ProjectileEffect.ScoreMultiplyer, 10);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Slowmoution), ProjectileEffect.Slowmoution, 5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HidePath), ProjectileEffect.HidePath, 5);
+        }
     }
 }
