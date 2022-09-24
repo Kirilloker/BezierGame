@@ -14,5 +14,10 @@ public class SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     }
+
+    public void GoToShopScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Shop");
+    }
 }
 

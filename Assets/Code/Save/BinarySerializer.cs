@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class BinarySerializer
 {
-    private const string path = "/GameData.dat";
+    private const string path = "/GameData5.dat";
 
     private Hashtable data;
 
@@ -84,5 +84,26 @@ public class BinarySerializer
             {"Coins", "0"},
             {"Record", "0"}
         };
+
+        // Добавление списка предметов
+        List<bool> allItem = new List<bool>();
+
+        for (int i = 0; i < Enum.GetNames(typeof(Item)).Length; i++)
+        {
+            allItem.Add(false);
+        }
+
+        data["Items"] = GameDataManager.GetStringAllItems(allItem);
+
+
+        // Добавление списка эффектов
+        List<int> allEffect = new List<int>();
+
+        for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
+        {
+            allEffect.Add(0);
+        }
+
+        data["Effects"] = GameDataManager.GetStringAllEffects(allEffect);
     }
 }
