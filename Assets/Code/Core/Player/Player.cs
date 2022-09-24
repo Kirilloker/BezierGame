@@ -9,13 +9,23 @@ public class Player : MonoBehaviour
     private CircleCollider2D circleCollider;
 
     //Характеристики игрока_________________________________
-    private float playerSpeed = 10;
-    private int playerHealth = 1;
-    private int scoreMultiplier = 1;
-    private float playerSize = 1;
+    private float playerSpeed;
+    private float playerBaseSpeed = 10;
     private float maxSpeed = 50f;
     private float minSpeed = 5f;
+   
+    private float playerSize;
+    private float playerBaseSize =1;
+    private float minSize = 0.35f;
+    private float maxSize = 1.6f;
+
+    private int playerHealth;
+    private int playerBaseHealth = 1;
+
+    private int scoreMultiplier = 1;
     private bool shield = false;
+    private float slowmoutionPower = 0.5f;
+    private List<ProjectileEffect> whoMagneting = new List<ProjectileEffect> { ProjectileEffect.AddCoin};
     //______________________________________________________
 
 
@@ -123,7 +133,7 @@ public class Player : MonoBehaviour
                 break;
 
             case ProjectileEffect.Slowmoution:
-                Time.timeScale = 0.4f;
+                Time.timeScale = slowmoutionPower;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
                 yield return new WaitForSeconds(time);
                 Time.timeScale = 1f;
@@ -132,7 +142,7 @@ public class Player : MonoBehaviour
 
             case ProjectileEffect.CoinMagnet:
                 Magnet magnet = this.gameObject.AddComponent<Magnet>();
-                magnet.SetMagnetableProjectiles(new List<ProjectileEffect> { ProjectileEffect.AddCoin});
+                magnet.SetMagnetableProjectiles(whoMagneting);
                 yield return new WaitForSeconds(time);
                 Destroy(magnet);
                 break;
@@ -145,6 +155,10 @@ public class Player : MonoBehaviour
     public void OnWayCreated(Dictionary<int, Vector2> wayPoints)
     {
         mover.SetWayPoints(wayPoints);
+
+        playerHealth = playerBaseHealth;
+        playerSpeed = playerBaseSpeed;
+        playerSize = playerBaseSize;
     }
 
     public void OnWayChanged(Dictionary<int, Vector2> wayPoints)
@@ -181,10 +195,10 @@ public class Player : MonoBehaviour
         {
             playerSize = (float)value;
 
-            if (playerSize < 0.35f)
-                playerSize = 0.35f;
-            if (playerSize > 1.6f)
-                playerSize = 1.6f;
+            if (playerSize < minSize)
+                playerSize = minSize;
+            if (playerSize > maxSize)
+                playerSize = maxSize;
 
             this.transform.localScale = new Vector3(playerSize, playerSize, 0);
         }
