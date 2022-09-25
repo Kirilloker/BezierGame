@@ -13,17 +13,17 @@ public class Cheat : MonoBehaviour
     public void GiveMoney()
     {
         data.Coins += 100;
-        Effect effect = Effect.speed;
+        UpgradeEffect effect = UpgradeEffect.speed;
 
         switch (effect)
         {
-            case Effect.speed:
+            case UpgradeEffect.speed:
                 Debug.Log("Добавить улучшение 1");
-                goto case Effect.size;
-            case Effect.size:
+                goto case UpgradeEffect.size;
+            case UpgradeEffect.size:
                 Debug.Log("Добавить улучшение 2");
-                goto case Effect.shield;
-            case Effect.shield:
+                goto case UpgradeEffect.shield;
+            case UpgradeEffect.shield:
                 Debug.Log("Добавить улучшение 3");
                 break;
             default:
