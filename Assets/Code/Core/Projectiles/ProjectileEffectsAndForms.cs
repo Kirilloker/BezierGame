@@ -30,5 +30,5 @@ public enum ProjectileForm
     Slowmoution,
     Shield,
     CoinMagnet,
-    HidePath
+    HidePath,
 }

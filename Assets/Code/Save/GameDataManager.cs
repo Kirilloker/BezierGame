@@ -287,9 +287,14 @@ public class GameDataManager : MonoBehaviour
 }
 public enum UpgradeEffect
 {
-    speed = 0,
-    size = 1,
-    shield = 2,
+    speed,
+    size ,
+    shield,
+    player, 
+    health,
+    slowmoution,
+    magnet,
+    xscore
 }
 
 public enum Item

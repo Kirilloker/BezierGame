@@ -1082,6 +1082,7 @@ MonoBehaviour:
   platform2: {fileID: 2127873479}
   battery: {fileID: 2111866014}
   way: {fileID: 796895702}
+  dataManager: {fileID: 0}
 --- !u!4 &1411639009
 Transform:
   m_ObjectHideFlags: 0
@@ -1284,6 +1285,7 @@ MonoBehaviour:
   ShieldProjectile: {fileID: 3084450190497505680, guid: 18b0679af8a11b54bbc5455a55da1e82, type: 3}
   HidePathProjectile: {fileID: 3084450190497505680, guid: 5eef58e232a7a254db45a3910ec1b5f6, type: 3}
   CoinMagnetProjectile: {fileID: 3084450190497505680, guid: 000df1216d060ad4692985ea1a6543c1, type: 3}
+  HealthUpProjectile: {fileID: 3084450190497505680, guid: db3a147c29f205d4296f0ea57cfe42b1, type: 3}
 --- !u!4 &1573015786
 Transform:
   m_ObjectHideFlags: 0

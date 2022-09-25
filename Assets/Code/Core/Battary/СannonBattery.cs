@@ -89,6 +89,13 @@ public class СannonBattery : MonoBehaviour
         {
             cannons[0].Load(
           projectilesPrefabs.GetProjectilePrefab(ProjectileForm.CoinMagnet), ProjectileEffect.CoinMagnet, 5);
+
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            cannons[0].Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HealthUp), ProjectileEffect.HealthChange, 1);
+
         }
     }
 }

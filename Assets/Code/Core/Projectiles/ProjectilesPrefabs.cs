@@ -30,6 +30,8 @@ public class ProjectilesPrefabs : MonoBehaviour
     private GameObject HidePathProjectile;
     [SerializeField]
     private GameObject CoinMagnetProjectile;
+    [SerializeField]
+    private GameObject HealthUpProjectile;
 
 
     public GameObject GetProjectilePrefab(ProjectileForm prefab)
@@ -69,6 +71,9 @@ public class ProjectilesPrefabs : MonoBehaviour
                 break;
             case ProjectileForm.HidePath:
                 projectile = HidePathProjectile;
+                break;
+            case ProjectileForm.HealthUp:
+                projectile = HealthUpProjectile;
                 break;
         }
 
