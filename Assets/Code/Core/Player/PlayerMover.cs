@@ -31,6 +31,7 @@ public class PlayerMover : MonoBehaviour
         Sigma += (int)currentSpeed;
         player.transform.position = wayPoints[Sigma];
 
+
         if (Input.GetKey(KeyCode.W))
         {
             AcceleratePlayer(1);

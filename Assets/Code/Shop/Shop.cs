@@ -269,7 +269,7 @@ public class Shop : MonoBehaviour
     string iconMoution = "s_Moution";
     string iconXScore = "s_XScore";
     string iconSpeed = "s_Speed";
-    string iconHealth = "s_Healt";
+    string iconHealth = "s_Health";
     string iconSize = "s_Size";
     //string iconPlayer = "s_Spped";
 

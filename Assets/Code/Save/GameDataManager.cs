@@ -294,7 +294,8 @@ public enum UpgradeEffect
     XScore,
     Speed,
     Health,
-    Size
+    Size, 
+    Player
 }
 
 public enum Item
