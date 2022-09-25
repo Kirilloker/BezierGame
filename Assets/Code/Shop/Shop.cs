@@ -14,12 +14,26 @@ public class Shop : MonoBehaviour
     [SerializeField]
     Transform transformItem;
 
+<<<<<<< HEAD
+    [SerializeField]
+    Text textCoins;
+
+    [SerializeField]
+    Text textButton;
+
     private List<GameObject> itemsShop = new List<GameObject>();
+=======
+    private List<ItemShop> itemsShop = new List<ItemShop>();
+>>>>>>> parent of c29e3f8 (Добавлена кнопка назад в магазине и количество монет)
 
     private void Start()
     {
         data = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        Stard();
+<<<<<<< HEAD
+        UpdateTextCoins();
+        SetTextButtonBack();
+
+        CreateItems();
     }
 
     private void Stard()
@@ -31,6 +45,15 @@ public class Shop : MonoBehaviour
             UpgradeEffect nowEffect = (UpgradeEffect)i;
 
             GameObject itemShop = Instantiate(prefabItemShop, new Vector2(0f, i * -6f), Quaternion.identity ,transformItem);
+=======
+        
+
+        for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
+        {
+            Effect nowEffect = (Effect)i;
+
+            GameObject itemShop = Instantiate(prefabItemShop, new Vector2(0f, i * -6f), Quaternion.identity, transformItem);
+>>>>>>> parent of c29e3f8 (Добавлена кнопка назад в магазине и количество монет)
             itemShop.GetComponent<ItemShop>().CreateItem(
                 GetInfoEffect(nowEffect, language),
                 data.GetInfoEffect(nowEffect),
@@ -40,13 +63,41 @@ public class Shop : MonoBehaviour
                 nowEffect
                 );
 
+<<<<<<< HEAD
             itemsShop.Add(itemShop);
+=======
+            itemsShop.Add(itemShop.GetComponent<ItemShop>());
+        }
+
+    }
+
+    public bool BuyEffect(Effect effect, int price)
+    {
+        if (data.Coins >= price)
+        {
+            Debug.Log("��� ������ ������ ��� �������:" + effect + " �� ����:" + price);
+
+            data.Coins -= price;
+            data.IncEffect(effect);
+
+            // ������� ���� ��������� �������, ��� �� ���� ����������
+            for (int i = 0; i < itemsShop.Count; i++)
+            {
+                itemsShop[i].UpdateElementsUI();
+            }
+
+            return true;
+>>>>>>> parent of c29e3f8 (Добавлена кнопка назад в магазине и количество монет)
         }
 
 
     }
 
+<<<<<<< HEAD
     private List<int> GetPriceEffect(UpgradeEffect effect)
+=======
+    private List<int> GetPriceEffect(Effect effect)
+>>>>>>> parent of c29e3f8 (Добавлена кнопка назад в магазине и количество монет)
     {
         switch (effect)
         {
