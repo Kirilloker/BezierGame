@@ -242,7 +242,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2247187255636160812}
   - component: {fileID: 7725985925108240514}
-  - component: {fileID: 5994834268632956837}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -289,26 +288,6 @@ MonoBehaviour:
   infoText: {fileID: 948601959924255191}
   iconEffect: {fileID: 7753683099265389347}
   buttonBuy: {fileID: 7425147198101464601}
---- !u!114 &5994834268632956837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311908501872368165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: 1044.6519
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &7261056710295235899
 GameObject:
   m_ObjectHideFlags: 0

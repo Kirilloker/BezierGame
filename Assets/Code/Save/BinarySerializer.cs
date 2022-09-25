@@ -84,13 +84,8 @@ public class BinarySerializer
             {
                 Debug.Log("C удалением файла что то пошло не так");
             }
-
             SetDefaultData();
             SaveData();
-        }
-        else
-        {
-            Debug.Log("Файл не существует");
         }
     }
 
@@ -122,7 +117,7 @@ public class BinarySerializer
         // Добавление списка эффектов
         List<int> allEffect = new List<int>();
 
-        for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(UpgradeEffect)).Length; i++)
         {
             allEffect.Add(0);
         }

@@ -11,20 +11,21 @@ public class Player : MonoBehaviour
     //Характеристики игрока_________________________________
     private float playerSpeed;
     private float playerBaseSpeed = 10;
-    private float maxSpeed = 50f;
+    private float maxSpeed = 35f;
     private float minSpeed = 5f;
    
     private float playerSize;
-    private float playerBaseSize =1;
-    private float minSize = 0.35f;
-    private float maxSize = 1.6f;
+    private float playerBaseSize = 1.2f;
+    private float minSize = 0.6f;
+    private float maxSize = 1.8f;
 
     private int playerHealth;
     private int playerBaseHealth = 1;
+    private int MaxHeath = 3;
 
     private int scoreMultiplier = 1;
     private bool shield = false;
-    private float slowmoutionPower = 0.5f;
+    private float slowmoutionPower = 0.75f;
     private List<ProjectileEffect> whoMagneting = new List<ProjectileEffect> { ProjectileEffect.AddCoin};
     //______________________________________________________
 
@@ -165,6 +166,46 @@ public class Player : MonoBehaviour
     {
         mover.SetWayPoints(wayPoints);
     }
+
+    public void OnGameDataLoaded(Dictionary<string, float> upgrades)
+    {
+        foreach(var upgrade in upgrades)
+        {
+            switch (upgrade.Key)
+            {
+                case ("Increase max speed"):
+                    maxSpeed += upgrade.Value;
+                    break;
+                case ("Decrease min size"):
+                    minSize += upgrade.Value;
+                    break;
+                case ("Increase base health"):
+                    playerBaseHealth += (int)upgrade.Value;
+                    break;
+                case ("Increase base speed"):
+                    playerBaseSpeed += upgrade.Value;
+                    break;
+                case ("Decrease base size"):
+                    playerBaseSize -= upgrade.Value;
+                    break;
+                case ("Increase max health"):
+                    MaxHeath += (int)upgrade.Value;
+                    break;
+                case ("Increase slowmoution effect"):
+                    slowmoutionPower -= upgrade.Value;
+                    break;
+                case ("Magniting healthup"):
+                    whoMagneting.Add(ProjectileEffect.HealthChange);
+                    break;
+                case ("Magniting speedup"):
+                    whoMagneting.Add(ProjectileEffect.SpeedChange);
+                    break;              
+                case ("Magniting sise decrease"):
+                    whoMagneting.Add(ProjectileEffect.SizeChange);
+                    break;
+            }
+        }
+    }
     //_______________________________________________________________
 
 
@@ -175,6 +216,9 @@ public class Player : MonoBehaviour
         set
         {
             playerHealth = value;
+            if (playerHealth > MaxHeath)
+                playerHealth = MaxHeath;
+
             if (playerHealth <= 0)
                 playerDie.Invoke();
         }
