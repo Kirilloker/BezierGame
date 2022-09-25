@@ -87,7 +87,7 @@ public class ItemShop : MonoBehaviour
         // Если уже купили все эффекты, то удаляем кнопку Купить
         if (levelEffect == infoEffect.Count - 1)
         {
-            if (buttonBuy == null) return;
+            if (buttonBuy.gameObject == null) return;
 
             Destroy(buttonBuy.gameObject);
             Debug.Log("Test"); 

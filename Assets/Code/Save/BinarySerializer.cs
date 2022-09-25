@@ -85,7 +85,10 @@ public class BinarySerializer
                 Debug.Log("C удалением файла что то пошло не так");
             }
             SetDefaultData();
+<<<<<<< HEAD
             SaveData();
+=======
+>>>>>>> parent of c29e3f8 (Добавлена кнопка назад в магазине и количество монет)
         }
     }
 

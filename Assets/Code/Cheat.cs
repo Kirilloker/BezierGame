@@ -13,6 +13,7 @@ public class Cheat : MonoBehaviour
     public void GiveMoney()
     {
         data.Coins += 100;
+<<<<<<< HEAD
         UpgradeEffect effect = UpgradeEffect.speed;
 
         switch (effect)
@@ -36,6 +37,8 @@ public class Cheat : MonoBehaviour
     {
         Debug.Log("��������� ������");
         data.ResetData();
+=======
+>>>>>>> parent of c29e3f8 (Добавлена кнопка назад в магазине и количество монет)
     }
 
 }
