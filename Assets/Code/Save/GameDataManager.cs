@@ -206,7 +206,7 @@ public class GameDataManager : MonoBehaviour
 
 
 
-    private List<int> GetAllInfoEffects()
+    public List<int> GetAllInfoEffects()
     {
         List<int> allEffect = new List<int>();
 
@@ -237,7 +237,7 @@ public class GameDataManager : MonoBehaviour
         return newString;
     }
 
-    public int GetInfoEffect(Effect effect)
+    public int GetInfoEffect(UpgradeEffect effect)
     {
         List<int> allItem = GetAllInfoEffects();
 
@@ -250,7 +250,7 @@ public class GameDataManager : MonoBehaviour
         return allItem[(int)effect];
     }
 
-    private void SetInfoEffect(Effect effect, int stateItem)
+    private void SetInfoEffect(UpgradeEffect effect, int stateItem)
     {
         List<int> allItem = GetAllInfoEffects();
 
@@ -267,7 +267,7 @@ public class GameDataManager : MonoBehaviour
         ChangeHashTable("Effects", newString);
     }
 
-    public void IncEffect(Effect effect)
+    public void IncEffect(UpgradeEffect effect)
     {
         if (GetInfoEffect(effect) < 6)
         {
@@ -279,7 +279,7 @@ public class GameDataManager : MonoBehaviour
         }
     }
 }
-public enum Effect
+public enum UpgradeEffect
 {
     speed = 0,
     size = 1,

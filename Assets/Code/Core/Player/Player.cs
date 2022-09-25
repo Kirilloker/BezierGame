@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private float minSpeed = 5f;
    
     private float playerSize;
-    private float playerBaseSize =1;
+    private float playerBaseSize = 1;
     private float minSize = 0.35f;
     private float maxSize = 1.6f;
 
@@ -164,6 +164,11 @@ public class Player : MonoBehaviour
     public void OnWayChanged(Dictionary<int, Vector2> wayPoints)
     {
         mover.SetWayPoints(wayPoints);
+    }
+
+    public void OnGameDataLoaded(Dictionary<string, float> upgrades)
+    {
+
     }
     //_______________________________________________________________
 

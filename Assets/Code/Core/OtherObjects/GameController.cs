@@ -17,15 +17,19 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Way way;
 
-    private Score score;
+    [SerializeField]
     private GameDataManager dataManager;
+    private Score score;
+
+    //Ивент загрузки игровых данных
+    public delegate void GameDataLoadedHandler(Dictionary<string, float> upgrades);
+    public event GameDataLoadedHandler gameDataLoaded;
 
 
     private void Awake()
     {
         dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         score = new Score(dataManager);
-
 
         //Регистрируем обработчики различных событий
         platform1.playerHitPlatform += score.OnPlayerHitPlatform;
@@ -41,11 +45,17 @@ public class GameController : MonoBehaviour
         player.playerDie += this.OnPlayerDie;
         player.playerFacedProjectile += way.OnPlayerFacedProjectile;
         player.playerPickUpCoin += dataManager.OnPlayerPickUpCoin;
+
+        gameDataLoaded += player.OnGameDataLoaded;
     }
 
     //Начало игры
     private void Start()
     {
+        gameDataLoaded.Invoke(
+            GameDataUpgradeEncoder.EncodeUpgradeEffects(
+                dataManager.GetAllInfoEffects()));
+
         Vector2 upPoint = new Vector2(platform1.transform.position.x,
             platform1.transform.position.y - platform1.transform.localScale.y / 2);
         Vector2 downPoint = new Vector2(platform2.transform.position.x,

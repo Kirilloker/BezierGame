@@ -26,9 +26,9 @@ public class Shop : MonoBehaviour
     {
         Language language = Language.en;
 
-        for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(UpgradeEffect)).Length; i++)
         {
-            Effect nowEffect = (Effect)i;
+            UpgradeEffect nowEffect = (UpgradeEffect)i;
 
             GameObject itemShop = Instantiate(prefabItemShop, new Vector2(0f, i * -6f), Quaternion.identity ,transformItem);
             itemShop.GetComponent<ItemShop>().CreateItem(
@@ -46,41 +46,41 @@ public class Shop : MonoBehaviour
 
     }
 
-    private List<int> GetPriceEffect(Effect effect)
+    private List<int> GetPriceEffect(UpgradeEffect effect)
     {
         switch (effect)
         {
-            case Effect.speed:
+            case UpgradeEffect.speed:
                 return priceSpeed;
-            case Effect.size:
+            case UpgradeEffect.size:
                 return priceSpeed;
-            case Effect.shield:
+            case UpgradeEffect.shield:
                 return priceSpeed;
         }
 
         return new List<int>() { 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 };
     }
 
-    private string GetNameIcon(Effect effect)
+    private string GetNameIcon(UpgradeEffect effect)
     {
         switch (effect)
         {
-            case Effect.speed:
+            case UpgradeEffect.speed:
                 return iconSpeed;
-            case Effect.size:
+            case UpgradeEffect.size:
                 return iconSpeed;
-            case Effect.shield:
+            case UpgradeEffect.shield:
                 return iconSpeed;
         }
 
         return "Error";
     }
 
-    private List<string> GetInfoEffect(Effect effect, Language language)
+    private List<string> GetInfoEffect(UpgradeEffect effect, Language language)
     {
         switch (effect)
         {
-            case Effect.speed:
+            case UpgradeEffect.speed:
                 switch (language)
                 {
                     case Language.en:
@@ -92,7 +92,7 @@ public class Shop : MonoBehaviour
                         break;
                 }
                 break;
-            case Effect.size:
+            case UpgradeEffect.size:
                 switch (language)
                 {
                     case Language.en:
@@ -104,7 +104,7 @@ public class Shop : MonoBehaviour
                         break;
                 }
                 break;
-            case Effect.shield:
+            case UpgradeEffect.shield:
                 switch (language)
                 {
                     case Language.en:
