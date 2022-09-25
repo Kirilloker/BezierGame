@@ -109,37 +109,53 @@ public class Shop : MonoBehaviour
 
     private List<int> GetPriceEffect(Effect effect)
     {
-        //switch (effect)
-        //{
-        //    case Effect.speed:
-        //        return priceSpeed;
-        //    case Effect.size:
-        //        return priceSpeed;
-        //    case Effect.shield:
-        //        return priceSpeed;
-        //}
+        switch (effect)
+        {
+            case Effect.Magnite:
+                return priceMagnite;
+            case Effect.Shield:
+                return priceShield;
+            case Effect.Moution:
+                return priceMoution;
+            case Effect.XScore:
+                return priceXScore;
+            case Effect.Speed:
+                return priceSpeed;
+            case Effect.Health:
+                return priceHealth;
+            case Effect.Size:
+                return priceSize;
+            default:
+                return priceSpeed;
+        }
 
-        return new List<int>() { 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 };
     }
 
     private string GetNameIcon(Effect effect)
     {
-        //switch (effect)
-        //{
-        //    case Effect.speed:
-        //        return iconSpeed;
-        //    case Effect.size:
-        //        return iconSpeed;
-        //    case Effect.shield:
-        //        return iconSpeed;
-        //}
-
-        return "Error";
+        switch (effect)
+        {
+            case Effect.Magnite:
+                return iconMagnite;
+            case Effect.Shield:
+                return iconShield;
+            case Effect.Moution:
+                return iconMoution;
+            case Effect.XScore:
+                return iconXScore;
+            case Effect.Speed:
+                return iconSpeed;
+            case Effect.Health:
+                return iconHealth;
+            case Effect.Size:
+                return iconSize;
+            default:
+                return iconSpeed;
+        }
     }
 
     private List<string> GetInfoEffect(Effect effect, Language language)
     {
-
         switch (effect)
         {
             case Effect.Magnite:
@@ -252,7 +268,7 @@ public class Shop : MonoBehaviour
     string iconShield = "s_Shield";
     string iconMoution = "s_Moution";
     string iconXScore = "s_XScore";
-    string iconSpeed = "s_Spped";
+    string iconSpeed = "s_Speed";
     string iconHealth = "s_Healt";
     string iconSize = "s_Size";
     //string iconPlayer = "s_Spped";

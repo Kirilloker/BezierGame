@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class BinarySerializer
 {
-    private const string path = "/GameData5.dat";
+    private const string path = "/GameData.dat";
 
     private Hashtable data;
 
