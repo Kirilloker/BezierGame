@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
@@ -14,12 +15,21 @@ public class Shop : MonoBehaviour
     [SerializeField]
     Transform transformItem;
 
+    [SerializeField]
+    Text textCoins;
+
+    [SerializeField]
+    Text textButton;
+
     private List<GameObject> itemsShop = new List<GameObject>();
 
     private void Start()
     {
         data = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        Stard();
+        UpdateTextCoins();
+        SetTextButtonBack();
+
+        CreateItems();
     }
 
     private void Stard()

@@ -15,6 +15,12 @@ public class ItemShop : MonoBehaviour
     [SerializeField]
     private Button buttonBuy;
 
+    [SerializeField]
+    private List<Image> ActiveImages;
+
+    [SerializeField]
+    private List<Image> SelectImages;
+
     private UpgradeEffect effect;
     private List<string> infoEffect;
     private int levelEffect;
@@ -37,35 +43,36 @@ public class ItemShop : MonoBehaviour
 
         SetIcon();
         UpdateElementsUI();
+        SelectItem = levelEffect + 1;
     }
 
-    private void UpdateElementsUI()
+    public void UpdateElementsUI()
     {
-        SetText();
+        //SetText();
         SetTextButton();
     }
 
-    private void SetText()
-    {
-        string text = "";
+    //private void SetText()
+    //{
+    //    string text = "";
 
-        for (int i = 0; i < infoEffect.Count; i++)
-        {
-            // Подкрашиваем те, которые у нас есть
-            if (i <= levelEffect)
-                text += "<color=#" + colorHaveItem + "> ";
-            else
-                text += "<color=#" + colorNoItem + "> ";
+    //    for (int i = 0; i < infoEffect.Count; i++)
+    //    {
+    //        // Подкрашиваем те, которые у нас есть
+    //        if (i <= levelEffect)
+    //            text += "<color=#" + colorHaveItem + "> ";
+    //        else
+    //            text += "<color=#" + colorNoItem + "> ";
 
-            text += infoEffect[i];
+    //        text += infoEffect[i];
 
-            text += "</color>";
+    //        text += "</color>";
 
-            text += "\n";
-        }
+    //        text += "\n";
+    //    }
 
-        infoText.text = text;
-    }
+    //    infoText.text = text;
+    //}
 
     private void SetIcon()
     {
@@ -80,6 +87,8 @@ public class ItemShop : MonoBehaviour
         // Если уже купили все эффекты, то удаляем кнопку Купить
         if (levelEffect == infoEffect.Count - 1)
         {
+            if (buttonBuy == null) return;
+
             Destroy(buttonBuy.gameObject);
             Debug.Log("Test"); 
             return;
@@ -122,5 +131,23 @@ public class ItemShop : MonoBehaviour
 
         levelEffect++;
         UpdateElementsUI();
+    }
+
+    private int SelectItem
+    {
+        set
+        {
+            if (value < 0) value = 0;
+            if (value > 6) value = 6;
+
+            for (int i = 0; i < SelectImages.Count; i++)
+            {
+                SelectImages[i].gameObject.SetActive(false);
+            }
+
+            SelectImages[value].gameObject.SetActive(true);
+
+            infoText.text = infoEffect[value];
+        }
     }
 }
