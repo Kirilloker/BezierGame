@@ -84,6 +84,12 @@ public class GameDataManager : MonoBehaviour
         GameData = serializer.GetData();
     }
 
+    public void ResetData()
+    {
+        serializer.ResetData();
+        GameData = serializer.GetData();
+    }
+
     //Обработчики ивентов__________________________________
     public void OnPlayerPickUpCoin(int numOfCoins)
     {
