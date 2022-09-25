@@ -111,19 +111,19 @@ public class Shop : MonoBehaviour
     {
         switch (effect)
         {
-            case Effect.Magnite:
+            case UpgradeEffect.Magnite:
                 return priceMagnite;
-            case Effect.Shield:
+            case UpgradeEffect.Shield:
                 return priceShield;
-            case Effect.Moution:
+            case UpgradeEffect.Moution:
                 return priceMoution;
-            case Effect.XScore:
+            case UpgradeEffect.XScore:
                 return priceXScore;
-            case Effect.Speed:
+            case UpgradeEffect.Speed:
                 return priceSpeed;
-            case Effect.Health:
+            case UpgradeEffect.Health:
                 return priceHealth;
-            case Effect.Size:
+            case UpgradeEffect.Size:
                 return priceSize;
             default:
                 return priceSpeed;
@@ -135,19 +135,19 @@ public class Shop : MonoBehaviour
     {
         switch (effect)
         {
-            case Effect.Magnite:
+            case UpgradeEffect.Magnite:
                 return iconMagnite;
-            case Effect.Shield:
+            case UpgradeEffect.Shield:
                 return iconShield;
-            case Effect.Moution:
+            case UpgradeEffect.Moution:
                 return iconMoution;
-            case Effect.XScore:
+            case UpgradeEffect.XScore:
                 return iconXScore;
-            case Effect.Speed:
+            case UpgradeEffect.Speed:
                 return iconSpeed;
-            case Effect.Health:
+            case UpgradeEffect.Health:
                 return iconHealth;
-            case Effect.Size:
+            case UpgradeEffect.Size:
                 return iconSize;
             default:
                 return iconSpeed;
