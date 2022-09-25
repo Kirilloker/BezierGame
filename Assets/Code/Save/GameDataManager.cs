@@ -84,6 +84,12 @@ public class GameDataManager : MonoBehaviour
         GameData = serializer.GetData();
     }
 
+    public void ResetData()
+    {
+        serializer.ResetData();
+        GameData = serializer.GetData();
+    }
+
     //Обработчики ивентов__________________________________
     public void OnPlayerPickUpCoin(int numOfCoins)
     {
@@ -206,7 +212,7 @@ public class GameDataManager : MonoBehaviour
 
 
 
-    public List<int> GetAllInfoEffects()
+    private List<int> GetAllInfoEffects()
     {
         List<int> allEffect = new List<int>();
 
@@ -237,7 +243,7 @@ public class GameDataManager : MonoBehaviour
         return newString;
     }
 
-    public int GetInfoEffect(UpgradeEffect effect)
+    public int GetInfoEffect(Effect effect)
     {
         List<int> allItem = GetAllInfoEffects();
 
@@ -250,7 +256,7 @@ public class GameDataManager : MonoBehaviour
         return allItem[(int)effect];
     }
 
-    private void SetInfoEffect(UpgradeEffect effect, int stateItem)
+    private void SetInfoEffect(Effect effect, int stateItem)
     {
         List<int> allItem = GetAllInfoEffects();
 
@@ -267,7 +273,7 @@ public class GameDataManager : MonoBehaviour
         ChangeHashTable("Effects", newString);
     }
 
-    public void IncEffect(UpgradeEffect effect)
+    public void IncEffect(Effect effect)
     {
         if (GetInfoEffect(effect) < 6)
         {
@@ -279,21 +285,21 @@ public class GameDataManager : MonoBehaviour
         }
     }
 }
-public enum UpgradeEffect
+
+public enum Effect
 {
-    speed,
-    size ,
-    shield,
-    player, 
-    health,
-    slowmoution,
-    magnet,
-    xscore
+    Magnite,
+    Shield,
+    Moution,
+    XScore,
+    Speed,
+    Health,
+    Size
 }
 
 public enum Item
 {
-    s_Hallowen = 0,
-    s_Cat = 1,
-    s_Pluto = 2,
+    s_Hallowen,
+    s_Cat,
+    s_Pluto,
 }
