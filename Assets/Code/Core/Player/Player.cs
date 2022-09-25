@@ -156,10 +156,6 @@ public class Player : MonoBehaviour
     public void OnWayCreated(Dictionary<int, Vector2> wayPoints)
     {
         mover.SetWayPoints(wayPoints);
-
-        playerHealth = playerBaseHealth;
-        playerSpeed = playerBaseSpeed;
-        playerSize = playerBaseSize;
     }
 
     public void OnWayChanged(Dictionary<int, Vector2> wayPoints)
@@ -205,6 +201,10 @@ public class Player : MonoBehaviour
                     break;
             }
         }
+
+        PlayerHealth = playerBaseHealth;
+        PlayerSpeed = playerBaseSpeed;
+        PlayerSize = playerBaseSize;
     }
     //_______________________________________________________________
 
