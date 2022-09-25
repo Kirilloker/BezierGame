@@ -238,7 +238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -1168.7611}
+  m_AnchoredPosition: {x: 640, y: -955.9966}
   m_SizeDelta: {x: 1280, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &419304480
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b91faf54c538444aa70c8021e14251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabItemShop: {fileID: 6311908501872368165, guid: 97f28d84dd4edc143b0c77bf2133ebff, type: 3}
+  prefabItemShop: {fileID: 6311908501872368165, guid: cc3e7950a5af4954387c3a85b8f56049, type: 3}
   transformItem: {fileID: 419304479}
   textCoins: {fileID: 65655911}
   textButton: {fileID: 870905752}

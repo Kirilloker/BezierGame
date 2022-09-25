@@ -109,39 +109,88 @@ public class Shop : MonoBehaviour
 
     private List<int> GetPriceEffect(Effect effect)
     {
-        switch (effect)
-        {
-            case Effect.speed:
-                return priceSpeed;
-            case Effect.size:
-                return priceSpeed;
-            case Effect.shield:
-                return priceSpeed;
-        }
+        //switch (effect)
+        //{
+        //    case Effect.speed:
+        //        return priceSpeed;
+        //    case Effect.size:
+        //        return priceSpeed;
+        //    case Effect.shield:
+        //        return priceSpeed;
+        //}
 
         return new List<int>() { 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 };
     }
 
     private string GetNameIcon(Effect effect)
     {
-        switch (effect)
-        {
-            case Effect.speed:
-                return iconSpeed;
-            case Effect.size:
-                return iconSpeed;
-            case Effect.shield:
-                return iconSpeed;
-        }
+        //switch (effect)
+        //{
+        //    case Effect.speed:
+        //        return iconSpeed;
+        //    case Effect.size:
+        //        return iconSpeed;
+        //    case Effect.shield:
+        //        return iconSpeed;
+        //}
 
         return "Error";
     }
 
     private List<string> GetInfoEffect(Effect effect, Language language)
     {
+
         switch (effect)
         {
-            case Effect.speed:
+            case Effect.Magnite:
+                switch (language)
+                {
+                    case Language.en:
+                        return infoMagnitedEN;
+                    case Language.ru:
+                        return infoMagnitedRU;
+                    default:
+                        Cout("Такого языка нет");
+                        return infoMagnitedEN;
+                }
+
+            case Effect.Shield:
+                switch (language)
+                {
+                    case Language.en:
+                        return infoShieldEN;
+                    case Language.ru:
+                        return infoShieldRU;
+                    default:
+                        Cout("Такого языка нет");
+                        return infoShieldEN;
+                }
+
+            case Effect.Moution:
+                switch (language)
+                {
+                    case Language.en:
+                        return infoMoutionEN;
+                    case Language.ru:
+                        return infoMoutionRU;
+                    default:
+                        Cout("Такого языка нет");
+                        return infoMoutionEN;
+                }
+
+            case Effect.XScore:
+                switch (language)
+                {
+                    case Language.en:
+                        return infoXScoreEN;
+                    case Language.ru:
+                        return infoXScoreRU;
+                    default:
+                        Cout("Такого языка нет");
+                        return infoXScoreEN;
+                }
+
+            case Effect.Speed:
                 switch (language)
                 {
                     case Language.en:
@@ -150,39 +199,46 @@ public class Shop : MonoBehaviour
                         return infoSpeedRU;
                     default:
                         Cout("Такого языка нет");
-                        break;
+                        return infoSpeedEN;
                 }
-                break;
-            case Effect.size:
+            case Effect.Health:
                 switch (language)
                 {
                     case Language.en:
-                        return infoSpeedEN;
+                        return infoHealtEN;
                     case Language.ru:
-                        return infoSpeedRU;
+                        return infoHealtRU;
                     default:
                         Cout("Такого языка нет");
-                        break;
+                        return infoHealtEN;
                 }
-                break;
-            case Effect.shield:
+
+            case Effect.Size:
                 switch (language)
                 {
                     case Language.en:
-                        return infoSpeedEN;
+                        return infoSizeEN;
                     case Language.ru:
-                        return infoSpeedRU;
+                        return infoSizeRU;
                     default:
                         Cout("Такого языка нет");
-                        break;
+                        return infoSizeEN;
                 }
-                break;
+
             default:
-                Cout("Такого эффекта нет!");
-                break;
+                switch (language)
+                {
+                    case Language.en:
+                        return infoSpeedEN;
+                    case Language.ru:
+                        return infoSpeedRU;
+                    default:
+                        Cout("Такого языка нет");
+                        return infoSpeedEN;
+                }
+
         }
 
-        return new List<string>() { "Error" };
     }
 
     private void Cout(string mess)
@@ -192,22 +248,54 @@ public class Shop : MonoBehaviour
 
     #region Имя иконки эффекта
 
-    string iconSpeed = "coin";
+    string iconMagnite= "s_Magnite";
+    string iconShield = "s_Shield";
+    string iconMoution = "s_Moution";
+    string iconXScore = "s_XScore";
+    string iconSpeed = "s_Spped";
+    string iconHealth = "s_Healt";
+    string iconSize = "s_Size";
+    //string iconPlayer = "s_Spped";
 
     #endregion
 
-
     #region Цены эффектов
+
+    List<int> priceMagnite = new List<int>()
+    {
+        10,  20,  30,  40,  50,  60 
+    };
+
+    List<int> priceShield = new List<int>()
+    {
+        10,  20,  30,  40,  50,  60
+    };
+
+    List<int> priceMoution = new List<int>()
+    {
+        10,  20,  30,  40,  50,  60
+    };
+
+    List<int> priceXScore = new List<int>()
+    {
+        10,  20,  30,  40,  50,  60
+    };
 
     List<int> priceSpeed = new List<int>()
     {
-        10, //1
-        20, //2
-        30, //3
-        40, //4
-        50, //5
-        60  //6
+        10,  20,  30,  40,  50,  60
     };
+
+    List<int> priceHealth = new List<int>()
+    {
+        10,  20,  30,  40,  50,  60
+    };
+
+    List<int> priceSize = new List<int>()
+    {
+        10,  20,  30,  40,  50,  60
+    };
+
 
     #endregion
 
@@ -215,9 +303,49 @@ public class Shop : MonoBehaviour
 
     #region Русский
 
+    List<string> infoMagnitedRU = new List<string>()
+    {
+        "Получить эффект - он притягивает множитель очков", //1
+        "Увеличивает длительность", //2
+        "Притягивает уменьшение размера", //3
+        "Притягивает увеличение скорости", //4
+        "Увеличивает шанс выпадения", //5
+        "Притягивает сердечки", //6
+    };
+
+    List<string> infoShieldRU = new List<string>()
+    {
+        "Получить эффект - он добавляет уязвимость к снарядам", //1
+        "Увеличивает длительность", //2
+        "Увеличивает шанс выпадения", //3
+        "Увеличивает длительность", //4
+        "Увеличивает шанс выпадения", //5
+        "Увеличивает длительность", //6
+    };
+
+    List<string> infoMoutionRU = new List<string>()
+    {
+        "Получить эффект - он замедляет время", //1
+        "Увеличивает длительность", //2
+        "Усиление слоумо", //3
+        "Увеличивает шанс выпадения", //4
+        "Увеличивает длительность", //5
+        "Усиление слоумо", //6
+    };
+
+    List<string> infoXScoreRU = new List<string>()
+    {
+        "Получить эффект - больше очков получаешь", //1
+        "Увеличивает длительность", //2
+        "Увеличивает шанс выпадения", //3
+        "х3", //4
+        "Увеличивает длительность", //5
+        "х4", //6
+    };
+
     List<string> infoSpeedRU = new List<string>()
     {
-        "Получить эффект", //1
+        "Получить эффект - быстрее движешься", //1
         "Увеличивает шанс выпадения", //2
         "Увеличивает прибавляемую скорость", //3
         "Увеличивает шанс выпадения", //4
@@ -225,18 +353,98 @@ public class Shop : MonoBehaviour
         "Увеличивает максимальную скорость", //6
     };
 
+    List<string> infoHealtRU = new List<string>()
+    {
+        "Получить эффект - дается жизнь", //1
+        "Увеличивает шанс выпадения", //2
+        "Увеличивает прибавляемое хп", //3
+        "Увеличивает шанс выпадения", //4
+        "Увеличивает прибавляемое хп", //5
+        "Увеличивает максимальное хп", //6
+    };
+
+    List<string> infoSizeRU = new List<string>()
+    {
+        "Получить эффект - уменьшается размер", //1
+        "Увеличивает шанс выпадения", //2
+        "Увеличивает уменьшение размера", //3
+        "Увеличивает шанс выпадения", //4
+        "Увеличивает уменьшение размера", //5
+        "Уменьшает минимальный размера", //6
+    };
+
     #endregion
 
     #region Английский
 
+    List<string> infoMagnitedEN = new List<string>()
+    {
+        "Get the effect - it attracts a score multiplier", //1
+        "Increases duration", //2
+        "Attracts size reduction", //3
+        "Attracts an increase in speed", //4
+        "Increases drop chance", //5
+        "Attracts hearts", //6
+    };
+
+    List<string> infoShieldEN = new List<string>()
+    {
+        "Get effect - it adds vulnerability to projectiles", //1
+        "Increases duration", //2
+        "Increases drop chance", //3
+        "Increases duration", //4
+        "Increases drop chance", //5
+        "Increases duration", //6
+    };
+
+    List<string> infoMoutionEN = new List<string>()
+    {
+        "Get the effect - it slows down time", //1
+        "Increases duration", //2
+        "Slowmo gain", //3
+        "Increases drop chance", //4
+        "Increases duration", //5
+        "Slowmo gain", //6
+    };
+
+    List<string> infoXScoreEN = new List<string>()
+    {
+        "Get the effect - you get more points", //1
+        "Increases duration", //2
+        "Increases drop chance", //3
+        "х3", //4
+        "Increases duration", //5
+        "х4", //6
+    };
+
     List<string> infoSpeedEN = new List<string>()
     {
-        "Get effect", //1
-        "Increases spawn chance", //2
+        "Get the effect - move faster", //1
+        "Increases drop chance", //2
         "Increases added speed", //3
-        "Increases spawn chance", //4
+        "Increases drop chance", //4
         "Increases added speed", //5
-        "Increases the maximum speed", //6
+        "Increases top speed", //6
+    };
+
+    List<string> infoHealtEN = new List<string>()
+    {
+        "Get the effect - life is given", //1
+        "Increases drop chance", //2
+        "Increases added HP", //3
+        "Increases drop chance", //4
+        "Increases added HP", //5
+        "Increases top HP", //6
+    };
+
+    List<string> infoSizeEN = new List<string>()
+    {
+        "Get the effect - size decreases", //1
+        "Increases drop chance", //2
+        "Increases size reduction", //3
+        "Increases drop chance", //4
+        "Increases size reduction", //5
+        "Decreases the minimum size", //6
     };
 
     #endregion

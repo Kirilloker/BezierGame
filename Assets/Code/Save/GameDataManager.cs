@@ -285,16 +285,21 @@ public class GameDataManager : MonoBehaviour
         }
     }
 }
+
 public enum Effect
 {
-    speed = 0,
-    size = 1,
-    shield = 2,
+    Magnite,
+    Shield,
+    Moution,
+    XScore,
+    Speed,
+    Health,
+    Size
 }
 
 public enum Item
 {
-    s_Hallowen = 0,
-    s_Cat = 1,
-    s_Pluto = 2,
+    s_Hallowen,
+    s_Cat,
+    s_Pluto,
 }
