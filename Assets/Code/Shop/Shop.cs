@@ -36,9 +36,9 @@ public class Shop : MonoBehaviour
 
     public void CreateItems()
     {
-        for (int i = 0; i < Enum.GetNames(typeof(Effect)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(UpgradeEffect)).Length; i++)
         {
-            Effect nowEffect = (Effect)i;
+            UpgradeEffect nowEffect = (UpgradeEffect)i;
 
             GameObject itemShop = Instantiate(prefabItemShop, transformItem);
             itemShop.GetComponent<ItemShop>().CreateItem(
@@ -59,7 +59,7 @@ public class Shop : MonoBehaviour
         }
     }
 
-    public bool BuyEffect(Effect effect, int price)
+    public bool BuyEffect(UpgradeEffect effect, int price)
     {
         if (data.Coins >= price)
         {
@@ -107,7 +107,7 @@ public class Shop : MonoBehaviour
         textButton.text = t_Button;
     }
 
-    private List<int> GetPriceEffect(Effect effect)
+    private List<int> GetPriceEffect(UpgradeEffect effect)
     {
         //switch (effect)
         //{
@@ -122,7 +122,7 @@ public class Shop : MonoBehaviour
         return new List<int>() { 1000000, 1000000, 1000000, 1000000, 1000000, 1000000 };
     }
 
-    private string GetNameIcon(Effect effect)
+    private string GetNameIcon(UpgradeEffect effect)
     {
         //switch (effect)
         //{
@@ -137,12 +137,12 @@ public class Shop : MonoBehaviour
         return "Error";
     }
 
-    private List<string> GetInfoEffect(Effect effect, Language language)
+    private List<string> GetInfoEffect(UpgradeEffect effect, Language language)
     {
 
         switch (effect)
         {
-            case Effect.Magnite:
+            case UpgradeEffect.Magnite:
                 switch (language)
                 {
                     case Language.en:
@@ -154,7 +154,7 @@ public class Shop : MonoBehaviour
                         return infoMagnitedEN;
                 }
 
-            case Effect.Shield:
+            case UpgradeEffect.Shield:
                 switch (language)
                 {
                     case Language.en:
@@ -166,7 +166,7 @@ public class Shop : MonoBehaviour
                         return infoShieldEN;
                 }
 
-            case Effect.Moution:
+            case UpgradeEffect.Moution:
                 switch (language)
                 {
                     case Language.en:
@@ -178,7 +178,7 @@ public class Shop : MonoBehaviour
                         return infoMoutionEN;
                 }
 
-            case Effect.XScore:
+            case UpgradeEffect.XScore:
                 switch (language)
                 {
                     case Language.en:
@@ -190,7 +190,7 @@ public class Shop : MonoBehaviour
                         return infoXScoreEN;
                 }
 
-            case Effect.Speed:
+            case UpgradeEffect.Speed:
                 switch (language)
                 {
                     case Language.en:
@@ -201,7 +201,7 @@ public class Shop : MonoBehaviour
                         Cout("Такого языка нет");
                         return infoSpeedEN;
                 }
-            case Effect.Health:
+            case UpgradeEffect.Health:
                 switch (language)
                 {
                     case Language.en:
@@ -213,7 +213,7 @@ public class Shop : MonoBehaviour
                         return infoHealtEN;
                 }
 
-            case Effect.Size:
+            case UpgradeEffect.Size:
                 switch (language)
                 {
                     case Language.en:

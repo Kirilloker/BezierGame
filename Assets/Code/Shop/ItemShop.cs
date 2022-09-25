@@ -22,7 +22,7 @@ public class ItemShop : MonoBehaviour
     [SerializeField]
     private List<Image> HaveEffectImages;
 
-    private Effect effect;
+    private UpgradeEffect effect;
     private List<string> infoEffect;
     private int levelEffect;
     private List<int> priceEffect;
@@ -36,7 +36,7 @@ public class ItemShop : MonoBehaviour
     private string colorHaveItem = "00FB00";
     private string colorNoItem = "13FBBB";
 
-    public void CreateItem(List<string> infoEffect, int levelEffect, List<int> priceEffect, string nameIcon, Language language, Effect effect, Shop shop, GameDataManager data)
+    public void CreateItem(List<string> infoEffect, int levelEffect, List<int> priceEffect, string nameIcon, Language language, UpgradeEffect effect, Shop shop, GameDataManager data)
     {
         this.infoEffect = infoEffect;
         this.levelEffect = levelEffect;
