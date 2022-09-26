@@ -143,6 +143,13 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
+    public Language Language
+    {
+        get { return (Language)int.Parse(TryGetValueInHashTable("Language")); }
+
+        set { ChangeHashTable("Language", ((int)(value)).ToString()); }
+    }
+
     // ===========================================================================================================
 
     private List<bool> GetAllInfoItems()
@@ -210,7 +217,7 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-
+    
 
     public List<int> GetAllInfoEffects()
     {
@@ -304,3 +311,9 @@ public enum Item
     s_Cat,
     s_Pluto,
 }
+public enum Language
+{
+    en,
+    ru
+}
+

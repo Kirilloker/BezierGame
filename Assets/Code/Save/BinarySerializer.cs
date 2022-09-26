@@ -119,9 +119,20 @@ public class BinarySerializer
 
         for (int i = 0; i < Enum.GetNames(typeof(UpgradeEffect)).Length; i++)
         {
-            allEffect.Add(0);
+            UpgradeEffect effect = (UpgradeEffect)i;
+
+            // Эффекты которые даем игроку сначала игры
+            if (effect == UpgradeEffect.Speed || effect == UpgradeEffect.Size ||
+                effect == UpgradeEffect.Health)
+                allEffect.Add(1);
+            else 
+                allEffect.Add(0);  
         }
 
         data["Effects"] = GameDataManager.GetStringAllEffects(allEffect);
+
+        // Добавление языка - по умолчанию Английский
+
+        data["Language"] = "0";
     }
 }
