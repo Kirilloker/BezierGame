@@ -20,56 +20,69 @@ public static class GameDataUpgradeEncoder
                 case 4:
                     switch (upgradeLvls[i])
                     {
-                        case 5:
+                        case 6:
                             upgrades.Add("Increase max speed", 15f);
+                            goto case 5;
+
+                        case 5:
+                            upgrades.Add("Increase adding speed", 1f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase adding speed", 1f);
+                            upgrades.Add("Increase speedup drop chance", 0.25f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase speedup drop chance", 0.25f);
+                            if (upgrades.ContainsKey("Increase adding speed"))
+                                upgrades["Increase adding speed"] += 0.5f;
+                            else
+                                upgrades.Add("Increase adding speed", 0.5f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase adding speed", 0.5f);
+                            if (upgrades.ContainsKey("Increase speedup chance"))
+                                upgrades["Increase speedup chance"] += 0.5f;
+                            else
+                            upgrades.Add("Increase speedup chance", 0.25f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase speedup chance", 0.25f);
-                            goto case 0;
-
-                        case 0:
                             break;
                     }
                     break;
-                    
+
                 //Size Upgrades
                 case 6:
                     switch (upgradeLvls[i])
                     {
-                        case 5:
+                        case 6:
                             upgrades.Add("Decrease min size", 0.25f);
+                            goto case 5;
+
+                        case 5:
+                            upgrades.Add("Increase size decrease", 0.25f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase size decrease", 1f);
+                            upgrades.Add("Increase sizedec drop chance", 0.25f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase sizedec drop chance", 0.25f);
+
+                            if (upgrades.ContainsKey("Increase size decrease"))
+                                upgrades["Increase size decrease"] += 0.25f;
+                            else
+                            upgrades.Add("Increase size decrease", 0.25f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase size decrease", 0.5f);
+                            if (upgrades.ContainsKey("Increase sizedec drop chance"))
+                                upgrades["Increase sizedec drop chance"] += 0.25f;
+                            else
+                                upgrades.Add("Increase sizedec drop chance", 0.25f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase sizedec drop chance", 0.25f);
-                            goto case 0;
-
-                        case 0:
                             break;
                     }
                     break;
@@ -78,27 +91,36 @@ public static class GameDataUpgradeEncoder
                 case 1:
                     switch (upgradeLvls[i])
                     {
+                        case 6:
+                            upgrades.Add("Increase shield timer", 2f);
+                            goto case 5;
+
                         case 5:
-                            upgrades.Add("Increase shield timer", 6f);
+                            upgrades.Add("Increase shield drop chance", 0.25f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase shield drop chance", 0.25f);
+                            if (upgrades.ContainsKey("Increase shield timer"))
+                                upgrades["Increase shield timer"] += 1f;
+                            else
+                                upgrades.Add("Increase shield timer", 1f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase shield timer", 5f);
+                            if (upgrades.ContainsKey("Increase shield drop chance"))
+                                upgrades["Increase shield drop chance"] += 0.25f;
+                            else
+                                upgrades.Add("Increase shield drop chance", 0.25f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase shield drop chance", 0.25f);
+                            if (upgrades.ContainsKey("Increase shield timer"))
+                                upgrades["Increase shield timer"] += 1f;
+                            else
+                                upgrades.Add("Increase shield timer", 1f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase shield timer", 4f);
-                            goto case 0;
-
-                        case 0:
                             upgrades.Add("Open shield upgrade", 0f);
                             break;
                     }
@@ -108,27 +130,36 @@ public static class GameDataUpgradeEncoder
                 case 7:
                     switch (upgradeLvls[i])
                     {
-                        case 5:
+                        case 6:
                             upgrades.Add("Increase base health", 1f);
+                            goto case 5;
+
+                        case 5:
+                            upgrades.Add("Decrease base size", 0.2f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Decrease base size", 0.2f);
+                            upgrades.Add("Increase base speed", 5f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase base speed", 5f);
+                            if (upgrades.ContainsKey("Increase base health"))
+                                upgrades["Increase base health"] += 1f;
+                            else
+                                upgrades.Add("Increase base health", 1f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase base health", 1f);
+                            if (upgrades.ContainsKey("Decrease base size"))
+                                upgrades["Decrease base size"] += 0.2f;
+                            else
+                                upgrades.Add("Decrease base size", 0.2f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Decrease base size", 0.2f);
-                            goto case 0;
-
-                        case 0:
+                            if (upgrades.ContainsKey("Increase base speed"))
+                                upgrades["Increase base speed"] += 5f;
+                            else
                             upgrades.Add("Increase base speed", 5f);
                             break;
                     }
@@ -138,27 +169,33 @@ public static class GameDataUpgradeEncoder
                 case 5:
                     switch (upgradeLvls[i])
                     {
+                        case 6:
+                            upgrades.Add("Increase max health", 3f);
+                            goto case 5;
+
                         case 5:
-                            upgrades.Add("Increase max health", 6f);
+                            upgrades.Add("Increase adding health", 1f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase adding health", 1f);
+                            upgrades.Add("Increase heathup drop chance", 0.25f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase heathup drop chance", 0.25f);
+                            if (upgrades.ContainsKey("Increase adding health"))
+                                upgrades["Increase adding health"] += 1f;
+                            else
+                                upgrades.Add("Increase adding health", 1f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase adding health", 1f);
+                            if (upgrades.ContainsKey("Increase heathup drop chance"))
+                                upgrades["Increase heathup drop chance"] += 0.25f;
+                            else
+                                upgrades.Add("Increase heathup drop chance", 0.25f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase heathup drop chance", 0.25f);
-                            goto case 0;
-
-                        case 0:
                             break;
                     }
                     break;
@@ -167,27 +204,33 @@ public static class GameDataUpgradeEncoder
                 case 2:
                     switch (upgradeLvls[i])
                     {
-                        case 5:
+                        case 6:
                             upgrades.Add("Increase slowmoution effect", 0.25f);
+                            goto case 5;
+
+                        case 5:
+                            upgrades.Add("Increase slowmoution timer", 8f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase slowmoution timer", 8f);
+                            upgrades.Add("Increase slowmoution drop chance", 1.5f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase slowmoution drop chance", 1.5f);
+                            if (upgrades.ContainsKey("Increase slowmoution effect"))
+                                upgrades["Increase slowmoution effect"] += 0.25f;
+                            else
+                                upgrades.Add("Increase slowmoution effect", 0.25f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase slowmoution effect", 0.25f);
+                            if (upgrades.ContainsKey("Increase slowmoution timer"))
+                                upgrades["Increase slowmoution timer"] += 2f;
+                            else
+                                upgrades.Add("Increase slowmoution timer", 2f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase slowmoution timer", 4f);
-                            goto case 0;
-
-                        case 0:
                             upgrades.Add("Open slowmoution upgrade", 0f);
                             break;
                     }
@@ -197,27 +240,27 @@ public static class GameDataUpgradeEncoder
                 case 0:
                     switch (upgradeLvls[i])
                     {
-                        case 5:
+                        case 6:
                             upgrades.Add("Magniting healthup", 0f);
+                            goto case 5;
+
+                        case 5:
+                            upgrades.Add("Increase magnet drop chance", 0.25f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase magnet drop chance", 0.25f);
+                            upgrades.Add("Magniting speedup", 0f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Magniting speedup", 0f);
+                            upgrades.Add("Magniting sise decrease", 0f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Magniting sise decrease", 0f);
+                            upgrades.Add("Increase magnet timer", 5f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase magnet timer", 7f);
-                            goto case 0;
-
-                        case 0:
                             upgrades.Add("Open magnet upgrade", 0f);
                             break;
                     }
@@ -227,27 +270,33 @@ public static class GameDataUpgradeEncoder
                 case 3:
                     switch (upgradeLvls[i])
                     {
-                        case 5:
+                        case 6:
                             upgrades.Add("Increase xscore multiplyer", 1f);
+                            goto case 5;
+
+                        case 5:
+                            upgrades.Add("Increase xscore timer", 4f);
                             goto case 4;
 
                         case 4:
-                            upgrades.Add("Increase xscore timer", 12f);
+                            if (upgrades.ContainsKey("Increase xscore multiplyer"))
+                                upgrades["Increase xscore multiplyer"] += 1f;
+                            else
+                                upgrades.Add("Increase xscore multiplyer", 1f);
                             goto case 3;
 
                         case 3:
-                            upgrades.Add("Increase xscore multiplyer", 1f);
+                            upgrades.Add("Increase xscore drop chance", 0.25f);
                             goto case 2;
 
                         case 2:
-                            upgrades.Add("Increase xscore drop chance", 0.25f);
+                            if (upgrades.ContainsKey("Increase xscore timer"))
+                                upgrades["Increase xscore timer"] += 3f;
+                            else
+                                upgrades.Add("Increase xscore timer", 3f);
                             goto case 1;
 
                         case 1:
-                            upgrades.Add("Increase xscore timer", 8f);
-                            goto case 0;
-
-                        case 0:
                             upgrades.Add("Open xscore upgrade", 0f);
                             break;
                     }

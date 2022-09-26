@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour
         player.playerPickUpCoin += dataManager.OnPlayerPickUpCoin;
 
         gameDataLoaded += player.OnGameDataLoaded;
+        gameDataLoaded += battery.OnGameDataLoaded;
     }
 
     //Начало игры

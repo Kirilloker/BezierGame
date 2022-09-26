@@ -199,6 +199,9 @@ public class Player : MonoBehaviour
                 case ("Magniting sise decrease"):
                     whoMagneting.Add(ProjectileEffect.SizeChange);
                     break;
+                case ("Increase xscore multiplyer"):
+                    ScoreMultiplier += (uint)upgrade.Value;
+                    break;
             }
         }
 
@@ -207,7 +210,6 @@ public class Player : MonoBehaviour
         PlayerSize = playerBaseSize;
     }
     //_______________________________________________________________
-
 
     //Свойства_______________________________________________________
     public int PlayerHealth
