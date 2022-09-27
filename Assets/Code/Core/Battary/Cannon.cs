@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cannon : MonoBehaviour 
+public class Cannon
 {
     private GameObject projectilePrefab;
     private GameObject launchedProjectile;
@@ -23,7 +23,7 @@ public class Cannon : MonoBehaviour
     public GameObject Fire(Vector2 targetPos, int firePower)
     {
         //Создаем в игровом мире снаряд
-        launchedProjectile = Instantiate(projectilePrefab, cannonPos, Quaternion.identity);
+        launchedProjectile = GameObject.Instantiate(projectilePrefab, cannonPos, Quaternion.identity);
 
         //Добавляем ему эффект
         switch (effect)

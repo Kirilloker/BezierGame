@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
         way.wayChanged += player.OnWayChanged;
 
         score.ScoreReachWayChangeValue += way.OnScoreReachWayChangeValue;
+        score.ScoreReachWayChangeValue += battery.OnScoreReachWayChangeValue;
 
         player.playerDie += this.OnPlayerDie;
         player.playerFacedProjectile += way.OnPlayerFacedProjectile;

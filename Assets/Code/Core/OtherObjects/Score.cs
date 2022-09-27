@@ -5,7 +5,7 @@ using UnityEngine;
 public class Score
 {
     private uint score = 0;
-    private uint ScoreWayChangeValue = 1;
+    private uint ScoreWayChangeValue = 2;
     private GameDataManager dataManager;
     
     //Ивент смены пути

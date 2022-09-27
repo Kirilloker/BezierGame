@@ -16,9 +16,9 @@ public class Way : MonoBehaviour
     //—колько раз уже помен€лс€ путь
     private int difficult = 0;
     //ћаксимальное количесто добавленных точек
-    private int maxBezierPoints = 12;
+    private int maxBezierPoints = 14;
     //≈сли сложность кратна этому числу - добавл€ем новую точку
-    private int addNewPointDiffValue = 3;
+    private int addNewPointDiffValue = 2;
 
     //»вент создани€ пути
     public delegate void WayCreated(Dictionary<int, Vector2> wayPoints);

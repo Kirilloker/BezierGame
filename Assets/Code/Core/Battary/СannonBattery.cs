@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class СannonBattery : MonoBehaviour
 {
     [SerializeField]
@@ -10,6 +11,12 @@ public class СannonBattery : MonoBehaviour
     [SerializeField]
     private Player player;
 
+    //Список пушек
+    private List<Cannon> cannons;
+    private float projectileSpeed = 4;
+    private int wayChangedCount = 0;
+
+    #region Параметры различных снарядов
     private bool magnetIsOpen = false;
     private float magnetTimer = 5;
     private float magnetDropChance = 0.1f;
@@ -34,97 +41,46 @@ public class СannonBattery : MonoBehaviour
 
     private float healthUpDropChance = 0.1f;
     private float healthUpValue = 1;
+    #endregion
 
-
-    //Список пушек
-    private List<Cannon> cannons;
-
-    //Пригодится для получения рандомных снарядов
-    private int projectilesEffectsCount = Enum.GetNames(typeof(ProjectileEffect)).Length;
-    private int projectilesFormsCount = Enum.GetNames(typeof(ProjectileForm)).Length;
-
+    //Создаем пушки
     private void Awake()
     {
         cannons = new List<Cannon>();
 
-        cannons.Add(new Cannon());
+        int startPos = 4;
+        int endPos = -4;
+        float interval = 0.5f;
 
-        cannons[0].SetCannonPos(new Vector2(3, 5));
+        //Заполняем список пушками сверху вниз (четные справа, нечетные слева)
+        for (int i = 0; 4 - ((float)(i / 2) * interval) >= endPos; i += 2)
+        {
+            cannons.Add(new Cannon());
+            cannons[i].SetCannonPos(new Vector2(3, startPos - ((float)(i / 2) * interval)));
+
+            cannons.Add(new Cannon());
+            cannons[i+1].SetCannonPos(new Vector2(-3, startPos - ((float)(i / 2) * interval)));
+        }
+
+        foreach(Cannon cannon in cannons)
+        {
+            LoadDamageDealer(cannon);
+        }
     }
 
     //Test 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            cannons[0].Fire(new Vector2(0, 0), 4);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (UnityEngine.Random.RandomRange(0f, 1f) > 0.98f)
         {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.HealthChange, -1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Coin), ProjectileEffect.AddCoin, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeInc), ProjectileEffect.SizeChange, 0.25f);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeDec), ProjectileEffect.SizeChange, -0.25f);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedUp), ProjectileEffect.SpeedChange, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedDown), ProjectileEffect.SpeedChange, -1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Shield), ProjectileEffect.Shield, 10);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.ScoreMultiplyer), ProjectileEffect.ScoreMultiplyer, 10);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Slowmoution), ProjectileEffect.Slowmoution, 5);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HidePath), ProjectileEffect.HidePath, 5);
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.CoinMagnet), ProjectileEffect.CoinMagnet, 5);
-
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            cannons[0].Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HealthUp), ProjectileEffect.HealthChange, 1);
-
+            cannons[UnityEngine.Random.RandomRange(0, cannons.Count)].Fire(
+               new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
+               (int)projectileSpeed);
         }
     }
 
+    #region Обработчики ивентов
     public void OnGameDataLoaded(Dictionary<string, float> upgrades)
     {
         foreach (var upgrade in upgrades)
@@ -185,9 +141,86 @@ public class СannonBattery : MonoBehaviour
                 case ("Open shield upgrade"):
                     shieldIsOpen = true;
                     break;
-
             }
 
         }
     }
+    public void OnScoreReachWayChangeValue()
+    {
+        wayChangedCount++;
+    }
+    #endregion
+
+    #region Методы для зарядки различных снарядов
+    private void LoadHealthUp(Cannon cannon)
+    {
+        cannon.Load(
+            projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HealthUp), ProjectileEffect.HealthChange, healthUpValue);
+    }
+
+    private void LoadDamageDealer(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.HealthChange, -1);
+    }
+
+    private void LoadCoin(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Coin), ProjectileEffect.AddCoin, 1);
+    }
+
+    private void LoadSizeInc(Cannon cannon)
+    {
+        cannon.Load(
+         projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeInc), ProjectileEffect.SizeChange, 0.25f);
+    }
+
+    private void LoadSizeDec(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeDec), ProjectileEffect.SizeChange, sizeDecreasing);
+    }
+
+    private void LoadSpeedUp(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedUp), ProjectileEffect.SpeedChange, addingSpeed);
+    }
+
+    private void LoadSpeedDown(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedDown), ProjectileEffect.SpeedChange, -2);
+    }
+    private void LoadShield(Cannon cannon)
+    {
+        cannon.Load(
+         projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Shield), ProjectileEffect.Shield, shieldTimer);
+    }
+
+    private void LoadScoreMult(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.ScoreMultiplyer), ProjectileEffect.ScoreMultiplyer, xscoreTimer);
+    }
+
+    private void LoadSlowmoution(Cannon cannon)
+    {
+        cannon.Load(
+         projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Slowmoution), ProjectileEffect.Slowmoution, slowmoutionTimer);
+    }
+
+    private void LoadHidePath(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HidePath), ProjectileEffect.HidePath, 5);
+    }
+
+    private void LoadMagnet(Cannon cannon)
+    {
+        cannon.Load(
+          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.CoinMagnet), ProjectileEffect.CoinMagnet, magnetTimer);
+    }
+    #endregion
 }
