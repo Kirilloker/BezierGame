@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 229108236}
   m_Layer: 5
   m_Name: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0435 Effects"
-  m_TagString: Untagged
+  m_TagString: UIGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,6 +379,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabItemEffect: {fileID: 1666027900136881554, guid: dd08e8eae24e01249a6204df39d128b5, type: 3}
+  HealthText: {fileID: 699218803}
+  ScoreText: {fileID: 1311888257}
+  CoinsText: {fileID: 1896030192}
+  IconEffectInGameScript: []
+  upgradeEffects: 
 --- !u!114 &229108237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +590,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1923412332}
+  - {fileID: 1311888256}
   m_Father: {fileID: 1611152229}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1377,6 +1383,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1311888255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1311888256}
+  - component: {fileID: 1311888258}
+  - component: {fileID: 1311888257}
+  m_Layer: 5
+  m_Name: Scoretext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1311888256
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311888255}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 347034104}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0.07899475, y: 1.2819977}
+  m_SizeDelta: {x: -0.16000366, y: -3.0200043}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1311888257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311888255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 99
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Score: 120'
+--- !u!222 &1311888258
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311888255}
+  m_CullTransparentMesh: 1
 --- !u!1 &1411639007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.016464742, y: 0}
   m_AnchorMax: {x: 0.33400002, y: 1}
-  m_AnchoredPosition: {x: -2.199997, y: -0.44939804}
+  m_AnchoredPosition: {x: -2.199997, y: -0.44939423}
   m_SizeDelta: {x: -11.739998, y: -15.739998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440702677
@@ -1813,7 +1899,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3452324, y: 0}
   m_AnchorMax: {x: 1, y: 0.9748084}
-  m_AnchoredPosition: {x: -0.3199997, y: 0.25400162}
+  m_AnchoredPosition: {x: -0.3199997, y: 0.25400543}
   m_SizeDelta: {x: 0.64100075, y: 1.493}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1896030192

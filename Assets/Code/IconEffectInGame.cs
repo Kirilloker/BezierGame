@@ -11,9 +11,9 @@ public class IconEffectInGame : MonoBehaviour
     [SerializeField]
     Image imageFon;
 
-    SpawnEffectIcon spawnEffectIcon;
+    GameUI spawnEffectIcon;
     UpgradeEffect effect;
-    public IEnumerator CreateEffect(float time, Sprite sprite, UpgradeEffect effect, SpawnEffectIcon spawnEffectIcon)
+    public IEnumerator CreateEffect(float time, Sprite sprite, UpgradeEffect effect, GameUI spawnEffectIcon)
     {
         this.effect = effect;
         this.spawnEffectIcon = spawnEffectIcon;
