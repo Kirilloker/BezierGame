@@ -106,7 +106,7 @@ public class GameDataManager : MonoBehaviour
         { 
             if (value < 0)
             {
-                if (PrintDebug) Debug.Log("Record);
+                if (PrintDebug) Debug.Log("Record");
 
                 ChangeHashTable("Record", "0");
             }

@@ -40,15 +40,40 @@ public class СannonBattery : MonoBehaviour
 
     private float speedUpDropChance = 0.1f;
     private float addingSpeed = 0.2f;
+    private float subtractionSpeed = -2f;
 
     private float sizeDecDropChance = 0.1f;
     private float sizeDecreasing = -0.1f;
 
     private float healthUpDropChance = 0.1f;
     private float healthUpValue = 1;
+    private float healthDamageValue = -1;
+
+    private float hidePathTimer = 5f;
+
+    private float countAddCoin = 1f;
+
+
     #endregion
 
-    
+    Dictionary<ProjectileEffect, ProjectileForm> possitiveEffectTest = new Dictionary<ProjectileEffect, ProjectileForm>()
+    {
+        { ProjectileEffect.HealthChange, ProjectileForm.HealthUp },
+        { ProjectileEffect.SpeedChange, ProjectileForm.SpeedUp },
+        { ProjectileEffect.SizeChange, ProjectileForm.SizeDec },
+        { ProjectileEffect.Shield, ProjectileForm.Shield },
+        { ProjectileEffect.ScoreMultiplyer, ProjectileForm.ScoreMultiplyer },
+        { ProjectileEffect.Slowmoution, ProjectileForm.Slowmoution },
+        { ProjectileEffect.CoinMagnet, ProjectileForm.CoinMagnet },
+    };
+
+    Dictionary<ProjectileEffect, ProjectileForm> NegativeEffectTest = new Dictionary<ProjectileEffect, ProjectileForm>()
+    {
+        { ProjectileEffect.HidePath, ProjectileForm.HidePath },
+        { ProjectileEffect.SpeedChange, ProjectileForm.SpeedDown },
+        { ProjectileEffect.SizeChange, ProjectileForm.SizeInc },
+    };
+
     //Создаем пушки
     private void Awake()
     {
@@ -67,6 +92,8 @@ public class СannonBattery : MonoBehaviour
             cannons.Add(new Cannon());
             cannons[i+1].SetCannonPos(new Vector2(-3.5f, startPos - ((float)(i / 2) * interval)));
         }
+
+        LoadDictionaryProjectileForm();
     }
 
     private void Start()
@@ -74,9 +101,7 @@ public class СannonBattery : MonoBehaviour
         StartCoroutine(RandomDamage(DamageProjectilesTimer));
         StartCoroutine(RandomPositiveEffect(PositiveProjectileTimer));
         StartCoroutine(RandomNegativeEffect(NegativeProjectileTimer));
-        Debug.Log(magnetIsOpen);
     }
-
 
     #region Сиситемы запуска различных проджектайлов
     IEnumerator RandomDamage(float timer)
@@ -86,65 +111,21 @@ public class СannonBattery : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             int randCannon = UnityEngine.Random.Range(0, cannons.Count);
 
-            LoadDamageDealer(cannons[randCannon]);
-
-            cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-               (int)projectileSpeed);
-
+            Fire(cannons[randCannon], ProjectileForm.Cube);
         }
         
         yield return new WaitForSeconds(DamageProjectilesTimer);
-
         StartCoroutine(RandomDamage(DamageProjectilesTimer));
     }
+
 
     IEnumerator RandomPositiveEffect(float timer)
     {
         int randCannon = UnityEngine.Random.Range(0, cannons.Count);
-        switch (effectGenerator.GetRandomPositiveEffect())
-        {
-            case ProjectileEffect.HealthChange:
-                LoadHealthUp(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
 
-            case ProjectileEffect.SpeedChange:;
-                LoadSpeedUp(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
+        ProjectileEffect randomPosEffect = effectGenerator.GetRandomPositiveEffect();
 
-            case ProjectileEffect.SizeChange:
-                LoadSizeDec(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
-
-            case ProjectileEffect.Shield:
-                LoadShield(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
-
-            case ProjectileEffect.ScoreMultiplyer:
-                LoadScoreMult(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
-
-            case ProjectileEffect.Slowmoution:
-                LoadSlowmoution(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
-
-            case ProjectileEffect.CoinMagnet:
-                LoadMagnet(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
-        }
+        Fire(cannons[randCannon], possitiveEffectTest[randomPosEffect]);
 
         yield return new WaitForSeconds(PositiveProjectileTimer);
         StartCoroutine(RandomPositiveEffect(PositiveProjectileTimer));
@@ -153,29 +134,20 @@ public class СannonBattery : MonoBehaviour
     IEnumerator RandomNegativeEffect(float timer)
     {
         int randCannon = UnityEngine.Random.Range(0, cannons.Count);
-        switch (effectGenerator.GetRandomNegativeEffect())
-        {
-            case ProjectileEffect.HidePath:
-                LoadHidePath(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
 
-            case ProjectileEffect.SpeedChange:
-                LoadSpeedDown(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
+        ProjectileEffect randomNegEffect = effectGenerator.GetRandomNegativeEffect();
 
-            case ProjectileEffect.SizeChange:
-                LoadSizeInc(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)projectileSpeed);
-                break;
-        }
+        Fire(cannons[randCannon], NegativeEffectTest[randomNegEffect]);
 
         yield return new WaitForSeconds(NegativeProjectileTimer);
         StartCoroutine(RandomNegativeEffect(NegativeProjectileTimer));
+    }
+
+    private void Fire(Cannon cannon, ProjectileForm projectileForm)
+    {
+        LoadCannon(cannon, projectileForm);
+        cannon.Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
+           (int)projectileSpeed);
     }
 
     #endregion
@@ -231,23 +203,26 @@ public class СannonBattery : MonoBehaviour
                     break;
                 case ("Open xscore upgrade"):
                     xscoreIsOpen = true;
-                    effectGenerator.OpenXScore();
+                    effectGenerator.OpenEffect(ProjectileEffect.ScoreMultiplyer);
                     break;
                 case ("Open magnet upgrade"):
                     magnetIsOpen = true;
-                    effectGenerator.OpenMagnet();
+                    effectGenerator.OpenEffect(ProjectileEffect.CoinMagnet);
                     break;
                 case ("Open slowmoution upgrade"):
                     slowmoutionIsOpen = true;
-                    effectGenerator.OpenSlowmounion();
+                    effectGenerator.OpenEffect(ProjectileEffect.Slowmoution);
                     break;
                 case ("Open shield upgrade"):
                     shieldIsOpen = true;
-                    effectGenerator.OpenShield();
+                    effectGenerator.OpenEffect(ProjectileEffect.Shield);
                     break;
             }
 
         }
+
+        // Надеюсь там ссылки хранятся, но если нет лучше перезагружу
+        LoadDictionaryProjectileForm();
     }
     public void OnScoreReachWayChangeValue()
     {
@@ -255,77 +230,42 @@ public class СannonBattery : MonoBehaviour
     }
     #endregion
 
-    #region Методы для зарядки различных снарядов
-    private void LoadHealthUp(Cannon cannon)
+
+    private void LoadCannon(Cannon cannon, ProjectileForm form)
     {
         cannon.Load(
-            projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HealthUp), ProjectileEffect.HealthChange, healthUpValue);
+          projectilesPrefabs.GetProjectilePrefab(form), projectileForm[form].effect, projectileForm[form].effectValue);
     }
 
-    private void LoadDamageDealer(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Cube), ProjectileEffect.HealthChange, -1);
-    }
+    Dictionary<ProjectileForm, TwoVal> projectileForm;
 
-    private void LoadCoin(Cannon cannon)
+    private void LoadDictionaryProjectileForm()
     {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Coin), ProjectileEffect.AddCoin, 1);
+        projectileForm = new Dictionary<ProjectileForm, TwoVal>()
+        {
+            {ProjectileForm.HealthUp,       new TwoVal(ProjectileEffect.HealthChange,   healthUpValue) },
+            {ProjectileForm.Cube,           new TwoVal(ProjectileEffect.HealthChange,   healthDamageValue) },
+            {ProjectileForm.Coin,           new TwoVal(ProjectileEffect.AddCoin,        countAddCoin) },
+            {ProjectileForm.SizeInc,        new TwoVal(ProjectileEffect.SizeChange,     0.25f) },
+            {ProjectileForm.SizeDec,        new TwoVal(ProjectileEffect.SizeChange,     sizeDecreasing) },
+            {ProjectileForm.SpeedUp,        new TwoVal(ProjectileEffect.SpeedChange,    addingSpeed) },
+            {ProjectileForm.SpeedDown,      new TwoVal(ProjectileEffect.SpeedChange,    subtractionSpeed) },
+            {ProjectileForm.Shield,         new TwoVal(ProjectileEffect.Shield,         shieldTimer) },
+            {ProjectileForm.ScoreMultiplyer,new TwoVal(ProjectileEffect.ScoreMultiplyer,xscoreTimer) },
+            {ProjectileForm.Slowmoution,    new TwoVal(ProjectileEffect.Slowmoution,    slowmoutionTimer) },
+            {ProjectileForm.HidePath,       new TwoVal(ProjectileEffect.HidePath,       hidePathTimer) },
+            {ProjectileForm.CoinMagnet,     new TwoVal(ProjectileEffect.CoinMagnet,     magnetTimer) },
+        };
     }
+}
 
-    private void LoadSizeInc(Cannon cannon)
+public struct TwoVal
+{
+    public ProjectileEffect effect;
+    public float effectValue;
+    public TwoVal(ProjectileEffect effect, float effectValue)
     {
-        cannon.Load(
-         projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeInc), ProjectileEffect.SizeChange, 0.25f);
+        this.effect = effect;
+        this.effectValue = effectValue;
     }
-
-    private void LoadSizeDec(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SizeDec), ProjectileEffect.SizeChange, sizeDecreasing);
-    }
-
-    private void LoadSpeedUp(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedUp), ProjectileEffect.SpeedChange, addingSpeed);
-    }
-
-    private void LoadSpeedDown(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.SpeedDown), ProjectileEffect.SpeedChange, -2);
-    }
-    private void LoadShield(Cannon cannon)
-    {
-        cannon.Load(
-         projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Shield), ProjectileEffect.Shield, shieldTimer);
-    }
-
-    private void LoadScoreMult(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.ScoreMultiplyer), ProjectileEffect.ScoreMultiplyer, xscoreTimer);
-    }
-
-    private void LoadSlowmoution(Cannon cannon)
-    {
-        cannon.Load(
-         projectilesPrefabs.GetProjectilePrefab(ProjectileForm.Slowmoution), ProjectileEffect.Slowmoution, slowmoutionTimer);
-    }
-
-    private void LoadHidePath(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.HidePath), ProjectileEffect.HidePath, 5);
-    }
-
-    private void LoadMagnet(Cannon cannon)
-    {
-        cannon.Load(
-          projectilesPrefabs.GetProjectilePrefab(ProjectileForm.CoinMagnet), ProjectileEffect.CoinMagnet, magnetTimer);
-    }
-    #endregion
-
 }

@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
             case ProjectileEffect.ScoreMultiplyer:
                 ScoreMultiplier *= 2;
                 yield return new WaitForSeconds(time);
-                scoreMultiplier /= 2;
+                ScoreMultiplier /= 2;
                 break;
 
             case ProjectileEffect.Slowmoution:

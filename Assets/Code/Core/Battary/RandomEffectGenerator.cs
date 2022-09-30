@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,120 +6,87 @@ using UnityEngine;
 
 public class RandomEffectGenerator
 {
-    #region Позитивные эффекты
-    private float SpeedUpChance = 0.20f;
-    private float HealthUpChance = 0.15f;
-    private float SizeDecChance = 0.20f;
-    private float MagnetChance = 0.15f;
-    private float SlowmoutionChance = 0.15f;
-    private float ShieldChance = 0.075f;
-    private float xScoreChance = 0.075f;
+    Dictionary<ProjectileEffect, float> chanceNegativeEffects = new Dictionary<ProjectileEffect, float>()
+    {
+        { ProjectileEffect.HidePath,     0.10f},
+        { ProjectileEffect.SizeChange,   0.45f},
+        { ProjectileEffect.SpeedChange,  0.45f},
+    };
 
-    private bool magnetOpen = false;
-    private bool xScoreOpen = false;
-    private bool slowmoutionOpen = false;
-    private bool shieldOpen = false;
-    #endregion
 
-    #region Негативные эффекты
-    private float hidePathChance = 0.10f;
-    private float sizeIncChance = 0.45f;
-    private float speedDownChance = 0.45f;
-    #endregion
+    Dictionary<ProjectileEffect, float> chancePossitiveEffects = new Dictionary<ProjectileEffect, float>()
+    {
+        { ProjectileEffect.SpeedChange,     0.20f},
+        { ProjectileEffect.HealthChange,    0.15f},
+        { ProjectileEffect.SizeChange,      0.20f},
+        { ProjectileEffect.CoinMagnet,      0.15f},
+        { ProjectileEffect.Slowmoution,     0.15f},
+        { ProjectileEffect.Shield,          0.075f},
+        { ProjectileEffect.ScoreMultiplyer, 0.075f},
+    };
+
+
+    Dictionary<ProjectileEffect, bool> openPossitiveEffects = new Dictionary<ProjectileEffect, bool>()
+    {
+        { ProjectileEffect.SpeedChange,     true},
+        { ProjectileEffect.HealthChange,    true},
+        { ProjectileEffect.SizeChange,      true},
+        { ProjectileEffect.CoinMagnet,      false},
+        { ProjectileEffect.Slowmoution,     false},
+        { ProjectileEffect.Shield,          false},
+        { ProjectileEffect.ScoreMultiplyer, false},
+    };
 
     public ProjectileEffect GetRandomPositiveEffect()
     {
-        float roll = UnityEngine.Random.Range(0f, 1f);
-
+        float roll = Random.Range(0f, 1f);
         float sum = 0f;
 
-        if (roll <= SpeedUpChance)
-            return ProjectileEffect.SpeedChange;
+        foreach (var chanceEffects in chancePossitiveEffects)
+        {
+            if ((roll > sum) && (roll <= (sum + chanceEffects.Value)) && openPossitiveEffects[chanceEffects.Key])
+                return chanceEffects.Key;
 
-        sum += SpeedUpChance;
-
-        if ((roll > sum) && (roll <= (sum + HealthUpChance)))
-            return ProjectileEffect.HealthChange;
-
-        sum += HealthUpChance;
-
-        if ((roll > sum) && (roll <= (sum + SizeDecChance)))
-            return ProjectileEffect.SizeChange;
-
-        sum += SizeDecChance;
-
-        if ((roll > sum) && (roll <= (sum + MagnetChance)) && magnetOpen)
-            return ProjectileEffect.CoinMagnet;
-
-        sum += MagnetChance;
-        
-        if ((roll > sum) && (roll <= (sum + SlowmoutionChance)) && slowmoutionOpen)
-            return ProjectileEffect.Slowmoution;
-
-        sum += SlowmoutionChance;
-
-        if ((roll > sum) && (roll <= (sum + ShieldChance)) && shieldOpen)
-            return ProjectileEffect.Shield;
-
-        sum += ShieldChance;
-
-        if ((roll > sum) && (roll <= (sum + xScoreChance)) && xScoreOpen)
-            return ProjectileEffect.ScoreMultiplyer;
+            sum += chanceEffects.Value;
+        }
 
         return RollWithoutUpgrades();
     }
     public ProjectileEffect GetRandomNegativeEffect()
     {
-        float roll = UnityEngine.Random.Range(0f, 1f);
-
+        float roll = Random.Range(0f, 1f);
         float sum = 0f;
 
-        if (roll <= hidePathChance)
-            return ProjectileEffect.HidePath;
+        foreach (var chanceEffects in chanceNegativeEffects)
+        {
+            if ((roll > sum) && (roll <= (sum + chanceEffects.Value)))
+                return chanceEffects.Key;
 
-        sum += hidePathChance;
-
-        if ((roll > sum) && (roll <= (sum + sizeIncChance)))
-            return ProjectileEffect.SizeChange;
-
-        sum += sizeIncChance;
-
-        if ((roll > sum) && (roll <= (sum + speedDownChance)))
-            return ProjectileEffect.SpeedChange;
+            sum += chanceEffects.Value;
+        }
 
         return ProjectileEffect.SpeedChange;
     }
-    public void OpenMagnet()
+
+    public void OpenEffect(ProjectileEffect projectileEffect)
     {
-        magnetOpen = true;
+        openPossitiveEffects[projectileEffect] = true;
     }
-    public void OpenShield()
-    {
-        shieldOpen = true;
-    }
-    public void OpenSlowmounion()
-    {
-        slowmoutionOpen = true;
-    }
-    public void OpenXScore()
-    {
-        xScoreOpen = true;
-    }
+
     private ProjectileEffect RollWithoutUpgrades()
     {
-        float roll = UnityEngine.Random.Range(0f, 1f);
+        ProjectileEffect[] projectileEffect = new ProjectileEffect[]
+        {
+            ProjectileEffect.SpeedChange,
+            ProjectileEffect.HealthChange,
+            ProjectileEffect.SizeChange
+        };
 
-        if (roll <= 0.33f)
-            return ProjectileEffect.SpeedChange;
+        return GetRandomProjectileEffectInArray(projectileEffect);
+    }
 
-        if ((roll > 0.33f) && (roll <= 0.66f))
-            return ProjectileEffect.HealthChange;
-
-        if ((roll > 0.66f) && (roll <= 1f))
-            return ProjectileEffect.SizeChange;
-
-
-        return ProjectileEffect.SpeedChange;
+    private ProjectileEffect GetRandomProjectileEffectInArray(ProjectileEffect[] array)
+    {
+        return array[Random.Range(0, array.Length)];
     }
 }
-

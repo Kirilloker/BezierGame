@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 public enum ProjectileEffect
 {
-    HealthChange,
-    AddCoin,
     SpeedChange,
+    HealthChange,
     SizeChange,
+    CoinMagnet,
+    Slowmoution,
     Shield,
     ScoreMultiplyer,
+    AddCoin,
     HidePath,
-    Slowmoution,
-    CoinMagnet
 }
 
 public enum ProjectileForm
