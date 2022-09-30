@@ -12,6 +12,10 @@ public class Score
     public delegate void ScoreReachWayChangeValueHandler();
     public event ScoreReachWayChangeValueHandler ScoreReachWayChangeValue;
 
+    // Äëÿ UI
+    public delegate void ScoreChangeValueHandler(uint score);
+    public event ScoreChangeValueHandler ScoreChangeValue;
+
     public Score(GameDataManager dataManager)
     {
         this.dataManager = dataManager;
@@ -20,6 +24,8 @@ public class Score
     private void IncreaseScore(uint points)
     {
         score += points;
+
+        ScoreChangeValue.Invoke(score);
 
         dataManager.Record = (int)score;
 

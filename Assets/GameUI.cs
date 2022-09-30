@@ -29,7 +29,7 @@ public class GameUI : MonoBehaviour
         dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         //UIGame = GameObject.FindGameObjectWithTag("GameUI").GetComponent<SpawnEffectIcon>();
 
-        CoinsUI = dataManager.Coins;
+        CoinsUI = (uint)dataManager.Coins;
         ScoreUI = 0;
         HealthUI = 1;
     }
@@ -56,10 +56,14 @@ public class GameUI : MonoBehaviour
         upgradeEffects.Remove(effect);
     }
 
+    public void OnScoreChangeValue(uint score)
+    {
+        ScoreUI = score;
+    }
 
 
-    int healthUI;
-    public int HealthUI
+    uint healthUI;
+    public uint HealthUI
     {
         get 
         {
@@ -72,8 +76,8 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    int scoreUI;
-    public int ScoreUI
+    uint scoreUI;
+    public uint ScoreUI
     {
         get
         {
@@ -100,12 +104,15 @@ public class GameUI : MonoBehaviour
 
             newText += scoreUI.ToString();
 
+            Debug.Log("ScoreUI:" + scoreUI);
+            Debug.Log("newText:" + newText);
+
             ScoreText.text = newText;
         }
     }
 
-    int coinsUI;
-    public int CoinsUI
+    uint coinsUI;
+    public uint CoinsUI
     {
         get
         {

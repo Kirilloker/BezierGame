@@ -57,6 +57,7 @@ public class Cannon
                 break;
         }
 
+
         //Задаем значение добавленному эффекта
         launchedProjectile.GetComponent<IProjectile>().SetEffectValue(effectValue);
 

@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private GameDataManager dataManager;
+    [SerializeField]
+    private GameUI gameUI;
     private Score score;
 
     //Ивент загрузки игровых данных
@@ -49,6 +51,10 @@ public class GameController : MonoBehaviour
 
         gameDataLoaded += player.OnGameDataLoaded;
         gameDataLoaded += battery.OnGameDataLoaded;
+
+        // UI
+        score.ScoreChangeValue += gameUI.OnScoreChangeValue;
+        
     }
 
     //Начало игры
@@ -63,7 +69,7 @@ public class GameController : MonoBehaviour
         Vector2 downPoint = new Vector2(platform2.transform.position.x,
             platform2.transform.position.y + (platform2.transform.localScale.y / 2));
 
-        platform1.Active = true;;
+        platform1.Active = true;
 
         way.CreateWay(upPoint, downPoint);
     }
@@ -73,6 +79,7 @@ public class GameController : MonoBehaviour
     private void OnPlayerHitPlatform(Player player, Platform platform)
     {
         platform.Active = false;
+
         if(platform == platform1)
             platform2.Active = true;
         else 

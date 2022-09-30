@@ -1499,6 +1499,7 @@ MonoBehaviour:
   battery: {fileID: 2111866014}
   way: {fileID: 796895702}
   dataManager: {fileID: 0}
+  gameUI: {fileID: 229108236}
 --- !u!4 &1411639009
 Transform:
   m_ObjectHideFlags: 0
