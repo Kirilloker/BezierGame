@@ -40,6 +40,24 @@ public class Platform : MonoBehaviour
 
             //Тут можно выполнять какую-то логику при каждом касании любой платформы
         }
+        if (collision.gameObject.tag == "Projectile")
+        {
+            IProjectile projectile = collision.gameObject.GetComponent<IProjectile>();
+
+            //if((projectile.GetEffect() == ProjectileEffect.HealthChange) && (projectile.GetEffectValue() < 0))
+            //    projectile.Destroy();
+
+            //if((projectile.GetEffect() == ProjectileEffect.SizeChange) && (projectile.GetEffectValue() > 0))
+            //    projectile.Destroy();
+
+            //if ((projectile.GetEffect() == ProjectileEffect.SpeedChange) && (projectile.GetEffectValue() < 0))
+            //    projectile.Destroy();
+
+            //if (projectile.GetEffect() == ProjectileEffect.HidePath)
+            //    projectile.Destroy();
+
+            projectile.Destroy();
+        }
     }
 
     public bool Active

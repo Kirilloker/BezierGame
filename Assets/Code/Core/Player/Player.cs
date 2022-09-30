@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     //Характеристики игрока_________________________________
     private float playerSpeed;
-    private float playerBaseSpeed = 10;
+    private float playerBaseSpeed = 8;
     private float maxSpeed = 35f;
     private float minSpeed = 5f;
    
@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
             case ProjectileEffect.Slowmoution:
                 Time.timeScale = slowmoutionPower;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
-                yield return new WaitForSeconds(time);
+                yield return new WaitForSeconds(time * slowmoutionPower);
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
                 break;

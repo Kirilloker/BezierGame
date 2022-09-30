@@ -25,9 +25,9 @@ public class GameController : MonoBehaviour
     public delegate void GameDataLoadedHandler(Dictionary<string, float> upgrades);
     public event GameDataLoadedHandler gameDataLoaded;
 
-
     private void Awake()
     {
+        Physics2D.IgnoreLayerCollision(6, 6, true);
         dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         score = new Score(dataManager);
 
