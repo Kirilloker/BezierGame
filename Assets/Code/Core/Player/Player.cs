@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
    
     private float playerSize;
     private float playerBaseSize = 1.2f;
-    private float minSize = 0.6f;
+    private float minSize = 0.5f;
     private float maxSize = 1.8f;
 
     private int playerHealth;
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
                     maxSpeed += upgrade.Value;
                     break;
                 case ("Decrease min size"):
-                    minSize += upgrade.Value;
+                    minSize -= upgrade.Value;
                     break;
                 case ("Increase base health"):
                     playerBaseHealth += (int)upgrade.Value;

@@ -23,9 +23,9 @@ public class RandomEffectGenerator
     #endregion
 
     #region Негативные эффекты
-    private float hidePathChance = 0.05f;
+    private float hidePathChance = 0.10f;
     private float sizeIncChance = 0.45f;
-    private float speedDownChance = 0.50f;
+    private float speedDownChance = 0.45f;
     #endregion
 
     public ProjectileEffect GetRandomPositiveEffect()
