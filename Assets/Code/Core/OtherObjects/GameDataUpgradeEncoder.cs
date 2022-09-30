@@ -56,11 +56,11 @@ public static class GameDataUpgradeEncoder
                     switch (upgradeLvls[i])
                     {
                         case 6:
-                            upgrades.Add("Decrease min size", 0.25f);
+                            upgrades.Add("Decrease min size", 0.15f);
                             goto case 5;
 
                         case 5:
-                            upgrades.Add("Increase size decrease", 0.25f);
+                            upgrades.Add("Increase size decrease", 0.2f);
                             goto case 4;
 
                         case 4:
@@ -70,9 +70,9 @@ public static class GameDataUpgradeEncoder
                         case 3:
 
                             if (upgrades.ContainsKey("Increase size decrease"))
-                                upgrades["Increase size decrease"] += 0.25f;
+                                upgrades["Increase size decrease"] += 0.1f;
                             else
-                            upgrades.Add("Increase size decrease", 0.25f);
+                            upgrades.Add("Increase size decrease", 0.1f);
                             goto case 2;
 
                         case 2:

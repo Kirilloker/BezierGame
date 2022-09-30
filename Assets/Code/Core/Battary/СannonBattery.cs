@@ -73,7 +73,7 @@ public class СannonBattery : MonoBehaviour
     {
         StartCoroutine(RandomDamage(DamageProjectilesTimer));
         StartCoroutine(RandomPositiveEffect(PositiveProjectileTimer));
-
+        StartCoroutine(RandomNegativeEffect(NegativeProjectileTimer));
         Debug.Log(magnetIsOpen);
     }
 
@@ -174,8 +174,8 @@ public class СannonBattery : MonoBehaviour
                 break;
         }
 
-        yield return new WaitForSeconds(PositiveProjectileTimer);
-        StartCoroutine(RandomPositiveEffect(PositiveProjectileTimer));
+        yield return new WaitForSeconds(NegativeProjectileTimer);
+        StartCoroutine(RandomNegativeEffect(NegativeProjectileTimer));
     }
 
     #endregion
