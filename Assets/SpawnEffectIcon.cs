@@ -9,16 +9,6 @@ public class SpawnEffectIcon : MonoBehaviour
     [SerializeField]
     GameObject prefabItemEffect;
 
-    List<Sprite> sprites = new List<Sprite>();
-
-    private void Start()
-    {
-        for (int i = 0; i < Enum.GetNames(typeof(UpgradeEffect)).Length; i++)
-        {
-            sprites.Add(Resources.Load<Sprite>(iconEffects[i]));
-        }
-    }
-
     public List<IconEffectInGame> IconEffectInGameScript = new List<IconEffectInGame>();
     public List<UpgradeEffect> upgradeEffects = new List<UpgradeEffect>();
 
@@ -35,7 +25,7 @@ public class SpawnEffectIcon : MonoBehaviour
         IconEffectInGameScript.Add(effectScript);
         upgradeEffects.Add(effect);
 
-        StartCoroutine(effectScript.CreateEffect(time, sprites[(int)effect], effect, this));
+        StartCoroutine(effectScript.CreateEffect(time, ResoursesData.spritesEffect[(int)effect], effect, this));
     }
 
     public void DeleteEffect(UpgradeEffect effect)
@@ -58,16 +48,4 @@ public class SpawnEffectIcon : MonoBehaviour
             CreateEffect(UpgradeEffect.Shield, 5f);
         }
     }
-
-    List<string> iconEffects = new List<string>()
-    {
-        "s_Magnite",
-        "s_Shield",
-        "s_Moution",
-        "s_XScore",
-        "s_Speed",
-        "s_Health",
-        "s_Size",
-        "s_Player"
-    };
 }
