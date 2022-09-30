@@ -29,24 +29,22 @@ public class ItemShop : MonoBehaviour
     private List<string> infoEffect;
     private int levelEffect;
     private List<int> priceEffect;
-    private string nameIcon;
+    private Sprite spriteEffect;
     private Language language;
 
     private Shop shop;
     private GameDataManager data;
 
-    public void CreateItem(List<string> infoEffect, int levelEffect, List<int> priceEffect, string nameIcon, Language language, UpgradeEffect effect, Shop shop, GameDataManager data)
+    public void CreateItem(List<string> infoEffect, int levelEffect, List<int> priceEffect, Sprite spriteEffect, Language language, UpgradeEffect effect, Shop shop, GameDataManager data)
     {
         this.infoEffect = infoEffect;
         this.levelEffect = levelEffect;
         this.priceEffect = priceEffect;
-        this.nameIcon = nameIcon;
+        this.spriteEffect = spriteEffect;
         this.language = language;
         this.effect = effect;
         this.shop = shop;
         this.data = data;
-
-        Debug.Log("levelEffect: " + levelEffect);
 
         SetIcon();
         UpdateElementsUI();
@@ -61,8 +59,7 @@ public class ItemShop : MonoBehaviour
     }
     private void SetIcon()
     {
-        var sprite = Resources.Load<Sprite>(nameIcon);
-        iconEffect.sprite = sprite;
+        iconEffect.sprite = spriteEffect;
     }
 
     private void SetTextButton()
