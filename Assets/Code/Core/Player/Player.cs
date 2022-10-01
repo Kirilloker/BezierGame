@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
     private int playerBaseHealth = 1;
     private int MaxHeath = 3;
 
-    private int scoreMultiplier = 1;
+    private int currentScoreMultiplyer = 1;
+    private int scoreMultiplier = 2;
     private bool shield = false;
     private float slowmoutionPower = 0.75f;
     private List<ProjectileEffect> whoMagneting = new List<ProjectileEffect> { ProjectileEffect.AddCoin};
@@ -115,7 +116,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     //Куротина для временных эффектов________________________________
     IEnumerator EnableTempPlayerEffect(ProjectileEffect effect, float time)
     {
@@ -128,9 +128,9 @@ public class Player : MonoBehaviour
                 break;
 
             case ProjectileEffect.ScoreMultiplyer:
-                ScoreMultiplier *= 2;
+                currentScoreMultiplyer = scoreMultiplier;
                 yield return new WaitForSeconds(time);
-                scoreMultiplier /= 2;
+                currentScoreMultiplyer = 1;
                 break;
 
             case ProjectileEffect.Slowmoution:
@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
                     whoMagneting.Add(ProjectileEffect.SizeChange);
                     break;
                 case ("Increase xscore multiplyer"):
-                    ScoreMultiplier += (uint)upgrade.Value;
+                    scoreMultiplier += (int)upgrade.Value;
                     break;
             }
         }
@@ -231,8 +231,8 @@ public class Player : MonoBehaviour
     }
     public uint ScoreMultiplier
     {
-        get { return (uint)scoreMultiplier; }
-        set { scoreMultiplier = (int)value; }
+        get { return (uint)currentScoreMultiplyer; }
+        set { currentScoreMultiplyer = (int)value; }
     }
     public float PlayerSize
     {
