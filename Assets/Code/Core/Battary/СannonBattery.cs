@@ -22,10 +22,10 @@ public class СannonBattery : MonoBehaviour
     private bool NegativeEffSystemEnabled = false;
     private bool CoinSystemEnabled = false;
 
-    private float DamageProjectilesTimer = 2f;
+    private float DamageProjectilesTimer = 3f;
     private float PositiveProjectileTimer = 10f;
     private float NegativeProjectileTimer = 11f;
-    private int coinsPerWay = 5;
+    private int coinsPerWay = 8;
     #endregion
 
     #region Параметры различных снарядов
@@ -102,17 +102,17 @@ public class СannonBattery : MonoBehaviour
     {
         DamageSystemEnabled = true;
 
-        for (int i = 0; i < 3; i++)
-        {
-            yield return new WaitForSeconds(0.3f);
-            int randCannon = UnityEngine.Random.Range(0, cannons.Count);
+        //тут логика выбора различных пресетов
 
-            LoadDamageDealer(cannons[randCannon]);
 
-            cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
-               (int)damageProjectileSpeed);
+        //StartCoroutine(RandomProjectiles(5));
+        //StartCoroutine(LaserProjectiles(3));
+        //StartCoroutine(BundleProjectiles(2));
+        //StartCoroutine(RandomSnakeProjectiles(3));
+        StartCoroutine(RandomWallProjectiles(3));
+        //StartCoroutine(RandomWindowProjectiles(1));
 
-        }
+
         yield return new WaitForSeconds(DamageProjectilesTimer);
         DamageSystemEnabled = false;
 
@@ -217,6 +217,128 @@ public class СannonBattery : MonoBehaviour
         CoinSystemEnabled = false;
     }
     #endregion
+
+
+    #region Различные ивенты для дамажных снарядов
+    IEnumerator RandomProjectiles(int numOfProjectiles)
+    {
+        for (int i = 0; i < numOfProjectiles; i++)
+        {
+            yield return new WaitForSeconds(0.3f);
+            int randCannon = UnityEngine.Random.Range(0, cannons.Count);
+
+            LoadDamageDealer(cannons[randCannon]);
+
+            cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+               (int)damageProjectileSpeed);
+        }
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator LaserProjectiles(int numOfLasers)
+    {
+        for (int i = 0; i < numOfLasers; i++)
+        {
+            int randCannon = UnityEngine.Random.Range(0, cannons.Count);
+
+            for (int j = 0; j < 6; j++)
+            {
+                yield return new WaitForSeconds(0.16f);
+                LoadDamageDealer(cannons[randCannon]);
+                cannons[randCannon].Fire(new Vector2(0,cannons[randCannon].GetCannonPos().y),
+                   (int)damageProjectileSpeed);
+            }
+        }
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator BundleProjectiles(int numOfBundeles)
+    {
+        for (int i = 0; i < numOfBundeles; i++)
+        {
+            int randCannon = UnityEngine.Random.Range(0, cannons.Count);
+
+            for (int j = 0; j < 6; j++)
+            {
+                yield return new WaitForSeconds(0.1f);
+                LoadDamageDealer(cannons[randCannon]);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)damageProjectileSpeed);
+            }
+        }
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator RandomSnakeProjectiles(int numOfSnakes)
+    {
+        for(int j = 0; j < numOfSnakes; j++)
+        {
+            int randCannon = UnityEngine.Random.Range(10, cannons.Count - 10);
+            int direction = UnityEngine.Random.Range(-1, 1);
+
+            if (direction < 0) direction = -1;
+            else direction = 1;
+
+            for (int i = 0; i < 5; i++)
+            {
+                int cannonNum = randCannon + ((i * direction) * 2);
+                LoadDamageDealer(cannons[cannonNum]);
+                cannons[cannonNum].Fire(
+                   new Vector2(0, cannons[randCannon].GetCannonPos().y),
+                   (int)damageProjectileSpeed);
+                yield return new WaitForSeconds(0.15f);
+            }
+        }    
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator RandomWallProjectiles(int numOfWalls)
+    {
+        for (int j = 0; j < numOfWalls; j++)
+        {
+            int randCannon = UnityEngine.Random.Range(7, cannons.Count - 7);
+            int direction = UnityEngine.Random.Range(-1, 1);
+
+            if (direction < 0) direction = -1;
+            else direction = 1;
+
+            for (int i = 0; i < 3; i++)
+            {
+                int cannonNum = randCannon + ((i * direction) * 2);
+                LoadDamageDealer(cannons[cannonNum]);
+                cannons[cannonNum].Fire(
+                   new Vector2(0, cannons[cannonNum].GetCannonPos().y),
+                   (int)damageProjectileSpeed);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator RandomWindowProjectiles(int numOfWindows)
+    {
+        for (int j = 0; j < numOfWindows; j++)
+        {
+            int randCannon = UnityEngine.Random.Range(16, cannons.Count - 16);
+            int direction = UnityEngine.Random.Range(-1, 1);
+
+            if (direction < 0) direction = -1;
+            else direction = 1;
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (i > 1 && i < 6) continue;
+
+                int cannonNum = randCannon + ((i * direction) * 2);
+                LoadDamageDealer(cannons[cannonNum]);
+                cannons[cannonNum].Fire(
+                   new Vector2(0, cannons[cannonNum].GetCannonPos().y),
+                   (int)damageProjectileSpeed);
+            }
+        }
+        yield return new WaitForSeconds(1f);
+    }
+    #endregion region
 
     public Vector2 GetRandomTagretForCannon(Cannon cannon)
     {

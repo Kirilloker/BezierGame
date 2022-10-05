@@ -43,16 +43,15 @@ public class PlayerMover : MonoBehaviour
 
         SlowdownPlayer();
 
-        //    if (Input.GetMouseButton(0))
-        //{
-        //    //CreatePointBezier(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //    Vector3 vectorTouch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 vectorTouch = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //    if (vectorTouch.x < 0)
-        //        
-        //    else
-        //        
-        //}
+            if (vectorTouch.x < 0)
+                AcceleratePlayer(1);
+            else
+                AcceleratePlayer(-1);
+        }
     }
 
     private void SlowdownPlayer()
