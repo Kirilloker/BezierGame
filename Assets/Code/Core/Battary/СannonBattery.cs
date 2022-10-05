@@ -23,9 +23,9 @@ public class СannonBattery : MonoBehaviour
     private bool CoinSystemEnabled = false;
 
     private float DamageProjectilesTimer = 2f;
-    private float PositiveProjectileTimer = 5f;
-    private float NegativeProjectileTimer = 5f;
-    private int coinsPerWay = 8;
+    private float PositiveProjectileTimer = 10f;
+    private float NegativeProjectileTimer = 11f;
+    private int coinsPerWay = 5;
     #endregion
 
     #region Параметры различных снарядов
@@ -104,12 +104,12 @@ public class СannonBattery : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
             int randCannon = UnityEngine.Random.Range(0, cannons.Count);
 
             LoadDamageDealer(cannons[randCannon]);
 
-            cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
+            cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
                (int)damageProjectileSpeed);
 
         }
@@ -121,82 +121,82 @@ public class СannonBattery : MonoBehaviour
     IEnumerator RandomPositiveEffect()
     {
         PositiveEffSystemEnabled = true;
+        yield return new WaitForSeconds(PositiveProjectileTimer);
+
         int randCannon = UnityEngine.Random.Range(0, cannons.Count);
         switch (effectGenerator.GetRandomPositiveEffect())
         {
             case ProjectileEffect.HealthChange:
                 LoadHealthUp(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.SpeedChange:;
                 LoadSpeedUp(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.SizeChange:
                 LoadSizeDec(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.Shield:
                 LoadShield(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.ScoreMultiplyer:
                 LoadScoreMult(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.Slowmoution:
                 LoadSlowmoution(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.CoinMagnet:
                 LoadMagnet(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)PositiveProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)positiveEffProjectilesSpeed);
                 break;
         }
-
-        yield return new WaitForSeconds(PositiveProjectileTimer);
         PositiveEffSystemEnabled = false;
     }
 
     IEnumerator RandomNegativeEffect()
     {
         NegativeEffSystemEnabled = true;
+        yield return new WaitForSeconds(NegativeProjectileTimer);
+
         int randCannon = UnityEngine.Random.Range(0, cannons.Count);
         switch (effectGenerator.GetRandomNegativeEffect())
         {
             case ProjectileEffect.HidePath:
                 LoadHidePath(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)NegativeProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)neganiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.SpeedChange:
                 LoadSpeedDown(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)NegativeProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)neganiveEffProjectilesSpeed);
                 break;
 
             case ProjectileEffect.SizeChange:
                 LoadSizeInc(cannons[randCannon]);
-                cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
-                   (int)NegativeProjectileTimer);
+                cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
+                   (int)neganiveEffProjectilesSpeed);
                 break;
         }
-
-        yield return new WaitForSeconds(NegativeProjectileTimer);
         NegativeEffSystemEnabled = false;
     }
 
@@ -208,15 +208,21 @@ public class СannonBattery : MonoBehaviour
             int randCannon = UnityEngine.Random.Range(0, cannons.Count);
             LoadCoin(cannons[randCannon]);
 
-            cannons[randCannon].Fire(new Vector2(UnityEngine.Random.Range(-2, 2f), UnityEngine.Random.Range(-4f, 4f)),
+            cannons[randCannon].Fire(GetRandomTagretForCannon(cannons[randCannon]),
                (int)coinSpeed);
 
             coinsPerWay--;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 2f));
         }
         CoinSystemEnabled = false;
     }
     #endregion
+
+    public Vector2 GetRandomTagretForCannon(Cannon cannon)
+    {
+        Vector2 target = new Vector2(0, cannon.GetCannonPos().y + UnityEngine.Random.Range(1f, -1f));
+        return target;
+    }
 
     #region Обработчики ивентов
     public void OnGameDataLoaded(Dictionary<string, float> upgrades)

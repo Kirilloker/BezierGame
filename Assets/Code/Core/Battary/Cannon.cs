@@ -72,4 +72,9 @@ public class Cannon
     {
         cannonPos = newPos;
     }
+
+    public Vector2 GetCannonPos()
+    {
+        return cannonPos;
+    }
 }
