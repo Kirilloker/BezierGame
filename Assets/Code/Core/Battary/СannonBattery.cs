@@ -13,10 +13,9 @@ public class СannonBattery : MonoBehaviour
 
     private RandomEffectGenerator effectGenerator = new RandomEffectGenerator();
     private List<Cannon> cannons;
-    private int wayChangedCount = 0;
 
     #region параметры различных систем
-
+    private int score = 0;
     private bool DamageSystemEnabled = false;
     private bool PositiveEffSystemEnabled = false;
     private bool NegativeEffSystemEnabled = false;
@@ -26,6 +25,13 @@ public class СannonBattery : MonoBehaviour
     private float PositiveProjectileTimer = 10f;
     private float NegativeProjectileTimer = 11f;
     private int coinsPerWay = 8;
+
+    //Блок параметров для системы дамажных снарядов
+    private int numOfDiffEvents = 1;
+    private int numOfConcretEvents = 2;
+
+    private const int maxNumOfDiffEvents = 5;
+    private const int maxNumOfConcreteEvents = 5;
     #endregion
 
     #region Параметры различных снарядов
@@ -61,7 +67,6 @@ public class СannonBattery : MonoBehaviour
     private float healthUpValue = 1;
     #endregion
 
-
     //Создаем пушки
     private void Awake()
     {
@@ -85,7 +90,7 @@ public class СannonBattery : MonoBehaviour
     private void FixedUpdate()
     {
         if(!DamageSystemEnabled)
-            StartCoroutine(RandomDamage());
+            StartCoroutine(DamageSystem());
 
         if(!PositiveEffSystemEnabled)
             StartCoroutine(RandomPositiveEffect());
@@ -98,24 +103,23 @@ public class СannonBattery : MonoBehaviour
     }
 
     #region Сиситемы запуска различных проджектайлов
-    IEnumerator RandomDamage()
+    IEnumerator DamageSystem()
     {
         DamageSystemEnabled = true;
 
-        //тут логика выбора различных пресетов
+        ChangeComplexity();
 
 
         //StartCoroutine(RandomProjectiles(5));
         //StartCoroutine(LaserProjectiles(3));
         //StartCoroutine(BundleProjectiles(2));
         //StartCoroutine(RandomSnakeProjectiles(3));
-        StartCoroutine(RandomWallProjectiles(3));
+        //StartCoroutine(RandomWallProjectiles(3));
         //StartCoroutine(RandomWindowProjectiles(1));
 
 
         yield return new WaitForSeconds(DamageProjectilesTimer);
         DamageSystemEnabled = false;
-
     }
 
     IEnumerator RandomPositiveEffect()
@@ -217,7 +221,6 @@ public class СannonBattery : MonoBehaviour
         CoinSystemEnabled = false;
     }
     #endregion
-
 
     #region Различные ивенты для дамажных снарядов
     IEnumerator RandomProjectiles(int numOfProjectiles)
@@ -346,6 +349,17 @@ public class СannonBattery : MonoBehaviour
         return target;
     }
 
+    public void ChangeComplexity()
+    {
+        if(score > 5 )
+
+        if (score > 3)
+        {
+            numOfDiffEvents = 2;
+            numOfConcretEvents = 2;
+        }
+    }
+
     #region Обработчики ивентов
     public void OnGameDataLoaded(Dictionary<string, float> upgrades)
     {
@@ -415,10 +429,13 @@ public class СannonBattery : MonoBehaviour
 
         }
     }
-    public void OnScoreReachWayChangeValue()
+
+    public void OnScoreChangeValue()
     {
-        coinsPerWay = 8;
+        coinsPerWay = 4;
+        score++;
     }
+
     #endregion
 
     #region Методы для зарядки различных снарядов
