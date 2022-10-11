@@ -36,7 +36,7 @@ public class ResoursesData : MonoBehaviour
             "s_Shield",
             "s_Moution",
             "s_XScore",
-            "s_Speed",
+            "s_SpeedUp",
             "s_Health",
             "s_Size",
             "s_Player"
