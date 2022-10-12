@@ -27,7 +27,6 @@ public class GameUI : MonoBehaviour
     private void Start()
     {
         dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        //UIGame = GameObject.FindGameObjectWithTag("GameUI").GetComponent<SpawnEffectIcon>();
 
         CoinsUI = (uint)dataManager.Coins;
         ScoreUI = 0;
@@ -36,6 +35,8 @@ public class GameUI : MonoBehaviour
 
     public void CreateEffect(UpgradeEffect effect, float time)
     {
+        // Если такой эффект уже есть на игроке
+        // то удаляем иконку предыдущего эффекта 
         if (upgradeEffects.Contains(effect))
         {
             IconEffectInGameScript[upgradeEffects.IndexOf(effect)].Delete();
@@ -47,6 +48,7 @@ public class GameUI : MonoBehaviour
         IconEffectInGameScript.Add(effectScript);
         upgradeEffects.Add(effect);
 
+        // Запускаем анимацию длительности эффекта
         StartCoroutine(effectScript.CreateEffect(time, ResoursesData.spritesEffect[(int)effect], effect, this));
     }
 
@@ -103,9 +105,6 @@ public class GameUI : MonoBehaviour
             }
 
             newText += scoreUI.ToString();
-
-            Debug.Log("ScoreUI:" + scoreUI);
-            Debug.Log("newText:" + newText);
 
             ScoreText.text = newText;
         }

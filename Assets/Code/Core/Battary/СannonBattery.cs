@@ -510,4 +510,40 @@ public class СannonBattery : MonoBehaviour
           projectilesPrefabs.GetProjectilePrefab(ProjectileForm.CoinMagnet), ProjectileEffect.CoinMagnet, magnetTimer);
     }
     #endregion
+
+    #region Функции усложнения игры
+
+    public float FuncPositiveTimer(float x)
+    {
+        float normalizeX = x / 15f;
+
+        if (normalizeX < 4)
+        {
+            return 20;
+        }
+        else if (normalizeX > 25)
+        {
+            return 4;
+        }
+
+        return (9.6f) / (0.13f * normalizeX) + 0.8f;
+    }
+
+    public float FuncNegativeTimer(float x)
+    {
+        float normalizeX = x / 15f;
+
+        if (normalizeX < 4)
+        {
+            return 25;
+        }
+        else if (normalizeX > 25)
+        {
+            return 1;
+        }
+
+        return (4f) / (0.047f * normalizeX) - 2.2f;
+    }
+
+    #endregion
 }
