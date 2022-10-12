@@ -21,17 +21,15 @@ public class СannonBattery : MonoBehaviour
     private bool NegativeEffSystemEnabled = false;
     private bool CoinSystemEnabled = false;
 
-    private float DamageProjectilesTimer = 3f;
+    private float DamageProjectilesTimer = 4f;
     private float PositiveProjectileTimer = 10f;
     private float NegativeProjectileTimer = 11f;
     private int coinsPerWay = 8;
 
     //Блок параметров для системы дамажных снарядов
-    private int numOfDiffEvents = 1;
-    private int numOfConcretEvents = 2;
-
-    private const int maxNumOfDiffEvents = 5;
-    private const int maxNumOfConcreteEvents = 5;
+    delegate IEnumerator DamageEvent(int numOfEvents);
+    List<DamageEvent> DamageEvents;
+    private const int maxLvlOfDifficult = 6;
     #endregion
 
     #region Параметры различных снарядов
@@ -85,6 +83,16 @@ public class СannonBattery : MonoBehaviour
             cannons.Add(new Cannon());
             cannons[i+1].SetCannonPos(new Vector2(-3.5f, startPos - ((float)(i / 2) * interval)));
         }
+
+        DamageEvents = new List<DamageEvent>()
+        {
+            RandomSnakeProjectiles,
+            LaserProjectiles,
+            RandomProjectiles,
+            BundleProjectiles,
+            RandomWallProjectiles,
+            RandomWindowProjectiles
+        };
     }
 
     private void FixedUpdate()
@@ -107,16 +115,10 @@ public class СannonBattery : MonoBehaviour
     {
         DamageSystemEnabled = true;
 
-        ChangeComplexity();
+        int numOfEvents = UnityEngine.Random.Range(0, maxLvlOfDifficult + 1); ;
 
-
-        //StartCoroutine(RandomProjectiles(5));
-        //StartCoroutine(LaserProjectiles(3));
-        //StartCoroutine(BundleProjectiles(2));
-        //StartCoroutine(RandomSnakeProjectiles(3));
-        //StartCoroutine(RandomWallProjectiles(3));
-        //StartCoroutine(RandomWindowProjectiles(1));
-
+        int randomEvent = UnityEngine.Random.Range(0, DamageEvents.Count);
+        StartCoroutine(DamageEvents[randomEvent].Invoke(numOfEvents));
 
         yield return new WaitForSeconds(DamageProjectilesTimer);
         DamageSystemEnabled = false;
@@ -223,9 +225,10 @@ public class СannonBattery : MonoBehaviour
     #endregion
 
     #region Различные ивенты для дамажных снарядов
-    IEnumerator RandomProjectiles(int numOfProjectiles)
+    IEnumerator RandomProjectiles(int diffLvl)
     {
-        for (int i = 0; i < numOfProjectiles; i++)
+        int numOfPrijectiles = diffLvl + 2;
+        for (int i = 0; i < numOfPrijectiles; i++)
         {
             yield return new WaitForSeconds(0.3f);
             int randCannon = UnityEngine.Random.Range(0, cannons.Count);
@@ -238,8 +241,11 @@ public class СannonBattery : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    IEnumerator LaserProjectiles(int numOfLasers)
+    IEnumerator LaserProjectiles(int diffLvl)
     {
+        int numOfLasers = diffLvl - 1;
+        if (diffLvl <= 0) numOfLasers = 1;
+
         for (int i = 0; i < numOfLasers; i++)
         {
             int randCannon = UnityEngine.Random.Range(0, cannons.Count);
@@ -255,9 +261,12 @@ public class СannonBattery : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    IEnumerator BundleProjectiles(int numOfBundeles)
+    IEnumerator BundleProjectiles(int diffLvl)
     {
-        for (int i = 0; i < numOfBundeles; i++)
+        int numOfBundls = diffLvl - 1;
+        if (diffLvl <= 0) numOfBundls = 1;
+
+        for (int i = 0; i < numOfBundls; i++)
         {
             int randCannon = UnityEngine.Random.Range(0, cannons.Count);
 
@@ -272,9 +281,12 @@ public class СannonBattery : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    IEnumerator RandomSnakeProjectiles(int numOfSnakes)
+    IEnumerator RandomSnakeProjectiles(int diffLvl)
     {
-        for(int j = 0; j < numOfSnakes; j++)
+        int numOfSnakes = diffLvl - 1;
+        if (diffLvl <= 0) numOfSnakes = 1;
+
+        for (int j = 0; j < numOfSnakes; j++)
         {
             int randCannon = UnityEngine.Random.Range(10, cannons.Count - 10);
             int direction = UnityEngine.Random.Range(-1, 1);
@@ -295,9 +307,12 @@ public class СannonBattery : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    IEnumerator RandomWallProjectiles(int numOfWalls)
+    IEnumerator RandomWallProjectiles(int diffLvl)
     {
-        for (int j = 0; j < numOfWalls; j++)
+        int numOfwalls = diffLvl - 2;
+        if (diffLvl <= 0) numOfwalls = 1;
+
+        for (int j = 0; j < numOfwalls; j++)
         {
             int randCannon = UnityEngine.Random.Range(7, cannons.Count - 7);
             int direction = UnityEngine.Random.Range(-1, 1);
@@ -318,8 +333,11 @@ public class СannonBattery : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    IEnumerator RandomWindowProjectiles(int numOfWindows)
+    IEnumerator RandomWindowProjectiles(int diffLvl)
     {
+        int numOfWindows = diffLvl - 2;
+        if (diffLvl <= 0) numOfWindows = 1;
+
         for (int j = 0; j < numOfWindows; j++)
         {
             int randCannon = UnityEngine.Random.Range(16, cannons.Count - 16);
@@ -347,17 +365,6 @@ public class СannonBattery : MonoBehaviour
     {
         Vector2 target = new Vector2(0, cannon.GetCannonPos().y + UnityEngine.Random.Range(1f, -1f));
         return target;
-    }
-
-    public void ChangeComplexity()
-    {
-        if(score > 5 )
-
-        if (score > 3)
-        {
-            numOfDiffEvents = 2;
-            numOfConcretEvents = 2;
-        }
     }
 
     #region Обработчики ивентов

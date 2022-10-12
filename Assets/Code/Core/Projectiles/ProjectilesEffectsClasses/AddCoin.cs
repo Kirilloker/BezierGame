@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ using UnityEngine;
 public class AddCoin : MonoBehaviour, IProjectile
 {
     private int coins = 1;
-
     public void Destroy()
     {
         Destroy(this.gameObject);

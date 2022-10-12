@@ -5,7 +5,9 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     [SerializeField]
-    Animation Animation;
+    private Animation Animation;
+    [SerializeField]
+    private ParticleSystem particles;  
 
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
@@ -73,7 +75,12 @@ public class Platform : MonoBehaviour
                 Animation.Play("ActivePlatform");
             //spriteRenderer.color = activeColor;
             else
+            {
                 Animation.Play("NoActivePlatform");
+                particles.Play();
+            }
+
+
             //spriteRenderer.color = disactiveColor;
         }
     }
