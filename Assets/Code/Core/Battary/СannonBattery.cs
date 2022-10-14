@@ -174,7 +174,7 @@ public class СannonBattery : MonoBehaviour
                    (int)positiveEffProjectilesSpeed);
                 break;
         }
-        PositiveProjectileTimer = FuncPositiveTimer(score);
+        PositiveProjectileTimer = FuncPositiveTimer(Time.timeSinceLevelLoad);
         PositiveEffSystemEnabled = false;
     }
 
@@ -204,7 +204,7 @@ public class СannonBattery : MonoBehaviour
                    (int)neganiveEffProjectilesSpeed);
                 break;
         }
-        NegativeProjectileTimer = FuncNegativeTimer(score);
+        NegativeProjectileTimer = FuncNegativeTimer(Time.timeSinceLevelLoad);
         NegativeEffSystemEnabled = false;
 
     }
