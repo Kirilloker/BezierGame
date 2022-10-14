@@ -235,7 +235,11 @@ public class Player : MonoBehaviour
                 playerHealth = MaxHeath;
 
             if (playerHealth <= 0)
+            {
                 playerDie.Invoke();
+                playerHealth = 0;
+            }
+                
             playerPickUpHealth.Invoke(playerHealth);
         }
         get
