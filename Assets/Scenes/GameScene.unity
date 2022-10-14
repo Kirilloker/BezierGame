@@ -5951,7 +5951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.929865, g: 0.66415095, b: 1, a: 0.392}
+  m_Color: {r: 0.929865, g: 0.66415095, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7177,7 +7177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.929865, g: 0.66415095, b: 1, a: 0.392}
+  m_Color: {r: 0.5943396, g: 0.2938056, b: 0.5751696, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7573,7 +7573,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 4.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -7964,7 +7964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15812217, y: 0.65442634}
   m_AnchorMax: {x: 0.83500004, y: 0.891746}
-  m_AnchoredPosition: {x: 3.5, y: 3.800003}
+  m_AnchoredPosition: {x: 3.5, y: 3.8000183}
   m_SizeDelta: {x: 10.3, y: 7.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2098457107

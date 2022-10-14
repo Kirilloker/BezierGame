@@ -108,6 +108,21 @@ public class СannonBattery : MonoBehaviour
 
         if(!CoinSystemEnabled)
             StartCoroutine(RandomCoinProjectiles());
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            LoadHealthUp(cannons[16]);
+            cannons[16].Fire(new Vector2(0,0), (int)positiveEffProjectilesSpeed);
+        }
+            
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            LoadSlowmoution(cannons[16]);
+            cannons[16].Fire(new Vector2(0, 0), (int)positiveEffProjectilesSpeed);
+        }
+
+
     }
 
     #region Сиситемы запуска различных проджектайлов
