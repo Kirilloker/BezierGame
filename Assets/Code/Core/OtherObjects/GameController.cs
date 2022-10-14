@@ -56,6 +56,8 @@ public class GameController : MonoBehaviour
 
         // UI
         score.ScoreChangeValue += gameUI.OnScoreChangeValue;
+        //score.ScoreChangeValue += gameUI.HealthChangeValue;
+        //score.ScoreChangeValue += gameUI.CoinsChangeValue;
         
     }
 

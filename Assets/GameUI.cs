@@ -63,6 +63,15 @@ public class GameUI : MonoBehaviour
         ScoreUI = score;
     }
 
+    public void CoinsChangeValue(int coins)
+    {
+        CoinsUI = +(uint)coins;
+    }
+
+    public void HealthChangeValue(int health)
+    {
+        HealthUI = (uint)health;
+    }
 
     uint healthUI;
     public uint HealthUI
