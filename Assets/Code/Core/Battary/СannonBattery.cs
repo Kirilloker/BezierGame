@@ -174,6 +174,7 @@ public class СannonBattery : MonoBehaviour
                    (int)positiveEffProjectilesSpeed);
                 break;
         }
+        PositiveProjectileTimer = FuncPositiveTimer(score);
         PositiveEffSystemEnabled = false;
     }
 
@@ -203,7 +204,9 @@ public class СannonBattery : MonoBehaviour
                    (int)neganiveEffProjectilesSpeed);
                 break;
         }
+        NegativeProjectileTimer = FuncNegativeTimer(score);
         NegativeEffSystemEnabled = false;
+
     }
 
     IEnumerator RandomCoinProjectiles()

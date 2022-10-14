@@ -90,8 +90,18 @@ public class GameController : MonoBehaviour
     private void OnPlayerDie()
     {
         Debug.Log("Игрок погиб");
+        Pause();
         //Тут завершаем игру
     }
     //________________________________________________________________
 
+    private void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void Continue()
+    {
+        Time.timeScale = 1f;
+    }
 }
