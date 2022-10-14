@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     public event PlayerPickUpCoin playerPickUpCoin;
     //___________________________________________________________________________
 
+    public GameUI gameUI;
+
     private void Awake()
     {
         mover = GetComponent<PlayerMover>();
@@ -52,6 +54,8 @@ public class Player : MonoBehaviour
 
         circleCollider = GetComponent<CircleCollider2D>();
         circleCollider.enabled = true;
+
+        gameUI = GameObject.FindGameObjectWithTag("UIGame").GetComponent<GameUI>();
     }
 
     //Обработка столкновений с снарядами
@@ -92,22 +96,31 @@ public class Player : MonoBehaviour
                 //__________________________________________________________________
                 case ProjectileEffect.Slowmoution:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
+
+                    gameUI.CreateEffect(UpgradeEffect.Moution, effectValue);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.Shield:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
+
+                    gameUI.CreateEffect(UpgradeEffect.Shield, effectValue);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.ScoreMultiplyer:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
+
+                    gameUI.CreateEffect(UpgradeEffect.XScore, effectValue);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.HidePath:
                     playerFacedProjectile.Invoke(effect, effectValue);
+
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.CoinMagnet:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
+
+                    gameUI.CreateEffect(UpgradeEffect.Magnite, effectValue);
                     break;
                 //__________________________________________________________________
 
