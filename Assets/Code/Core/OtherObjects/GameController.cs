@@ -110,6 +110,12 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void Revive()
+    {
+        Time.timeScale = 1f;
+        player.PlayerHealth = 1;
+    }
+
     public void HideDethMenu()
     {
         deathMenu.SetActive(false);
