@@ -81,7 +81,6 @@ public class Player : MonoBehaviour
                     int newHealth = PlayerHealth;
                     newHealth += (int)effectValue;
                     PlayerHealth = newHealth;
-                    playerPickUpHealth.Invoke(playerHealth);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.AddCoin:
@@ -222,8 +221,6 @@ public class Player : MonoBehaviour
         PlayerHealth = playerBaseHealth;
         PlayerSpeed = playerBaseSpeed;
         PlayerSize = playerBaseSize;
-        //Для корректного отображения в начале игры
-        playerPickUpHealth.Invoke(PlayerHealth);
     }
     //_______________________________________________________________
 
@@ -239,6 +236,7 @@ public class Player : MonoBehaviour
 
             if (playerHealth <= 0)
                 playerDie.Invoke();
+            playerPickUpHealth.Invoke(playerHealth);
         }
         get
         {
