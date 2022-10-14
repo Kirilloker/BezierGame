@@ -96,31 +96,22 @@ public class Player : MonoBehaviour
                 //__________________________________________________________________
                 case ProjectileEffect.Slowmoution:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
-
-                    gameUI.CreateEffect(UpgradeEffect.Moution, effectValue);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.Shield:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
-
-                    gameUI.CreateEffect(UpgradeEffect.Shield, effectValue);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.ScoreMultiplyer:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
-
-                    gameUI.CreateEffect(UpgradeEffect.XScore, effectValue);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.HidePath:
                     playerFacedProjectile.Invoke(effect, effectValue);
-
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.CoinMagnet:
                     StartCoroutine(EnableTempPlayerEffect(effect, effectValue));
-
-                    gameUI.CreateEffect(UpgradeEffect.Magnite, effectValue);
                     break;
                 //__________________________________________________________________
 
@@ -135,18 +126,21 @@ public class Player : MonoBehaviour
         switch (effect)
         {
             case ProjectileEffect.Shield:
+                gameUI.CreateEffect(UpgradeEffect.Shield, time);
                 shield = true;
                 yield return new WaitForSeconds(time);
                 shield = false;
                 break;
 
             case ProjectileEffect.ScoreMultiplyer:
+                gameUI.CreateEffect(UpgradeEffect.XScore, time);
                 currentScoreMultiplyer = scoreMultiplier;
                 yield return new WaitForSeconds(time);
                 currentScoreMultiplyer = 1;
                 break;
 
             case ProjectileEffect.Slowmoution:
+                gameUI.CreateEffect(UpgradeEffect.Moution, time);
                 Time.timeScale = slowmoutionPower;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
                 yield return new WaitForSeconds(time * slowmoutionPower);
@@ -155,6 +149,7 @@ public class Player : MonoBehaviour
                 break;
 
             case ProjectileEffect.CoinMagnet:
+                gameUI.CreateEffect(UpgradeEffect.Magnite, time);
                 Magnet magnet = this.gameObject.AddComponent<Magnet>();
                 magnet.SetMagnetableProjectiles(whoMagneting);
                 yield return new WaitForSeconds(time);
