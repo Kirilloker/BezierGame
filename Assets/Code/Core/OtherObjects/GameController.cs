@@ -105,20 +105,16 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void Continue()
+    private void Continue()
     {
         Time.timeScale = 1f;
-    }
-
-    public void Revive()
-    {
-        Time.timeScale = 1f;
-        player.PlayerHealth = 1;
     }
 
     public void HideDethMenu()
     {
-        deathMenu.SetActive(false);
+        player.PlayerHealth = 1;
         StartCoroutine(player.EnableTempPlayerEffect(ProjectileEffect.Shield, 3f));
+        deathMenu.SetActive(false);
+        Continue();   
     }
 }
