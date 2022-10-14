@@ -73,6 +73,7 @@ public class GameUI : MonoBehaviour
         HealthUI = (uint)health;
     }
 
+
     uint healthUI;
     public uint HealthUI
     {
