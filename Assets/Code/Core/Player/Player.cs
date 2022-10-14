@@ -222,6 +222,8 @@ public class Player : MonoBehaviour
         PlayerHealth = playerBaseHealth;
         PlayerSpeed = playerBaseSpeed;
         PlayerSize = playerBaseSize;
+        //Для корректного отображения в начале игры
+        playerPickUpHealth.Invoke(PlayerHealth);
     }
     //_______________________________________________________________
 
