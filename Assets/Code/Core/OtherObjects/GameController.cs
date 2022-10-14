@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     private СannonBattery battery;
     [SerializeField]
     private Way way;
+    [SerializeField]
+    GameObject deathMenu;
 
     [SerializeField]
     private GameDataManager dataManager;
@@ -91,6 +93,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Игрок погиб");
         Pause();
+        deathMenu.SetActive(true);
         //Тут завершаем игру
     }
     //________________________________________________________________
@@ -100,8 +103,14 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    private void Continue()
+    public void Continue()
     {
         Time.timeScale = 1f;
+    }
+
+    public void HideDethMenu()
+    {
+        deathMenu.SetActive(false);
+        StartCoroutine(player.EnableTempPlayerEffect(ProjectileEffect.Shield, 3f));
     }
 }

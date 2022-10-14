@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     }
 
     //Куротина для временных эффектов________________________________
-    IEnumerator EnableTempPlayerEffect(ProjectileEffect effect, float time)
+    public IEnumerator EnableTempPlayerEffect(ProjectileEffect effect, float time)
     {
         switch (effect)
         {
