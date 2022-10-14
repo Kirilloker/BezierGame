@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
     //Ивент поднятия монетки
     public delegate void PlayerPickUpCoin(int coins);
     public event PlayerPickUpCoin playerPickUpCoin;
+
+    //Ивент поднятия хп
+    public delegate void PlayerPickUpCHeath(int curHealth);
+    public event PlayerPickUpCHeath playerPickUpHealth;
+
     //___________________________________________________________________________
 
     public GameUI gameUI;
@@ -76,6 +81,7 @@ public class Player : MonoBehaviour
                     int newHealth = PlayerHealth;
                     newHealth += (int)effectValue;
                     PlayerHealth = newHealth;
+                    playerPickUpHealth.Invoke(playerHealth);
                     break;
                 //__________________________________________________________________
                 case ProjectileEffect.AddCoin:
